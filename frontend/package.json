@@ -1,0 +1,32 @@
+{
+  "name": "coin98-clone",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Frontity project",
+  "keywords": [
+    "frontity"
+  ],
+  "engines": {
+    "node": ">=10.0.0",
+    "npm": ">=6.0.0"
+  },
+  "scripts": {
+    "dev": "frontity dev",
+    "build": "frontity build",
+    "serve": "frontity serve"
+  },
+  "prettier": {},
+  "dependencies": {
+    "@frontity/core": "^1.15.1",
+    "@frontity/html2react": "^1.7.0",
+    "@frontity/tiny-router": "^1.4.4",
+    "@frontity/twentytwenty-theme": "./packages/twentytwenty-theme",
+    "@frontity/wp-source": "^1.11.7",
+    "@frontity/yoast": "^2.1.1",
+    "dayjs": "^1.11.0",
+    "frontity": "^1.17.2",
+    "lucis-theme": "file:packages/lucis-theme",
+    "node-sass": "^7.0.1",
+    "sass": "^1.49.9"
+  }
+}

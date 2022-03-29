@@ -1,15 +1,15 @@
 import React from "react"
-import { connect } from "frontity"
+import { connect, styled } from "frontity"
 import RelatedPosts from "./relatedPosts"
 import SidebarCategory from "./sidebarCategory"
-import { StickyAside } from "../../styles/common"
+import { RightSidebarContainer } from "../../styles/post"
 
 const RightSidebar = ({ state }) => {
   return (
-    <StickyAside className="right-sidebar">
+    <RightSidebarContainer>
       <RelatedPosts />
       <SidebarCategory />
-    </StickyAside>
+    </RightSidebarContainer>
   )
 }
 

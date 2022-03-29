@@ -19,7 +19,7 @@ const Root = ({ state }) => {
     <>
       <GlobalStyles />
       <Header />
-      <main>
+      <Main className="">
         <Switch>
           <Loading when={data.isFetching} />
           <Container when={data.isHome}>
@@ -33,9 +33,13 @@ const Root = ({ state }) => {
           <Post when={data.isPost} />
           <NotFound />
         </Switch>
-      </main>
+      </Main>
     </>
   )
 }
+
+const Main = styled.main`
+  margin-top: 140px;
+`
 
 export default connect(Root)

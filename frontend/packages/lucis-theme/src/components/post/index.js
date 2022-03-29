@@ -1,17 +1,22 @@
 import React from "react"
-import { connect } from "frontity"
-import LeftSidebar from "../common/leftSidebar"
+import { connect, loadable } from "frontity"
 import PostContent from "./postContent"
 import RightSidebar from "../common/rightSidebar"
 import MostViewedPosts from "../common/mostViewedPosts"
-import { PostDetailContainer } from "../../styles/post"
+import { PostDetail, PostDetailContainer } from "../../styles/post"
+import useDimension from "../../hooks/useDimension"
+const LeftSidebar = loadable(() => import('../common/leftSidebar'))
 
-const Post = ({ state }) => {  
+const Post = ({ state }) => { 
+  const dimension = useDimension()
+
   return (
     <>
       <PostDetailContainer>
-        <LeftSidebar />
-        <PostContent />
+        <PostDetail>
+          {dimension.width >= 768 ? <LeftSidebar /> : null}
+          <PostContent />
+        </PostDetail>
         <RightSidebar />
       </PostDetailContainer>
       <div>

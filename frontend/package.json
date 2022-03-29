@@ -24,6 +24,7 @@
     "@frontity/wp-source": "^1.11.7",
     "@frontity/yoast": "^2.1.1",
     "dayjs": "^1.11.0",
+    "dotenv": "^16.0.0",
     "frontity": "^1.17.2",
     "lucis-theme": "file:packages/lucis-theme"
   }

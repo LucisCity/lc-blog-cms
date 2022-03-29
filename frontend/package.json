@@ -1,5 +1,5 @@
 {
-  "name": "coin98-clone",
+  "name": "lucis-blog",
   "version": "1.0.0",
   "private": true,
   "description": "Frontity project",
@@ -25,8 +25,6 @@
     "@frontity/yoast": "^2.1.1",
     "dayjs": "^1.11.0",
     "frontity": "^1.17.2",
-    "lucis-theme": "file:packages/lucis-theme",
-    "node-sass": "^7.0.1",
-    "sass": "^1.49.9"
+    "lucis-theme": "file:packages/lucis-theme"
   }
 }

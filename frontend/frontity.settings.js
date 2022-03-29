@@ -1,9 +1,9 @@
 const settings = {
-  "name": "coin98-clone",
+  "name": "lucis-blog",
   "state": {
     "frontity": {
       "url": "http://localhost:3000/",
-      "title": "Test Frontity Blog",
+      "title": "Lucis blog",
       "description": "WordPress installation for Frontity development"
     }
   },

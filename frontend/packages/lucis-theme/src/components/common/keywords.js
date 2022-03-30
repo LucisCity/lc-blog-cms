@@ -4,7 +4,7 @@ import { BoxRoundedBlur } from "../../styles/common"
 
 const Keywords = ({ state }) => {
   return (
-    <BoxRoundedBlur>keywords</BoxRoundedBlur>
+    <BoxRoundedBlur padding="20px 30px">keywords</BoxRoundedBlur>
   )
 }
 

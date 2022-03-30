@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from "react"
 import { connect } from "frontity"
 import { TableOfContentsContainer } from "../../styles/post"
-import Link from "@frontity/components/link"
-import { BoxRoundedBlur } from "../../styles/common"
 
 const TableOfContents = ({ state }) => {
-  const data = state.source.get(state.router.link)
   const [nestedHeading, setNestedHeading] = useState([])
 
   useEffect(() => {
@@ -25,20 +22,18 @@ const TableOfContents = ({ state }) => {
   }, []);
 
   return (
-    <BoxRoundedBlur>
+    <TableOfContentsContainer padding="20px 30px">
       <nav aria-label="Table of contents">
         <ul>
           {nestedHeading.length > 0 && nestedHeading.map((heading, index) => {
             return (
               <li key={heading.id}>
-                <span>{index + 1}. </span>
-                <AnchorItem data={heading} />
+                <AnchorItem data={heading} marker={index + 1 + '. '} />
                 {heading.items.length > 0 && (
                   <ul className="childrens-heading">
                     {heading.items.map((item) => (
                       <li key={item.id}>
-                        <span>+ </span>
-                        <AnchorItem data={item} />
+                        <AnchorItem data={item} marker="+" />
                       </li>
                     ))}
                   </ul>
@@ -48,22 +43,25 @@ const TableOfContents = ({ state }) => {
           })}
         </ul>
       </nav>
-    </BoxRoundedBlur>
+    </TableOfContentsContainer>
   )
 }
 
-const AnchorItem = ({ data }) => {
+const AnchorItem = ({ data, marker }) => {
+  const handleAnchorClick = (event, data) => {
+    event.preventDefault()
+    document.querySelector(`#${data.id}`)?.scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
   return (
     <a
       href={`#${data.id}`}
-      onClick={(e) => {
-        e.preventDefault();
-        document.querySelector(`#${data.id}`).scrollIntoView({
-          behavior: "smooth"
-        });
-      }}
+      onClick={(event) => handleAnchorClick(event, data)}
     >
-      {data.title}
+      <span>{marker}</span>
+      <span>{data.title}</span>
     </a>
   )
 }

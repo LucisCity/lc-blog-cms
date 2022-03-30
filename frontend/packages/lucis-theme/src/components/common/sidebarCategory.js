@@ -4,7 +4,7 @@ import { BoxRoundedBlur } from "../../styles/common"
 
 const SidebarCategory = ({ state }) => {
   return (
-    <BoxRoundedBlur>SidebarCategory</BoxRoundedBlur>
+    <BoxRoundedBlur padding="20px 30px">SidebarCategory</BoxRoundedBlur>
   )
 }
 

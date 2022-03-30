@@ -37,8 +37,15 @@ const Header = ({ state }) => {
   )
 }
 
-const HeaderStyled = styled.div`
+const HeaderStyled = styled.header`
   margin-bottom: 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(0deg,hsl(0deg 0% 24%),rgb(30 30 30));
+  z-index: 1;
+  padding: 20px 15px;
 `
 
 const Li = styled.li`

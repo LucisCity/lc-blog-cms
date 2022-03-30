@@ -1,8 +1,14 @@
-import { Global, css } from "frontity"
+import { Global, css, Head } from "frontity"
 
 const GlobalStyles = () => {
   return (
-    <Global styles={
+    <>
+      <Head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,200;0,400;0,500;1,200;1,400;1,500" rel="stylesheet" />
+      </Head>
+      <Global styles={
       css`
         * {
           margin: 0;
@@ -10,21 +16,22 @@ const GlobalStyles = () => {
           box-sizing: border-box;
         }
         html {
-          font-family: system-ui, Verdana, Arial, sans-serif;
+          font-family: 'Saira', sans-serif;
         }
         body {
-          background: #282828;
+          background: #100f0e;
           color: #bbbbbb;
-        }
-        body::-webkit-scrollbar {
-          width: 3px;
-        }
-        body::-webkit-scrollbar-track {
-          -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
-        }
-        body::-webkit-scrollbar-thumb {
-          background-color: darkgrey;
-          border-radius: 5px;
+          word-break: break-word;
+          &::-webkit-scrollbar, *::-webkit-scrollbar {
+            width: 3px;
+          }
+          &::-webkit-scrollbar-track, *::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+          }
+          &::-webkit-scrollbar-thumb, *::-webkit-scrollbar-thumb {
+            background-color: rgba(169, 169, 169, 0.34);
+            border-radius: 5px;
+          }
         }
         ul {
           list-style: none;
@@ -67,7 +74,8 @@ const GlobalStyles = () => {
           margin-bottom: 20px;
         }
       `}
-    />
+      />
+    </>
   )
 }
 

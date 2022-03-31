@@ -1,5 +1,5 @@
 import React from "react"
-import { connect, css } from "frontity"
+import { css } from "frontity"
 import dayjs from "dayjs"
 import gutenbergStyle from "../../styles/gutenberg/style.css"
 import gutenbergTheme from "../../styles/gutenberg/theme.css"
@@ -7,15 +7,12 @@ import { Author, PostContentContainer, PostInfo, PostDate } from "../../styles/p
 import { BoxRoundedBlur } from "../../styles/common"
 import Image from "@frontity/components/image";
 
-const PostContent = ({ state }) => {
-  const data = state.source.get(state.router.link)
-  const post = state.source[data.type][data.id]
-  const author = state.source.author[post.author]
+const PostContent = ({ post, author }) => {
   const formatedDate = dayjs(post.date).format('DD/MM/YYYY')
   const formatedTime = dayjs(post.date).format('H:mm')
 
   return (
-    <PostContentContainer className="bgGlow">
+    <PostContentContainer className="bg-glow" id="post-content">
       <BoxRoundedBlur padding="30px 40px">
         <h1>{post.title.rendered}</h1>
         <PostInfo>
@@ -41,4 +38,4 @@ const PostContent = ({ state }) => {
   )
 }
 
-export default connect(PostContent)
+export default PostContent

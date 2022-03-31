@@ -14,8 +14,8 @@ const lucisTheme = {
   actions: {
     theme: {
       beforeCSR: ({ state, actions }) => {
-        console.log(state)
-        console.log(actions)
+        // console.log(state)
+        // console.log(actions)
       },
       openMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = true;

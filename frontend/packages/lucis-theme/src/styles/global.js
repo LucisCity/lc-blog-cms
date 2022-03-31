@@ -73,6 +73,16 @@ const GlobalStyles = () => {
         .post-featured-image {
           margin-bottom: 20px;
         }
+        .img-hover-scale {
+          .img-scale {
+            transition: transform .3s;
+          }
+          &:hover {
+            .img-scale {
+              transform: scale(1.1)
+            }
+          }
+        }
       `}
       />
     </>

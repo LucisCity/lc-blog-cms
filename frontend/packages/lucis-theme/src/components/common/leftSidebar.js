@@ -1,15 +1,22 @@
 import React from "react"
-import { connect } from "frontity"
-import TableOfContents from "../post/tableOfContents"
-import Keywords from "./keywords"
-import { StickyAside } from "../../styles/common"
+import { connect, loadable } from "frontity"
+import { LeftSidebarContainer } from "../../styles/post"
+import useDimension from "../../hooks/useDimension"
+const TableOfContents = loadable(() => import("../post/tableOfContents"))
+const Keywords = loadable(() => import("./keywords"))
 
 const LeftSidebar = ({ state }) => {
+  const dimension = useDimension()
+
   return (
-    <StickyAside className="left-sidebar">
-      <TableOfContents />
-      <Keywords />
-    </StickyAside>
+    <LeftSidebarContainer className="bgGlow">
+      { dimension.width >= 768 ? (
+        <>
+          <TableOfContents />
+          <Keywords />
+        </>
+      ) : null }
+    </LeftSidebarContainer>
   )
 }
 

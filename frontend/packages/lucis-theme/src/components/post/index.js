@@ -1,17 +1,19 @@
 import React from "react"
 import { connect } from "frontity"
-import LeftSidebar from "../common/leftSidebar"
 import PostContent from "./postContent"
 import RightSidebar from "../common/rightSidebar"
 import MostViewedPosts from "../common/mostViewedPosts"
-import { PostDetailContainer } from "../../styles/post"
+import { PostDetail, PostDetailContainer } from "../../styles/post"
+import LeftSidebar from "../common/leftSidebar"
 
-const Post = ({ state }) => {  
+const Post = ({ state }) => { 
   return (
     <>
       <PostDetailContainer>
-        <LeftSidebar />
-        <PostContent />
+        <PostDetail>
+          <LeftSidebar />
+          <PostContent />
+        </PostDetail>
         <RightSidebar />
       </PostDetailContainer>
       <div>

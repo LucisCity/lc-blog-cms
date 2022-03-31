@@ -1,0 +1,49 @@
+version: '3'
+services:
+  wp:
+    build:
+      context: ../wordpress/
+      dockerfile: wordpress.Dockerfile
+      args:
+        buildno: 1
+    image: lucis-blog-wp:1.0
+    ports:
+      - "13500:80"
+    environment:
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    volumes:
+      - ./data/wp-uploads:/var/www/html/wp-content/uploads/
+    networks:
+      - lucis_blog
+
+  mysql:
+    image: "mysql:8.0.28"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    ports:
+      - "33060:3306"
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    networks:
+      - lucis_blog
+
+  frontity:
+    build:
+      context: ../frontend/
+      dockerfile: frontity.Dockerfile
+    image: lucis-blog-ui:1.0
+    restart: always
+    ports:
+      - "13501:3000"
+    networks:
+      - lucis_blog
+
+networks:
+  lucis_blog:
+    driver: bridge

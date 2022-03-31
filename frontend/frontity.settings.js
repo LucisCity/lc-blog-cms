@@ -2,7 +2,7 @@ const settings = {
   "name": "lucis-blog",
   "state": {
     "frontity": {
-      "url": "http://localhost:3000/",
+      "url": "http://localhost:13501/",
       "title": "Lucis blog",
       "description": "WordPress installation for Frontity development"
     }
@@ -15,7 +15,7 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "http://wp-api.local/"
+          "url": "http://localhost:13500/"
         }
       }
     },

@@ -14,7 +14,7 @@ services:
       MYSQL_USER: "${MYSQL_USER}"
       MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
     volumes:
-      - ./data/wp-uploads:/var/www/html/wp-content/uploads/
+      - ../data/wp-uploads:/var/www/html/wp-content/uploads/
     networks:
       - lucis_blog
 
@@ -29,7 +29,7 @@ services:
     ports:
       - "33060:3306"
     volumes:
-      - ./data/mysql:/var/lib/mysql
+      - ../data/mysql:/var/lib/mysql
     networks:
       - lucis_blog
 

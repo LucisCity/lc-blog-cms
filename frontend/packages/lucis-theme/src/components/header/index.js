@@ -6,7 +6,6 @@ import logo from "../../images/logo.png"
 import useDimension from "../../hooks/useDimension"
 
 const Header = ({ state, actions }) => {
-  const data = state.source.get(state.router.link)
   const dimension = useDimension()
 
   useEffect(() => {
@@ -92,7 +91,7 @@ const HeaderStyled = styled.header`
   }
   &.is-scrolling {
     &::before {
-      background: linear-gradient(rgba(0, 0, 0, 0.57), rgba(19, 19, 19, 0.86) 99%);
+      background: linear-gradient(rgba(37, 36, 35, 0.2), rgba(37, 36, 35, 0.6) 99%);
       backdrop-filter: blur(44px);
     }
   }
@@ -141,6 +140,7 @@ const Logo = styled(Link)`
 `
 
 const OpenMobileMenu = styled.div`
+  cursor: pointer;
   width: 20px;
   height: 20px;
   margin-right: 15px;
@@ -165,6 +165,7 @@ const OpenMobileMenu = styled.div`
   }
 `
 const CloseMobileMenu = styled.div`
+  cursor: pointer;
   width: 20px;
   height: 20px;
   margin-bottom: 25px;

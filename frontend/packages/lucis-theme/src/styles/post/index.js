@@ -2,10 +2,11 @@ import { styled } from "frontity"
 import { BoxRoundedBlur } from "../common"
 
 export const PostDetailContainer = styled.div`
+  margin-bottom: 30px;
   @media screen and (min-width: 768px) {
     display: flex;
     flex-wrap: wrap;
-    .bgGlow {
+    .bg-glow {
       &::before {
         content: '';
         display: block;
@@ -78,13 +79,13 @@ export const PostContentContainer = styled.div`
     }
   }
   h2, h3, h4, h5, h6 {
-    scroll-margin-top: 130px;
+    scroll-margin-top: 80px;
   }
   @supports (-webkit-hyphens:none) {
     /* Safari-only */
     h2, h3, h4, h5, h6 {
-      padding-top: 130px;
-      margin-top: -130px;
+      padding-top: 80px;
+      margin-top: -80px;
     }
   }
   @media screen and (min-width: 768px) {
@@ -130,16 +131,19 @@ export const RightSidebarContainer = styled.aside`
   @media screen and (min-width: 768px) {
     width: 100%;
   }
-  @media screen and (min-width: 1200px) {
-    width: 325px;
+  @media screen and (min-width: 992px) {
+    width: 300px;
     position: sticky;
     top: 70px;
     max-height: 100vw;
   }
+  @media screen and (min-width: 1440px) {
+    width: 400px;
+  }
 `
 export const LeftSidebarContainer = styled.aside`
   display: none;
-  &.bgGlow {
+  &.bg-glow {
     &::before {
       width: 140px;
       height: 140px;
@@ -154,9 +158,6 @@ export const LeftSidebarContainer = styled.aside`
     top: 70px;
     max-height: calc(100vh - 140px);
     padding: 15px 7.5px 15px 15px;
-    .childrens-heading {
-      padding-left: 15px;
-    }
   }
   @media screen and (min-width: 1200px) {
     width: 325px;
@@ -166,30 +167,38 @@ export const LeftSidebarContainer = styled.aside`
 export const TableOfContentsContainer = styled(BoxRoundedBlur)`
   max-height: calc(100% - 200px);
   display: flex;
-  font-size: 16px;
+  font-size: 14px;
   color: #ededed;
   nav {
     overflow-y: auto;
     &::-webkit-scrollbar {
       display: none;
     }
+    ol {
+      padding-left: 30px;
+      > li {
+        padding-left: 10px;
+      }
+    }
     ul {
-      li {
-        a {
-          display: flex;
-          padding: 10px;
-          &:hover {
-            color: #cfb160;
-          }
-          span {
-            display: inline-block;
-            &:first-child {
-              min-width: 15px;
-              margin-right: 15px;
-            }
-          }
-        }
+      padding-left: 5px;
+    }
+    li {
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+    a {
+      display: flex;
+      &:hover {
+        color: #cfb160;
+      }
+      span {
+        display: inline-block;
       }
     }
   }
+`
+
+export const RelatedPostsFooterContainer = styled.section`
+
 `

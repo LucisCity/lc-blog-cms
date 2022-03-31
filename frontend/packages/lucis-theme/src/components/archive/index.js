@@ -9,7 +9,7 @@ const Archive = ({ state }) => {
   const data = state.source.get(state.router.link)
   const category = state.source.category[data.id]
   const posts = getPostsFromCategory(state.source, category?.slug)
-  console.log(category)
+  
   return (
     <section>
       <Container>

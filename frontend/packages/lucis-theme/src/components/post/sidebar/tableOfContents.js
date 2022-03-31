@@ -1,39 +1,39 @@
 import React, { useEffect, useState } from "react"
-import { connect } from "frontity"
-import { TableOfContentsContainer } from "../../styles/post"
+import { TableOfContentsContainer } from "../../../styles/post"
 
-const TableOfContents = ({ state }) => {
+const TableOfContents = () => {
   const [nestedHeading, setNestedHeading] = useState([])
 
   useEffect(() => {
-    const headings = Array.from(document.querySelectorAll('h2, h3'))
-    const headingArr = []
+    const headings = Array.from(document.querySelector('#post-content').querySelectorAll('h2, h3, h4, h5, h6'))
+    const headingsArr = []
 
     headings.forEach((heading, index) => {
       const { innerText: title, id } = heading
       heading.id = `heading-${index}`
       if (heading.nodeName === 'H2') {
-        headingArr.push({ id: heading.id, title, items: [] })
-      } else if (heading.nodeName !== 'H2' && headingArr.length > 0) {
-        headingArr[headingArr.length - 1].items.push({ id: heading.id, title })
+        headingsArr.push({ id: heading.id, title, items: [] })
+      } else if (heading.nodeName !== 'H2' && headingsArr.length > 0) {
+        headingsArr[headingsArr.length - 1].items.push({ id: heading.id, title })
       }
     })
-    setNestedHeading(headingArr)
+
+    setNestedHeading(headingsArr)
   }, []);
 
   return (
-    <TableOfContentsContainer padding="20px 30px">
+    <TableOfContentsContainer padding="30px 30px 30px 20px">
       <nav aria-label="Table of contents">
-        <ul>
-          {nestedHeading.length > 0 && nestedHeading.map((heading, index) => {
+        <ol>
+          {nestedHeading.length > 0 && nestedHeading.map((heading) => {
             return (
               <li key={heading.id}>
-                <AnchorItem data={heading} marker={index + 1 + '. '} />
+                <AnchorItem data={heading} />
                 {heading.items.length > 0 && (
-                  <ul className="childrens-heading">
+                  <ul style={{ listStyle: 'disc' }} className="childrens-heading">
                     {heading.items.map((item) => (
                       <li key={item.id}>
-                        <AnchorItem data={item} marker="+" />
+                        <AnchorItem data={item} />
                       </li>
                     ))}
                   </ul>
@@ -41,7 +41,7 @@ const TableOfContents = ({ state }) => {
               </li>
             )
           })}
-        </ul>
+        </ol>
       </nav>
     </TableOfContentsContainer>
   )
@@ -60,10 +60,9 @@ const AnchorItem = ({ data, marker }) => {
       href={`#${data.id}`}
       onClick={(event) => handleAnchorClick(event, data)}
     >
-      <span>{marker}</span>
       <span>{data.title}</span>
     </a>
   )
 }
 
-export default connect(TableOfContents)
+export default TableOfContents

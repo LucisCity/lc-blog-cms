@@ -5,20 +5,24 @@ import Link from "@frontity/components/link"
 import { getPostsFromCategory } from "../../../helpers"
 import FeaturedImage from "../../common/featuredImage"
 
-const SidebarCategory = ({ state }) => {
+const HotNews = ({ state }) => {
   const data = state.source.get(state.router.link)
   const currentPost = state.source[data.type][data.id]
-  const posts = getPostsFromCategory(state.source, 'nguoi-moi', currentPost.id)
+  const posts = getPostsFromCategory(state.source, 'tin-hot', currentPost.id)
 
   return (
-    <BoxRoundedBlur padding="20px 30px">
-      <Title>Title here</Title>
-      <Container>
+    <HotNewsContainer padding="20px 30px">
+      <Title>Tin hot</Title>
+      <PostsContainer>
         {posts.length > 0 && posts.slice(0, 2).map((post) => {
           const featuredMediaId = parseInt(post.featured_media)
 
           return (
-            <PostItem className="img-hover-scale">
+            <PostItem
+              key={post.id}
+              className="img-hover-scale"
+              link={post.link}
+            >
               <PostImage>
                 <FeaturedImage id={featuredMediaId} className="img-scale" />
               </PostImage>
@@ -26,17 +30,25 @@ const SidebarCategory = ({ state }) => {
             </PostItem>
           )
         })}
-      </Container>
-    </BoxRoundedBlur>
+      </PostsContainer>
+    </HotNewsContainer>
   )
 }
+
+const HotNewsContainer = styled(BoxRoundedBlur)`
+  max-height: 50%;
+`
 
 const Title = styled.div`
   margin-bottom: 20px;
 `
 
-const Container = styled.div`
-
+const PostsContainer = styled.div`
+  max-height: calc(100% - 40px);
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 const PostItem = styled(Link)`
@@ -60,4 +72,4 @@ const PostTitle = styled.div`
   overflow: hidden;
 `
 
-export default connect(SidebarCategory)
+export default connect(HotNews)

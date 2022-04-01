@@ -19,7 +19,7 @@ const TableOfContents = () => {
     })
 
     setNestedHeading(headingsArr)
-  }, []);
+  }, [])
 
   return (
     <TableOfContentsContainer padding="30px 30px 30px 20px">
@@ -30,7 +30,7 @@ const TableOfContents = () => {
               <li key={heading.id}>
                 <AnchorItem data={heading} />
                 {heading.items.length > 0 && (
-                  <ul style={{ listStyle: 'disc' }} className="childrens-heading">
+                  <ul style={{ listStyle: 'disc', marginTop: '15px' }} className="childrens-heading">
                     {heading.items.map((item) => (
                       <li key={item.id}>
                         <AnchorItem data={item} />
@@ -47,7 +47,7 @@ const TableOfContents = () => {
   )
 }
 
-const AnchorItem = ({ data, marker }) => {
+const AnchorItem = ({ data }) => {
   const handleAnchorClick = (event, data) => {
     event.preventDefault()
     document.querySelector(`#${data.id}`)?.scrollIntoView({

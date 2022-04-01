@@ -16,7 +16,7 @@ const RelatedPostsFooter = ({ state }) => {
   return (
     <RelatedPostsFooterContainer>
       <Container>
-        <Title>Tin liên quan</Title>
+        <Title>Tin cùng chuyên mục</Title>
         <PostsGrid>
           {posts.length > 0 && posts.slice(0, 6).map((post) => {
             const featuredMediaId = parseInt(post.featured_media)

@@ -1,18 +1,18 @@
 import React from "react"
 import { connect } from "frontity"
 import RelatedPosts from "./relatedPosts"
-import SidebarCategory from "./sidebarCategory"
 import { RightSidebarContainer } from "../../../styles/post"
 import useDimension from "../../../hooks/useDimension"
+import HotNews from "./hotNews"
 
 const RightSidebar = ({ state }) => {
   const dimension = useDimension()
   return (
-    <RightSidebarContainer>
+    <RightSidebarContainer className="bg-glow">
       { dimension.width >= 992 ? (
         <>
           <RelatedPosts />
-          <SidebarCategory />
+          <HotNews />
         </>
       ) : null }
     </RightSidebarContainer>

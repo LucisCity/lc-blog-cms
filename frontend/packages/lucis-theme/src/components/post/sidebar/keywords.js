@@ -1,5 +1,5 @@
 import React from "react"
-import { connect, styled } from "frontity"
+import { connect, styled, decode } from "frontity"
 import { BoxRoundedBlur } from "../../../styles/common"
 import Link from "@frontity/components/link"
 
@@ -9,14 +9,14 @@ const Keywords = ({ state }) => {
   const tags = post.tags.map((tagId) => {
     return state.source.tag[tagId]
   })
-  console.log(tags)
+  
   return (
     <TagsContainer padding="20px 30px">
       <Title>Keywords</Title>
       <ScrollContainer>
         {tags.length > 0 && tags.map((tag) => (
           <Tag key={tag.id} link={tag.link}>
-            {tag.name}
+            {decode(tag.name)}
           </Tag>
         ))}
       </ScrollContainer>

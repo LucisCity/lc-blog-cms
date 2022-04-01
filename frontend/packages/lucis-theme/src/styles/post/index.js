@@ -128,6 +128,11 @@ export const PostDetail = styled.div`
 
 export const RightSidebarContainer = styled.aside`
   padding: 15px 15px 15px 7.5px;
+  &.bg-glow {
+    &::before {
+      top: 50%;
+    }
+  }
   @media screen and (min-width: 768px) {
     width: 100%;
   }
@@ -135,7 +140,9 @@ export const RightSidebarContainer = styled.aside`
     width: 300px;
     position: sticky;
     top: 70px;
-    max-height: 100vw;
+    max-height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
   }
   @media screen and (min-width: 1440px) {
     width: 400px;

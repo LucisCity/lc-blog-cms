@@ -9,7 +9,6 @@ import {
   Container,
   HomepageSection,
   PostAuthor,
-  PostsGrid,
   PostsGridDate,
   PostsGridFavorite,
   PostsGridFooter,
@@ -18,11 +17,12 @@ import {
   PostsGridItem,
   PostsGridRibbon,
   PostsGridTitle,
+  RecentPostsGrid,
   SectionTitle
 } from "../../styles/common"
 
-const PostsListByCategory = ({ state, categorySlug, title }) => {
-  const posts = getPostsFromCategory(state.source, categorySlug)
+const RecentPosts = ({ state }) => {
+  const posts = getPostsFromCategory(state.source, 'he-sinh-thai')
   
   return (
     <>
@@ -30,9 +30,9 @@ const PostsListByCategory = ({ state, categorySlug, title }) => {
         posts.length ? (
           <HomepageSection>
             <Container>
-              <SectionTitle>{title}</SectionTitle>
-              <PostsGrid>
-              {posts.map((post) => {
+              <SectionTitle>RECENT</SectionTitle>
+              <RecentPostsGrid>
+              {posts.slice(0, 4).map((post) => {
                 const featuredMediaId = parseInt(post.featured_media)
                 const author = state.source.author[post.author]
 
@@ -56,7 +56,7 @@ const PostsListByCategory = ({ state, categorySlug, title }) => {
                   </PostsGridItem>
                 )
               })}
-              </PostsGrid>
+              </RecentPostsGrid>
             </Container>
           </HomepageSection>
         ) : null
@@ -65,4 +65,4 @@ const PostsListByCategory = ({ state, categorySlug, title }) => {
   )
 }
 
-export default connect(PostsListByCategory)
+export default connect(RecentPosts)

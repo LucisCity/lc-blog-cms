@@ -10,7 +10,8 @@ import Loading from "./common/loading"
 import Archive from "./archive"
 import NotFound from "./common/notfound"
 import GlobalStyles from "../styles/global"
-import { Container } from "../styles/common"
+import { MainBg } from "../styles/common"
+import RecentPosts from "./homepage/recentPosts"
 
 const Root = ({ state }) => {
   const data = state.source.get(state.router.link)
@@ -22,12 +23,12 @@ const Root = ({ state }) => {
       <Main>
         <Switch>
           <Loading when={data.isFetching} />
-          <Container when={data.isHome}>
-            <LatestPosts />
-            <PostsListByCategory categorySlug="nguoi-moi" title="Dành cho người mới" />
-            <PostsListByCategory categorySlug="coin-tokens" title="Coin & Tokens" />
-            <PostsListByCategory categorySlug="he-sinh-thai" title="Hệ sinh thái" />
-          </Container>
+          <MainBg when={data.isHome}>
+            <PostsListByCategory categorySlug="top-trending" title="TOP TRENDING" />
+            <PostsListByCategory categorySlug="nguoi-moi" title="HOT SEARCH" />
+            <RecentPosts />
+            <PostsListByCategory categorySlug="coin-tokens" title="LUCIS REVIEW" />
+          </MainBg>
           <Page when={data.isPage} />
           <Archive when={data.isArchive} />
           <Post when={data.isPost} />

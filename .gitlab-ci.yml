@@ -1,0 +1,48 @@
+image: docker/compose:latest
+services:
+  - docker:dind
+stages:
+  # - build
+  # - test
+  - deploy
+default:
+  before_script:
+    - echo "This is before script"
+    - touch ./docker/.env
+    - docker info
+    - docker-compose --version
+
+deploy-dev:
+  stage: deploy
+  only:
+    - develop
+  variables:
+    # Use a distinct name for each job.
+    COMPOSE_PROJECT_NAME: lucis-blog-dev-$CI_JOB_ID
+  script:
+    - cd ./docker
+    - echo MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD >> .env
+    - echo MYSQL_DATABASE=$MYSQL_DATABASE >> .env
+    - echo MYSQL_USER=$MYSQL_USER >> .env
+    - echo MYSQL_PASSWORD=$MYSQL_PASSWORD >> .env
+    - echo FRONTITY_PORT=$FRONTITY_PORT >> .env
+    - echo WP_PORT=$WP_PORT >> .env
+    - echo BLOG_URL="http://lucis.blog:${FRONTITY_PORT}" >> .env
+    - echo API_URL="http://host.docker.internal:${WP_PORT}" >> .env
+    - docker-compose up --build -d
+
+deploy-beta:
+  stage: deploy
+  only:
+    - beta
+  variables:
+    # Use a distinct name for each job.
+    COMPOSE_PROJECT_NAME: lucis-blog-beta-$CI_JOB_ID
+  script:
+    - echo NEXT_PUBLIC_GRAPHQL_URL=$NEXT_PUBLIC_GRAPHQL_URL_TRIAL >> .env
+    - echo NEXT_PUBLIC_GRAPHQL_SUBSCRIPTION_URL=$NEXT_PUBLIC_GRAPHQL_SUBSCRIPTION_URL_TRIAL >> .env
+    - docker build -t lucis_launchpad_trial:$CI_COMMIT_SHORT_SHA -f deploy/Dockerfile .
+    - docker stop lucis_launchpad_trial
+    - docker rm lucis_launchpad_trial
+    - docker run -p 3001:3000 --restart always --network lucis_network --name lucis_launchpad_trial -d lucis_launchpad_trial:$CI_COMMIT_SHORT_SHA
+

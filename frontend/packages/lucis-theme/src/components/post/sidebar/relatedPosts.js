@@ -9,16 +9,23 @@ const RelatedPosts = ({ state }) => {
   const data = state.source.get(state.router.link)
   const currentPost = state.source[data.type][data.id]
   const posts = getPostsFromCategory(state.source, 'nguoi-moi', currentPost.id)
+  const tags = currentPost.tags.map((tagId) => {
+    return state.source.tag[tagId]
+  })
 
   return (
-    <BoxRoundedBlur padding="20px 30px">
-      <Title>Related posts</Title>
-      <Container>
+    <RelatedPostsContainer padding="20px 30px">
+      <Title>Tin liên quan</Title>
+      <PostsContainer>
         {posts.length > 0 && posts.slice(0, 10).map((post) => {
           const featuredMediaId = parseInt(post.featured_media)
 
           return (
-            <PostItem className="img-hover-scale">
+            <PostItem
+              key={post.id}
+              className="img-hover-scale"
+              link={post.link}
+            >
               <PostImage>
                 <FeaturedImage id={featuredMediaId} className="img-scale" />
               </PostImage>
@@ -26,31 +33,39 @@ const RelatedPosts = ({ state }) => {
             </PostItem>
           )
         })}
-      </Container>
-    </BoxRoundedBlur>
+      </PostsContainer>
+    </RelatedPostsContainer>
   )
 }
+
+const RelatedPostsContainer = styled(BoxRoundedBlur)`
+  max-height: 50%;
+`
 
 const Title = styled.div`
   margin-bottom: 20px;
 `
 
-const Container = styled.div`
-
+const PostsContainer = styled.div`
+  max-height: calc(100% - 40px);
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `
 
 const PostItem = styled(Link)`
   display: flex;
   align-items: center;
-  margin-bottom: 25px;
+  margin-bottom: 15px;
   &:last-child {
     margin-bottom: 0;
   }
 `
 
 const PostImage = styled.div`
-  min-width: 100px;
-  max-width: 100px;
+  min-width: 80px;
+  max-width: 80px;
   border-radius: 10px;
   overflow: hidden;
   margin-right: 15px;

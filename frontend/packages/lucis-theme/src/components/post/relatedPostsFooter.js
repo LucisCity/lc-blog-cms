@@ -16,7 +16,7 @@ const RelatedPostsFooter = ({ state }) => {
   return (
     <RelatedPostsFooterContainer>
       <Container>
-        <Title>Tin liên quan</Title>
+        <Title>Tin cùng chuyên mục</Title>
         <PostsGrid>
           {posts.length > 0 && posts.slice(0, 6).map((post) => {
             const featuredMediaId = parseInt(post.featured_media)
@@ -68,10 +68,9 @@ const PostsGrid = styled.div`
   gap: 20px;
   grid-auto-rows: minmax(100px, auto);
   @media screen and (min-width: 768px) {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
   @media screen and (min-width: 992px) {
-    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
   }
 `

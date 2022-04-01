@@ -35,6 +35,7 @@ export const PostContentContainer = styled.div`
   }
   h1, h2, h3, h4, h5, h6 {
     color: #ededed;
+    line-height: 1.5;
   }
   h2 {
     margin: 28px 0 18px 0;

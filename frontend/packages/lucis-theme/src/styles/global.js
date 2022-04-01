@@ -1,4 +1,5 @@
 import { Global, css, Head } from "frontity"
+import SVNTransformer from "../fonts/SVN-Transformer.ttf"
 
 const GlobalStyles = () => {
   return (
@@ -10,6 +11,10 @@ const GlobalStyles = () => {
       </Head>
       <Global styles={
       css`
+        @font-face {
+          font-family: 'SVN Transformer';
+          src: url(${SVNTransformer}) format('truetype');
+        }
         * {
           margin: 0;
           padding: 0;
@@ -17,10 +22,11 @@ const GlobalStyles = () => {
         }
         html {
           font-family: 'Saira', sans-serif;
+          line-height: 115%;
+          color: #ffffff;
         }
         body {
           background: #100f0e;
-          color: #bbbbbb;
           word-break: break-word;
           &::-webkit-scrollbar, *::-webkit-scrollbar {
             width: 3px;
@@ -45,9 +51,6 @@ const GlobalStyles = () => {
         a {
           text-decoration: none;
           color: inherit;
-        }
-        a:hover {
-          color: gray;
         }
         section {
           margin-bottom: 50px;

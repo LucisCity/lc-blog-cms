@@ -3,6 +3,7 @@ import { connect, decode } from "frontity"
 import { getPostsFromCategory } from "../../helpers"
 import FeaturedImage from "../common/featuredImage"
 import Favorite from "../../images/Favorite_duotone.svg"
+import dayjs from "dayjs"
 import {
   AuthorAvatar,
   AuthorName,
@@ -35,6 +36,7 @@ const PostsListByCategory = ({ state, categorySlug, title }) => {
               {posts.map((post) => {
                 const featuredMediaId = parseInt(post.featured_media)
                 const author = state.source.author[post.author]
+                const formatedDate = dayjs(post.date).format('MMMM DD, YYYY')
 
                 return (
                   <PostsGridItem key={post.id} link={post.link}>
@@ -49,7 +51,7 @@ const PostsListByCategory = ({ state, categorySlug, title }) => {
                           <AuthorAvatar src={author.avatar_urls[24]} />
                           <AuthorName>{author.name}</AuthorName>
                         </PostAuthor>
-                        <PostsGridDate> March 24, 2022</PostsGridDate>
+                        <PostsGridDate>{formatedDate}</PostsGridDate>
                         <PostsGridFavorite src={Favorite} width="23px" />
                       </PostsGridFooter>
                     </PostsGridInfo>

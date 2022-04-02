@@ -158,13 +158,16 @@ const FooterForm = styled.div`
       backdrop-filter: blur(42px);
       border: none;
       outline: none;
-      padding: 20px;
+      padding: 10px;
       font-size: 16px;
       color: #ffffff;
+      @media screen and (min-width: 992px) {
+        padding: 20px;
+      }
       @media screen and (min-width: 1200px) {
         font-size: 26px;
       }
-      @media screen and (min-width: 1200px) {
+      @media screen and (min-width: 1400px) {
         font-size: 36px;
       }
     }

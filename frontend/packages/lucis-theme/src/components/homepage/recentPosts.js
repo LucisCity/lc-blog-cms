@@ -2,13 +2,13 @@ import React from "react"
 import { connect, decode } from "frontity"
 import { getPostsFromCategory } from "../../helpers"
 import FeaturedImage from "../common/featuredImage"
+import dayjs from "dayjs"
 import {
   AuthorName,
   Container,
   HomepageSection,
   PostAuthor,
   PostsGridDate,
-  PostsGridFavorite,
   PostsGridFooter,
   PostsGridImage,
   PostsGridInfo,
@@ -33,6 +33,7 @@ const RecentPosts = ({ state }) => {
               {posts.slice(0, 4).map((post) => {
                 const featuredMediaId = parseInt(post.featured_media)
                 const author = state.source.author[post.author]
+                const formatedDate = dayjs(post.date).format('MMMM DD, YYYY')
 
                 return (
                   <PostsGridItem key={post.id} link={post.link}>
@@ -46,7 +47,7 @@ const RecentPosts = ({ state }) => {
                         <PostAuthor>
                           <AuthorName>{author.name}</AuthorName>
                         </PostAuthor>
-                        <PostsGridDate>- March 24, 2022</PostsGridDate>
+                        <PostsGridDate>- {formatedDate}</PostsGridDate>
                       </PostsGridFooter>
                     </PostsGridInfo>
                   </PostsGridItem>

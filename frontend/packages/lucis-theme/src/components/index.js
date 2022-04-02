@@ -12,6 +12,7 @@ import GlobalStyles from "../styles/global"
 import RecentPosts from "./homepage/recentPosts"
 import MediaPosts from "./homepage/mediaPosts"
 import { MainBg } from "../styles/common"
+import Footer from "./footer"
 
 const Root = ({ state }) => {
   const data = state.source.get(state.router.link)
@@ -36,6 +37,7 @@ const Root = ({ state }) => {
           <NotFound />
         </Switch>
       </Main>
+      <Footer />
     </>
   )
 }

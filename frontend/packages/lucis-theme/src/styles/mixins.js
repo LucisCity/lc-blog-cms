@@ -17,3 +17,7 @@ export const GradientBorderRadius = (
   border: ${borderWidth} solid transparent;
   border-radius: ${radius};
 `
+
+export const BoxShadowGlowing = (color = 'rgba(67, 224, 247, 0.37)') => css`
+  box-shadow: 0px 0px 9px 8px ${color};
+`

@@ -2,6 +2,7 @@ import React from "react"
 import { connect, decode } from "frontity"
 import { getPostsFromCategory } from "../../helpers"
 import FeaturedImage from "../common/featuredImage"
+import useDimension from "../../hooks/useDimension"
 import {
   AuthorName,
   Container,
@@ -24,13 +25,14 @@ import {
 const MediaPosts = ({ state }) => {
   const posts = getPostsFromCategory(state.source, 'media')
   const sortedPosts = posts.sort((a, b) => a.acf.order - b.acf.order)
+  const dimension = useDimension()
+
   console.log(sortedPosts)
-  const firstPost = posts[0]
 
   return (
     <>
       {
-        posts.length ? (
+        sortedPosts.length ? (
           <HomepageSection>
             <Container>
               <SectionTitle>MEDIA</SectionTitle>

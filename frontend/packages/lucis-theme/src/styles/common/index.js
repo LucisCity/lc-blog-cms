@@ -1,7 +1,7 @@
 import { styled } from "frontity"
 import Link from "@frontity/components/link"
 import Image from "@frontity/components/image"
-import { GradientBorderRadius, TextLineClamp } from "../mixins"
+import { BoxShadowGlowing, GradientBorderRadius, TextLineClamp } from "../mixins"
 
 export const MainBg = styled.div`
   &::before, &::after {
@@ -102,13 +102,19 @@ export const PostsGridImage = styled.div`
 `
 
 export const PostsGridInfo = styled.div`
-  padding: 30px 15px 40px;
+  padding: 15px;
+  @media screen and (min-width: 1400px) {
+    padding: 30px 15px 40px;
+  }
 `
 
 export const PostsGridTitle = styled.h3`
   font-size: 16px;
   font-weight: 400;
-  margin-bottom: 35px;
+  margin-bottom: 20px;
+  @media screen and (min-width: 1400px) {
+    margin-bottom: 35px;
+  }
 `
 
 export const PostsGridFooter = styled.div`
@@ -328,19 +334,44 @@ export const RecentPostsGrid = styled.div`
 
 // Media
 export const PostsGridExcerp = styled.div`
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 300;
-  margin: 22px 0 30px;
-  ${TextLineClamp(6)};
+  margin: 10px 0;
+  ${TextLineClamp(3)};
+  @media screen and (min-width: 992px) {
+    font-size: 20px;
+    margin: 22px 0 30px;
+    ${TextLineClamp(6)};
+  }
+  @media screen and (min-width: 1400px) {
+    font-size: 24px;
+  }
 `
 
 export const MediaPostsGrid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 260px);
-  gap: 80px 48px;
+  @media screen and (min-width: 768px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 260px);
+    gap: 30px;
+  }
+  @media screen and (min-width: 992px) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 260px);
+  }
+  @media screen and (min-width: 992px) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(4, 220px);
+  }
+  @media screen and (min-width: 1200px) {
+    gap: 40px;
+  }
+  @media screen and (min-width: 1400px) {
+    gap: 80px 48px;
+  }
   ${PostsGridItem} {
     background: none;
+    margin-bottom: 20px;
     ${PostsGridImage} {
       height: 100%;
       img {
@@ -348,52 +379,142 @@ export const MediaPostsGrid = styled.div`
         height: 100%;
         object-fit: cover;
       }
-      }
+    }
     &:first-of-type {
-      margin-bottom: 30px;
-      grid-column-start: 1;
-      grid-column-end: 5;
-      grid-row-start: 1;
-      grid-row-end: 3;
-      display: flex;
+      @media screen and (min-width: 768px) {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 2;
+        display: flex;
+        margin-bottom: 0;
+      }
+      @media screen and (min-width: 992px) {
+        grid-column-end: 5;
+        grid-row-end: 3;
+      }
+      @media screen and (min-width: 1400px) {
+        margin-bottom: 30px;
+      }
       ${PostsGridImage} {
-        min-width: 683px;
+        min-width: 320px;
         ${GradientBorderRadius('#CD28E8', '#0BEBD6', '16px')}
+        @media screen and (min-width: 768px) {
+          min-width: 400px;
+        }
+        @media screen and (min-width: 992px) {
+          min-width: 550px;
+        }
+        @media screen and (min-width: 1200px) {
+          min-width: 600px;
+        }
+        @media screen and (min-width: 1400px) {
+          min-width: 683px;
+        }
       }
       ${PostsGridInfo} {
-        padding: 25px 22px;
+        padding: 15px;
+        @media screen and (min-width: 992px) {
+          padding: 25px 22px;
+        }
       }
       ${PostsGridTitle} {
-        font-size: 32px;
+        font-size: 16px;
         line-height: 1.3;
         text-transform: uppercase;
         font-weight: 600;
-        margin-bottom: 20px;
+        margin-bottom: 10px;
+        ${TextLineClamp(3)}
+        @media screen and (min-width: 992px) {
+          font-size: 26px;
+          margin-bottom: 20px;
+        }
+        @media screen and (min-width: 1400px) {
+          font-size: 32px;
+        }
       }
       ${PostsGridDate} {
-        font-size: 18px;
+        font-size: 14px;
         font-weight: 300;
+        @media screen and (min-width: 1400px) {
+          font-size: 18px;
+        }
       }
       ${AuthorAvatar} {
         width: 28px;
         height: 28px;
       }
       ${AuthorName} {
-        font-size: 16px;
+        font-size: 12px;
+        @media screen and (min-width: 992px) {
+          font-size: 16px;
+        }
       }
     }
-    &:nth-of-type(3), &:nth-of-type(6) {
-      grid-column-start: 2;
-      grid-column-end: 4;
-    }
     &:not(:first-of-type) {
-      margin-bottom: -30px;
+      margin-bottom: 30px;
+      ${BoxShadowGlowing()}
       ${GradientBorderRadius('#CD28E8', '#0BEBD6', '16px')}
+      @media screen and (min-width: 1400px) {
+        margin-bottom: -30px;
+      }
       ${PostsGridInfo} {
+        display: flex;
+        flex-direction: column-reverse;
         position: absolute;
         left: 0;
         right: 0;
         bottom: 0;
+        padding: 15px;
+        height: 100px;
+        background: rgba(0, 0, 0, 0.25);
+        backdrop-filter: blur(4px);
+        justify-content: start;
+        @media screen and (min-width: 1200px) {
+          padding: 25px 15px;
+          height: 120px;
+        }
+      }
+      ${PostsGridTitle} {
+        margin-bottom: 0;
+        font-size: 14px;
+        font-weight: 500;
+        ${TextLineClamp(2)}
+      }
+      ${PostsGridFooter} {
+        margin-bottom: 12px;
+        font-size: 12px;
+        font-weight: 600;
+      }
+      ${PostsGridDate} {
+        color: #ffffff;
+      }
+      ${PostAuthor} {
+        width: auto;
+        margin-bottom: 0;
+      }
+      ${AuthorName} {
+        margin-right: 3px;
+      }
+    }
+    @media screen and (min-width: 992px) {
+      &:nth-of-type(3), &:nth-of-type(6) {
+        grid-column-start: 2;
+        grid-column-end: 4;
+        ${PostsGridInfo} {
+          padding: 15px;
+          height: 120px;
+          @media screen and (min-width: 1200px) {
+            padding: 20px 15px;
+            height: 150px;
+          }
+        }
+        ${PostsGridTitle} {
+          font-size: 20px;
+          @media screen and (min-width: 1200px) {
+            font-size: 24px;
+          }
+        }
       }
     }
   }

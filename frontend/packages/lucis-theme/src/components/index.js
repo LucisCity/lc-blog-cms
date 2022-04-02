@@ -3,15 +3,15 @@ import { connect, styled } from "frontity"
 import Switch from "@frontity/components/switch"
 import Header from "./header"
 import PostsListByCategory from "./homepage/postsListByCategory"
-import LatestPosts from "./homepage/latestPosts"
 import Post from "./post"
 import Page from "./page"
 import Loading from "./common/loading"
 import Archive from "./archive"
 import NotFound from "./common/notfound"
 import GlobalStyles from "../styles/global"
-import { MainBg } from "../styles/common"
 import RecentPosts from "./homepage/recentPosts"
+import MediaPosts from "./homepage/mediaPosts"
+import { MainBg } from "../styles/common"
 
 const Root = ({ state }) => {
   const data = state.source.get(state.router.link)
@@ -27,6 +27,7 @@ const Root = ({ state }) => {
             <PostsListByCategory categorySlug="top-trending" title="TOP TRENDING" />
             <PostsListByCategory categorySlug="nguoi-moi" title="HOT SEARCH" />
             <RecentPosts />
+            <MediaPosts />
             <PostsListByCategory categorySlug="coin-tokens" title="LUCIS REVIEW" />
           </MainBg>
           <Page when={data.isPage} />

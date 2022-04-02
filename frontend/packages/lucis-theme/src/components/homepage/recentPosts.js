@@ -2,9 +2,7 @@ import React from "react"
 import { connect, decode } from "frontity"
 import { getPostsFromCategory } from "../../helpers"
 import FeaturedImage from "../common/featuredImage"
-import Favorite from "../../images/Favorite_duotone.svg"
 import {
-  AuthorAvatar,
   AuthorName,
   Container,
   HomepageSection,
@@ -46,11 +44,9 @@ const RecentPosts = ({ state }) => {
                       <PostsGridTitle>{decode(post.title.rendered)}</PostsGridTitle>
                       <PostsGridFooter>
                         <PostAuthor>
-                          <AuthorAvatar src={author.avatar_urls[24]} />
                           <AuthorName>{author.name}</AuthorName>
                         </PostAuthor>
-                        <PostsGridDate> March 24, 2022</PostsGridDate>
-                        <PostsGridFavorite src={Favorite} width="23px" />
+                        <PostsGridDate>- March 24, 2022</PostsGridDate>
                       </PostsGridFooter>
                     </PostsGridInfo>
                   </PostsGridItem>

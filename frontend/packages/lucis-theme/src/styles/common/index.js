@@ -1,18 +1,19 @@
 import { styled } from "frontity"
 import Link from "@frontity/components/link"
 import Image from "@frontity/components/image"
+import { GradientBorderRadius, TextLineClamp } from "../mixins"
 
 export const MainBg = styled.div`
   &::before, &::after {
     content: '';
     display: block;
     position: fixed;
-    width: 400px;
-    height: 300px;
+    width: 500px;
+    height: 400px;
     border-radius: 50%;
     background: linear-gradient(#FB03F5, #AA9CFF);
     z-index: -1;
-    filter: blur(120px);
+    filter: blur(150px);
   }
   &::before {
     top: 0;
@@ -176,23 +177,229 @@ export const PostsGridRibbon = styled.div`
 // Recent
 export const RecentPostsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, 1fr);
   gap: 20px;
-  a {
-    &:first-child {
-      grid-column-start: 1;
-      grid-column-end: 4;
-      grid-row-start: 1;
-      grid-row-end: 3;
-    }
-    &:last-child {
-      grid-column-start: 4;
-      grid-column-end: 6;
-      grid-row-start: 2;
-      grid-row-end: 3;
+  @media screen and (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+  }
+  @media screen and (min-width: 992px) {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(2, 250px);
+    gap: 16px;
+  }
+  @media screen and (min-width: 1200px) {
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 297px);
+  }
+  ${PostsGridRibbon} {
+    font-size: 10px;
+    padding: 5px 8px;
+    &::after {
+      content: none;
     }
   }
+  ${PostsGridItem} {
+    border-radius: 0;
+    &:first-child {
+      @media screen and (min-width: 992px) {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 3;
+      }
+      @media screen and (min-width: 1200px) {
+        grid-column-end: 4;
+      }
+      ${PostsGridTitle} {
+        @media screen and (min-width: 992px) {
+          font-size: 24px;
+          ${TextLineClamp(3)}
+        }
+        @media screen and (min-width: 1200px) {
+          font-size: 36px;
+          ${TextLineClamp(2)}
+        }
+      }
+      ${PostsGridInfo} {
+        @media screen and (min-width: 992px) {
+          height: 185px;
+          padding: 25px;
+        }
+      }
+      ${PostsGridFooter} {
+        @media screen and (min-width: 992px) {
+          font-size: 16px;
+          margin-bottom: 5px;
+        }
+      }
+      ${PostsGridRibbon} {
+        @media screen and (min-width: 992px) {
+          top: 25px;
+          left: 25px;
+          font-size: 14px;
+        }
+      }
+    }
+    &:last-child {
+      @media screen and (min-width: 992px) {
+        grid-column-start: 3;
+        grid-column-end: 5;
+        grid-row-start: 2;
+        grid-row-end: 3;
+      }
+      @media screen and (min-width: 1200px) {
+        grid-column-start: 4;
+        grid-column-end: 6;
+      }
+      ${PostsGridTitle} {
+        @media screen and (min-width: 992px) {
+          font-size: 18px;
+          ${TextLineClamp(3)}
+        }
+        @media screen and (min-width: 1200px) {
+          font-size: 24px;
+          ${TextLineClamp(2)}
+        }
+      }
+      ${PostsGridInfo} {
+        @media screen and (min-width: 992px) {
+          height: 145px;
+          padding: 25px;
+        }
+      }
+      ${PostsGridRibbon} {
+        @media screen and (min-width: 992px) {
+          top: 25px;
+          left: 25px;
+        }
+      }
+    }
+    ${PostsGridImage} {
+      border-radius: 0;
+      height: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    ${PostsGridTitle} {
+      font-size: 16px;
+      font-weight: 500;
+      margin-bottom: 0;
+      text-transform: capitalize;
+      ${TextLineClamp(3)}
+      @media screen and (min-width: 992px) {
+        font-size: 14px;
+      }
+    }
+    ${PostsGridInfo} {
+      display: flex;
+      flex-direction: column-reverse;
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 15px;
+      height: 120px;
+      background: rgba(0, 0, 0, 0.25);
+      backdrop-filter: blur(4px);
+      @media screen and (min-width: 992px) {
+        height: 110px;
+      }
+    }
+    ${PostsGridFooter} {
+      font-weight: 600;
+      font-size: 12px;
+      margin-bottom: 5px;
+    }
+    ${PostAuthor} {
+      width: auto;
+      margin-bottom: 0;
+    }
+    ${AuthorName} {
+      margin-right: 4px;
+    }
+    ${PostsGridDate} {
+      color: #ffffff;
+    }
+  }
+`
+
+// Media
+export const PostsGridExcerp = styled.div`
+  font-size: 24px;
+  font-weight: 300;
+  margin: 22px 0 30px;
+  ${TextLineClamp(6)};
+`
+
+export const MediaPostsGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 260px);
+  gap: 80px 48px;
+  ${PostsGridItem} {
+    background: none;
+    ${PostsGridImage} {
+      height: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      }
+    &:first-of-type {
+      margin-bottom: 30px;
+      grid-column-start: 1;
+      grid-column-end: 5;
+      grid-row-start: 1;
+      grid-row-end: 3;
+      display: flex;
+      ${PostsGridImage} {
+        min-width: 683px;
+        ${GradientBorderRadius('#CD28E8', '#0BEBD6', '16px')}
+      }
+      ${PostsGridInfo} {
+        padding: 25px 22px;
+      }
+      ${PostsGridTitle} {
+        font-size: 32px;
+        line-height: 1.3;
+        text-transform: uppercase;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+      ${PostsGridDate} {
+        font-size: 18px;
+        font-weight: 300;
+      }
+      ${AuthorAvatar} {
+        width: 28px;
+        height: 28px;
+      }
+      ${AuthorName} {
+        font-size: 16px;
+      }
+    }
+    &:nth-of-type(3), &:nth-of-type(6) {
+      grid-column-start: 2;
+      grid-column-end: 4;
+    }
+    &:not(:first-of-type) {
+      margin-bottom: -30px;
+      ${GradientBorderRadius('#CD28E8', '#0BEBD6', '16px')}
+      ${PostsGridInfo} {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+    }
+  }
+`
+
+export const PostsGridContent = styled.div`
 
 `
 

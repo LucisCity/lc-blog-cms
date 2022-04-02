@@ -4,24 +4,26 @@ import Image from "@frontity/components/image"
 import { BoxShadowGlowing, GradientBorderRadius, TextLineClamp } from "../mixins"
 
 export const MainBg = styled.div`
-  &::before, &::after {
-    content: '';
-    display: block;
-    position: fixed;
-    width: 500px;
-    height: 400px;
-    border-radius: 50%;
-    background: linear-gradient(#FB03F5, #AA9CFF);
-    z-index: -1;
-    filter: blur(150px);
-  }
-  &::before {
-    top: 0;
-    right: 0;
-  }
-  &::after {
-    top: 50%;
-    left: -70px;
+  @media screen and (min-width: 768px) {
+    &::before, &::after {
+      content: '';
+      display: block;
+      position: fixed;
+      width: 500px;
+      height: 400px;
+      border-radius: 50%;
+      background: linear-gradient(#FB03F5, #AA9CFF);
+      z-index: -1;
+      filter: blur(150px);
+    }
+    &::before {
+      top: 0;
+      right: 0;
+    }
+    &::after {
+      top: 80%;
+      left: -70px;
+    }
   }
 `
 
@@ -337,6 +339,7 @@ export const PostsGridExcerp = styled.div`
   font-size: 16px;
   font-weight: 300;
   margin: 10px 0;
+  line-height: 1.2;
   ${TextLineClamp(3)};
   @media screen and (min-width: 992px) {
     font-size: 20px;
@@ -372,6 +375,12 @@ export const MediaPostsGrid = styled.div`
   ${PostsGridItem} {
     background: none;
     margin-bottom: 20px;
+    ${PostsGridRibbon} {
+      top: 25px;
+      left: 25px;
+      font-size: 10px;
+      padding: 3px 5px;
+    }
     ${PostsGridImage} {
       height: 100%;
       img {
@@ -381,6 +390,10 @@ export const MediaPostsGrid = styled.div`
       }
     }
     &:first-of-type {
+      ${PostsGridRibbon} {
+        font-size: 16px;
+        padding: 5px 10px;
+      }
       @media screen and (min-width: 768px) {
         grid-column-start: 1;
         grid-column-end: 3;
@@ -455,8 +468,16 @@ export const MediaPostsGrid = styled.div`
       margin-bottom: 30px;
       ${BoxShadowGlowing()}
       ${GradientBorderRadius('#CD28E8', '#0BEBD6', '16px')}
+      @media screen and (min-width: 768px) {
+        margin-bottom: 0;
+      }
       @media screen and (min-width: 1400px) {
         margin-bottom: -30px;
+      }
+      ${PostsGridRibbon} {
+        &::after {
+          content: none;
+        }
       }
       ${PostsGridInfo} {
         display: flex;
@@ -522,6 +543,49 @@ export const MediaPostsGrid = styled.div`
 
 export const PostsGridContent = styled.div`
 
+`
+
+// Ranking
+
+export const Ranking = styled.div`
+  padding: 80px 0;
+  @media screen and (min-width: 1200px){
+    padding: 120px 0 250px;
+  }
+  ${Container} {
+    position: relative;
+    &::before {
+      @media screen and (min-width: 576px){
+        content: '';
+        display: block;
+        position: absolute;
+        border-radius: 50%;
+        border: 2px solid #36338c;
+        width: 904px;
+        height: 904px;
+        left: -171%;
+        top: -105%;
+      }
+      @media screen and (min-width: 768px){
+        width: 1274px;
+        height: 1274px;
+        left: -181%;
+        top: -113%;
+      }
+      @media screen and (min-width: 992px){
+        left: -134%;
+        top: -71%;
+      }
+      @media screen and (min-width: 1200px){
+        top: -55%;
+        left: -112%;
+      }
+      @media screen and (min-width: 1400px){
+        left: -104%;
+        top: -50%;
+      }
+    }
+  }
 `
 
 export const StickyAside = styled.aside`

@@ -11,8 +11,10 @@ import NotFound from "./common/notfound"
 import GlobalStyles from "../styles/global"
 import RecentPosts from "./homepage/recentPosts"
 import MediaPosts from "./homepage/mediaPosts"
-import { MainBg } from "../styles/common"
+import { Container, MainBg, Ranking } from "../styles/common"
 import Footer from "./footer"
+import Image from "@frontity/components/image"
+import rankingImg from "../images/ranking.png"
 
 const Root = ({ state }) => {
   const data = state.source.get(state.router.link)
@@ -25,6 +27,11 @@ const Root = ({ state }) => {
         <Switch>
           <Loading when={data.isFetching} />
           <MainBg when={data.isHome}>
+            <Ranking>
+              <Container>
+                <Image src={rankingImg} />
+              </Container>
+            </Ranking>
             <PostsListByCategory categorySlug="top-trending" title="TOP TRENDING" />
             <PostsListByCategory categorySlug="nguoi-moi" title="HOT SEARCH" />
             <RecentPosts />
@@ -43,9 +50,9 @@ const Root = ({ state }) => {
 }
 
 const Main = styled.main`
-  margin-top: 63px;
+  margin: 63px 0 50px;
   @media screen and (min-width: 768px) {
-    margin-top: 70px;
+    margin: 70px 0 150px;
   }
 
 `

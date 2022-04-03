@@ -88,8 +88,12 @@ export const PostContentContainer = styled.div`
   @supports (-webkit-hyphens:none) {
     /* Safari-only */
     h2, h3, h4, h5, h6 {
-      padding-top: 80px;
-      margin-top: -80px;
+      padding-top: 95px;
+      margin-top: -95px;
+      @media screen and (min-width: 1440px) {
+        padding-top: 140px;
+        margin-top: -140px;
+      }
     }
   }
   @media screen and (min-width: 768px) {

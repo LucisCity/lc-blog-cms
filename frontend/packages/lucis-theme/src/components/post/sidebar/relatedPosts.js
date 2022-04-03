@@ -14,32 +14,34 @@ const RelatedPosts = ({ state }) => {
   })
 
   return (
-    <RelatedPostsContainer padding="20px 30px">
-      <Title>Tin liên quan</Title>
-      <PostsContainer>
-        {posts.length > 0 && posts.slice(0, 10).map((post) => {
-          const featuredMediaId = parseInt(post.featured_media)
+    posts.length > 0 && (
+      <RelatedPostsContainer padding="20px 30px">
+        <Title>Tin liên quan</Title>
+        <PostsContainer>
+          {posts.slice(0, 10).map((post) => {
+            const featuredMediaId = parseInt(post.featured_media)
 
-          return (
-            <PostItem
-              key={post.id}
-              className="img-hover-scale"
-              link={post.link}
-            >
-              <PostImage>
-                <FeaturedImage id={featuredMediaId} className="img-scale" />
-              </PostImage>
-              <PostTitle>{decode(post.title.rendered)}</PostTitle>
-            </PostItem>
-          )
-        })}
-      </PostsContainer>
-    </RelatedPostsContainer>
+            return (
+              <PostItem
+                key={post.id}
+                className="img-hover-scale"
+                link={post.link}
+              >
+                <PostImage>
+                  <FeaturedImage id={featuredMediaId} className="img-scale" />
+                </PostImage>
+                <PostTitle>{decode(post.title.rendered)}</PostTitle>
+              </PostItem>
+            )
+          })}
+        </PostsContainer>
+      </RelatedPostsContainer>
+    )
   )
 }
 
 const RelatedPostsContainer = styled(BoxRoundedBlur)`
-  max-height: 50%;
+  max-height: calc(50% - 15px);
 `
 
 const Title = styled.div`

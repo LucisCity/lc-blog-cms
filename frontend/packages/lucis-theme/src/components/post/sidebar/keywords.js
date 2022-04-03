@@ -11,16 +11,18 @@ const Keywords = ({ state }) => {
   })
   
   return (
-    <TagsContainer padding="20px 30px">
-      <Title>Keywords</Title>
-      <ScrollContainer>
-        {tags.length > 0 && tags.map((tag) => (
-          <Tag key={tag.id} link={tag.link}>
-            {decode(tag.name)}
-          </Tag>
-        ))}
-      </ScrollContainer>
-    </TagsContainer>
+    tags.length > 0 && (
+      <TagsContainer padding="20px 30px">
+        <Title>Keywords</Title>
+        <ScrollContainer>
+          {tags.map((tag) => (
+            <Tag key={tag.id} link={tag.link}>
+              {decode(tag.name)}
+            </Tag>
+          ))}
+        </ScrollContainer>
+      </TagsContainer>
+    )
   )
 }
 

@@ -11,32 +11,35 @@ const HotNews = ({ state }) => {
   const posts = getPostsFromCategory(state.source, 'tin-hot', currentPost.id)
 
   return (
-    <HotNewsContainer padding="20px 30px">
-      <Title>Tin hot</Title>
-      <PostsContainer>
-        {posts.length > 0 && posts.slice(0, 2).map((post) => {
-          const featuredMediaId = parseInt(post.featured_media)
+    posts.length > 0 && (
+      <HotNewsContainer padding="20px 30px">
+        <Title>Tin hot</Title>
+        <PostsContainer>
+          {posts.slice(0, 2).map((post) => {
+            const featuredMediaId = parseInt(post.featured_media)
 
-          return (
-            <PostItem
-              key={post.id}
-              className="img-hover-scale"
-              link={post.link}
-            >
-              <PostImage>
-                <FeaturedImage id={featuredMediaId} className="img-scale" />
-              </PostImage>
-              <PostTitle>{decode(post.title.rendered)}</PostTitle>
-            </PostItem>
-          )
-        })}
-      </PostsContainer>
-    </HotNewsContainer>
+            return (
+              <PostItem
+                key={post.id}
+                className="img-hover-scale"
+                link={post.link}
+              >
+                <PostImage>
+                  <FeaturedImage id={featuredMediaId} className="img-scale" />
+                </PostImage>
+                <PostTitle>{decode(post.title.rendered)}</PostTitle>
+              </PostItem>
+            )
+          })}
+        </PostsContainer>
+      </HotNewsContainer>
+    )
   )
 }
 
 const HotNewsContainer = styled(BoxRoundedBlur)`
-  max-height: 50%;
+  min-height: calc(50% - 15px);
+  margin-bottom: 0;
 `
 
 const Title = styled.div`

@@ -1,11 +1,13 @@
 import React from "react"
-import { Container } from "../../styles/common"
+import { Container, HomepageSection } from "../../styles/common"
 
 const NotFound = () => {
   return (
-    <section>
-      <Container>404 not found</Container>
-    </section>
+    <HomepageSection style={{ paddingTop: '50px' }}>
+      <Container>
+        <h2>404 not found</h2>
+      </Container>
+    </HomepageSection>
   )
 }
 

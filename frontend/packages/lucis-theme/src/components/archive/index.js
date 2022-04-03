@@ -1,35 +1,77 @@
 import React from "react"
-import { connect, decode } from "frontity"
-import Link from "@frontity/components/link"
-import { getPostsFromCategory } from "../../helpers"
+import { connect, decode, styled } from "frontity"
+// import { getCategoryInfo } from "../../helpers"
 import FeaturedImage from "../common/featuredImage"
-import { Container } from "../../styles/common"
+import Favorite from "../../images/Favorite_duotone.svg"
+import {
+  AuthorAvatar,
+  AuthorName,
+  Container,
+  HomepageSection,
+  PostAuthor,
+  PostsGrid,
+  PostsGridDate,
+  PostsGridFavorite,
+  PostsGridFooter,
+  PostsGridImage,
+  PostsGridInfo,
+  PostsGridItem,
+  // PostsGridRibbon,
+  PostsGridTitle,
+  SectionTitle
+} from "../../styles/common"
+import dayjs from "dayjs"
 
 const Archive = ({ state }) => {
   const data = state.source.get(state.router.link)
-  const category = state.source.category[data.id]
-  const posts = getPostsFromCategory(state.source, category?.slug)
-  
+
   return (
-    <section>
+    <ArchiveSection>
       <Container>
-        <h1 className="text-center">{category?.name}</h1>
-        <div className="posts-grid">
-          {posts.length ? posts.map((post) => {
-            const featuredMediaId = parseInt(post.featured_media)
-            return (
-              <div className="post-item" key={post.id}>
-                <Link link={post.link}>
-                  <FeaturedImage id={featuredMediaId} />
-                  <h4>{decode(post.title.rendered)}</h4>
-                </Link>
-              </div>
-            )
-          }) : <p>Chưa có bài viết</p>}
-        </div>
+        <SectionTitle>{decode(state.source[data.taxonomy][data.id]?.name)}</SectionTitle>
+        {
+          data.items.length ? (
+            <PostsGrid>
+            {data.items.map(({type, id}) => {
+              const post = state.source[type][id]
+              const featuredMediaId = parseInt(post.featured_media)
+              const author = state.source.author[post.author]
+              const formatedDate = dayjs(post.date).format('MMMM DD, YYYY')
+              // const categoryInfo = getCategoryInfo(state.source, post.categories[0])
+
+              return (
+                <PostsGridItem key={post.id} link={post.link}>
+                  {/* <PostsGridRibbon>{decode(categoryInfo?.name)}</PostsGridRibbon> */}
+                  <PostsGridImage>
+                    <FeaturedImage id={featuredMediaId} />
+                  </PostsGridImage>
+                  <PostsGridInfo>
+                    <PostsGridTitle>{decode(post.title?.rendered)}</PostsGridTitle>
+                    <PostsGridFooter>
+                      <PostAuthor>
+                        <AuthorAvatar src={author?.avatar_urls[24]} />
+                        <AuthorName>{author?.name}</AuthorName>
+                      </PostAuthor>
+                      <PostsGridDate>{formatedDate}</PostsGridDate>
+                      <PostsGridFavorite src={Favorite} width="23px" />
+                    </PostsGridFooter>
+                  </PostsGridInfo>
+                </PostsGridItem>
+              )
+            })}
+            </PostsGrid>
+          ) : <h2>Chưa có bài viết</h2>
+        }
       </Container>
-    </section>
+    </ArchiveSection>
   )
 }
+
+const ArchiveSection = styled(HomepageSection)`
+  padding-top: 30px;
+  @media screen and (min-width: 1200px) {
+    padding-top: 50px;
+  }
+`
 
 export default connect(Archive)

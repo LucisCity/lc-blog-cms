@@ -80,7 +80,10 @@ export const PostContentContainer = styled.div`
     }
   }
   h2, h3, h4, h5, h6 {
-    scroll-margin-top: 80px;
+    scroll-margin-top: 95px;
+    @media screen and (min-width: 1440px) {
+      scroll-margin-top: 140px;
+    }
   }
   @supports (-webkit-hyphens:none) {
     /* Safari-only */

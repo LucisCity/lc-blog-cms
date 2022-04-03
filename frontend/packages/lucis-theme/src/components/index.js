@@ -33,10 +33,10 @@ const Root = ({ state }) => {
               </Container>
             </Ranking>
             <PostsListByCategory categorySlug="top-trending" title="TOP TRENDING" />
-            <PostsListByCategory categorySlug="nguoi-moi" title="HOT SEARCH" />
+            <PostsListByCategory categorySlug="hot-search" title="HOT SEARCH" />
             <RecentPosts />
             <MediaPosts />
-            <PostsListByCategory categorySlug="coin-tokens" title="LUCIS REVIEW" />
+            <PostsListByCategory categorySlug="lucis-review" title="LUCIS REVIEW" />
           </MainBg>
           <Page when={data.isPage} />
           <Archive when={data.isArchive} />

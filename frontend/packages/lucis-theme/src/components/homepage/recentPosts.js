@@ -1,6 +1,6 @@
 import React from "react"
 import { connect, decode } from "frontity"
-import { getPostsFromCategory } from "../../helpers"
+import { getCategoryInfo, getPostsFromCategory } from "../../helpers"
 import FeaturedImage from "../common/featuredImage"
 import dayjs from "dayjs"
 import {
@@ -20,8 +20,11 @@ import {
 } from "../../styles/common"
 
 const RecentPosts = ({ state }) => {
-  const posts = getPostsFromCategory(state.source, 'he-sinh-thai')
-  
+  const data = state.source.get(state.router.link)
+  const posts = data.items.map(({ type, id }, index) => {
+    return state.source[type][id]
+  })
+
   return (
     <>
       {
@@ -34,10 +37,11 @@ const RecentPosts = ({ state }) => {
                 const featuredMediaId = parseInt(post.featured_media)
                 const author = state.source.author[post.author]
                 const formatedDate = dayjs(post.date).format('MMMM DD, YYYY')
+                const categoryInfo = getCategoryInfo(state.source, post.categories[0])
 
                 return (
                   <PostsGridItem key={post.id} link={post.link}>
-                    <PostsGridRibbon>GAME NFT</PostsGridRibbon>
+                    <PostsGridRibbon>{decode(categoryInfo?.name)}</PostsGridRibbon>
                     <PostsGridImage>
                       <FeaturedImage id={featuredMediaId} />
                     </PostsGridImage>

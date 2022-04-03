@@ -1,6 +1,6 @@
 import React from "react"
 import { connect, decode } from "frontity"
-import { getPostsFromCategory } from "../../helpers"
+import { getCategoryInfo, getPostsFromCategory } from "../../helpers"
 import FeaturedImage from "../common/featuredImage"
 import Favorite from "../../images/Favorite_duotone.svg"
 import dayjs from "dayjs"
@@ -24,7 +24,8 @@ import {
 
 const PostsListByCategory = ({ state, categorySlug, title }) => {
   const posts = getPostsFromCategory(state.source, categorySlug)
-  
+  const categoryInfo = getCategoryInfo(state.source, categorySlug)
+
   return (
     <>
       {
@@ -33,14 +34,14 @@ const PostsListByCategory = ({ state, categorySlug, title }) => {
             <Container>
               <SectionTitle>{title}</SectionTitle>
               <PostsGrid>
-              {posts.map((post) => {
+              {posts.slice(0, 6).map((post) => {
                 const featuredMediaId = parseInt(post.featured_media)
                 const author = state.source.author[post.author]
                 const formatedDate = dayjs(post.date).format('MMMM DD, YYYY')
 
                 return (
                   <PostsGridItem key={post.id} link={post.link}>
-                    <PostsGridRibbon>GAME NFT</PostsGridRibbon>
+                    <PostsGridRibbon>{decode(categoryInfo?.name)}</PostsGridRibbon>
                     <PostsGridImage>
                       <FeaturedImage id={featuredMediaId} />
                     </PostsGridImage>

@@ -1,17 +1,21 @@
+const categoryFilter = (categories, categoryTarget) => {
+  return Object.values(
+    Object.values(categories)
+      .filter(category => {
+        return category.slug === categoryTarget
+      })
+  )[0]
+}
+
 export const getPostsFromCategory = ({ post, category }, categoryTarget, currentPost = undefined) => {
-  if (!categoryTarget) {
+  if (!categoryTarget || !category) {
     return []
   }
 
   let categoryId = undefined;
 
   if (typeof categoryTarget === 'string') {
-    categoryId = Object.values(
-      Object.values(category)
-        .filter(category => {
-          return category.slug === categoryTarget
-        })
-    )[0]?.id
+    categoryId = categoryFilter(category, categoryTarget)?.id
   }
   if (typeof categoryTarget === 'number') {
     categoryId = categoryTarget
@@ -21,6 +25,21 @@ export const getPostsFromCategory = ({ post, category }, categoryTarget, current
   .map(postID => post[postID])
   .filter(post => post.id !== currentPost)
   .filter(({categories}) => categories.includes(parseInt(categoryId)))
+}
+
+
+
+export const getCategoryInfo = ({ category }, categoryTarget) => {
+  if (!categoryTarget || !category) {
+    return null
+  }
+
+  if (typeof categoryTarget === 'string') {
+    return categoryFilter(category, categoryTarget)
+  }
+  if (typeof categoryTarget === 'number') {
+    return category[categoryTarget]
+  }
 }
 
 export const stringToSlug = (string) => {

@@ -166,3 +166,26 @@ function custom_editor_css() {
 	add_theme_support('editor-styles');
 	add_editor_style('editor-style.css');
 }
+
+add_action( 'rest_api_init', function () {
+	foreach ( get_post_types( array( 'show_in_rest' => true ), 'objects' ) as $post_type ) {
+	  if ( 'post' === $post_type->name || $post_type->has_archive ) {
+		add_filter( "rest_prepare_{$post_type->name}", function ( $response ) {
+		  $type      = $response->data['type'];
+		  $types_url = rest_url( "wp/v2/types/$type" );
+  
+		  $response->add_links(
+			array(
+			  'type' => array(
+				'href'       => $types_url,
+				'embeddable' => true,
+			  ),
+			)
+		  );
+  
+		  return $response;
+		} );
+	  }
+	}
+  } );
+  

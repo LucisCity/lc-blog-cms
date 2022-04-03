@@ -10,6 +10,9 @@ const lucisTheme = {
       isMobileMenuOpen: false,
       autoPrefetch: "in-view",
     },
+    yoast: {
+      renderTags: "both"
+    }
   },
   actions: {
     theme: {

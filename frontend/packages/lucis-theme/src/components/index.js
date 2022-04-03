@@ -50,9 +50,12 @@ const Root = ({ state }) => {
 }
 
 const Main = styled.main`
-  margin: 63px 0 50px;
+  margin: 68px 0 50px;
   @media screen and (min-width: 768px) {
-    margin: 70px 0 150px;
+    margin: 79px 0 150px;
+  }
+  @media screen and (min-width: 1440px) {
+    margin: 120px 0 150px;
   }
 
 `

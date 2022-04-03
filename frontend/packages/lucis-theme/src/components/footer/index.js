@@ -86,7 +86,7 @@ const FooterSubcribe = styled.div`
   @media screen and (min-width: 992px) {
     width: 600px;
   }
-  @media screen and (min-width: 1400px) {
+  @media screen and (min-width: 1440px) {
     width: auto;
   }
 `
@@ -113,7 +113,7 @@ const FooterSocials = styled.div`
       width: 80px;
       height: 80px;
     }
-    @media screen and (min-width: 1400px) {
+    @media screen and (min-width: 1440px) {
       width: 80px;
       height: 80px;
     }
@@ -167,7 +167,7 @@ const FooterForm = styled.div`
       @media screen and (min-width: 1200px) {
         font-size: 26px;
       }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1440px) {
         font-size: 36px;
       }
     }

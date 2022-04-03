@@ -44,14 +44,14 @@ export const Container = styled.div`
   @media screen and (min-width: 1200px) {
     width: 1140px;
   }
-  @media screen and (min-width: 1400px) {
+  @media screen and (min-width: 1440px) {
     width: 1240px;
   }
 `
 
 export const HomepageSection = styled.section`
   margin-bottom: 70px;
-  @media screen and (min-width: 1400px) {
+  @media screen and (min-width: 1440px) {
     margin-bottom: 200px;
   }
 `
@@ -85,7 +85,7 @@ export const PostsGrid = styled.div`
   @media screen and (min-width: 992px) {
     gap: 40px 20px;
   }
-  @media screen and (min-width: 1400px) {
+  @media screen and (min-width: 1440px) {
     gap: 80px 20px;
   }
 `
@@ -105,7 +105,7 @@ export const PostsGridImage = styled.div`
 
 export const PostsGridInfo = styled.div`
   padding: 15px;
-  @media screen and (min-width: 1400px) {
+  @media screen and (min-width: 1440px) {
     padding: 30px 15px 40px;
   }
 `
@@ -114,7 +114,7 @@ export const PostsGridTitle = styled.h3`
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 20px;
-  @media screen and (min-width: 1400px) {
+  @media screen and (min-width: 1440px) {
     margin-bottom: 35px;
   }
 `
@@ -176,7 +176,7 @@ export const PostsGridRibbon = styled.div`
     border-top-color: #0BEBD6;
     border-left-color: #0BEBD6;
   }
-  @media screen and (min-width: 1400px) {
+  @media screen and (min-width: 1440px) {
     padding: 8px 10px;
     font-size: 16px;
   }
@@ -346,7 +346,7 @@ export const PostsGridExcerp = styled.div`
     margin: 22px 0 30px;
     ${TextLineClamp(6)};
   }
-  @media screen and (min-width: 1400px) {
+  @media screen and (min-width: 1440px) {
     font-size: 24px;
   }
 `
@@ -369,7 +369,7 @@ export const MediaPostsGrid = styled.div`
   @media screen and (min-width: 1200px) {
     gap: 40px;
   }
-  @media screen and (min-width: 1400px) {
+  @media screen and (min-width: 1440px) {
     gap: 80px 48px;
   }
   ${PostsGridItem} {
@@ -406,7 +406,7 @@ export const MediaPostsGrid = styled.div`
         grid-column-end: 5;
         grid-row-end: 3;
       }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1440px) {
         margin-bottom: 30px;
       }
       ${PostsGridImage} {
@@ -421,7 +421,7 @@ export const MediaPostsGrid = styled.div`
         @media screen and (min-width: 1200px) {
           min-width: 600px;
         }
-        @media screen and (min-width: 1400px) {
+        @media screen and (min-width: 1440px) {
           min-width: 683px;
         }
       }
@@ -442,14 +442,14 @@ export const MediaPostsGrid = styled.div`
           font-size: 26px;
           margin-bottom: 20px;
         }
-        @media screen and (min-width: 1400px) {
+        @media screen and (min-width: 1440px) {
           font-size: 32px;
         }
       }
       ${PostsGridDate} {
         font-size: 14px;
         font-weight: 300;
-        @media screen and (min-width: 1400px) {
+        @media screen and (min-width: 1440px) {
           font-size: 18px;
         }
       }
@@ -471,7 +471,7 @@ export const MediaPostsGrid = styled.div`
       @media screen and (min-width: 768px) {
         margin-bottom: 0;
       }
-      @media screen and (min-width: 1400px) {
+      @media screen and (min-width: 1440px) {
         margin-bottom: -30px;
       }
       ${PostsGridRibbon} {
@@ -580,7 +580,7 @@ export const Ranking = styled.div`
         top: -55%;
         left: -112%;
       }
-      @media screen and (min-width: 1400px){
+      @media screen and (min-width: 1440px){
         left: -104%;
         top: -50%;
       }

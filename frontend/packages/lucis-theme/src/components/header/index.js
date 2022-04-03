@@ -47,16 +47,16 @@ const Header = ({ state, actions }) => {
           {dimension.width <= 992 && <CloseMobileMenu onClick={handleCloseMobileMenu} />}
           <ul>
             <Li>
-              <Link link="/portal">Ecosystem</Link>
+              <Link link="#">Ecosystem</Link>
             </Li>
             <Li>
-              <Link link="/category/lucis-finance">Media</Link>
+              <Link link="#">Media</Link>
             </Li>
             <Li>
-              <Link link="/category/nguoi-moi">Lucis Insight</Link>
+              <Link link="#">Lucis Insight</Link>
             </Li>
             <Li>
-              <Link link="/category/he-sinh-thai">About Us</Link>
+              <Link link="#">About Us</Link>
             </Li>
           </ul>
         </Nav>

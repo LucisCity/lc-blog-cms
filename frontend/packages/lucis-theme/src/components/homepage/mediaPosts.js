@@ -30,7 +30,7 @@ const MediaPosts = ({ state }) => {
     <>
       {
         sortedPosts.length ? (
-          <HomepageSection>
+          <HomepageSection id="media">
             <Container>
               <SectionTitle>MEDIA</SectionTitle>
               <MediaPostsGrid>

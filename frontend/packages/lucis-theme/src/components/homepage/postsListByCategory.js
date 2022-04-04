@@ -22,7 +22,7 @@ import {
   SectionTitle
 } from "../../styles/common"
 
-const PostsListByCategory = ({ state, categorySlug, title }) => {
+const PostsListByCategory = ({ state, categorySlug, title, id }) => {
   const posts = getPostsFromCategory(state.source, categorySlug)
   const categoryInfo = getCategoryInfo(state.source, categorySlug)
 
@@ -30,7 +30,7 @@ const PostsListByCategory = ({ state, categorySlug, title }) => {
     <>
       {
         posts.length ? (
-          <HomepageSection>
+          <HomepageSection id={id}>
             <Container>
               <SectionTitle>{title}</SectionTitle>
               <PostsGrid>

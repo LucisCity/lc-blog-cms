@@ -51,6 +51,20 @@ export const Container = styled.div`
 
 export const HomepageSection = styled.section`
   margin-bottom: 70px;
+  scroll-margin-top: 85px;
+  @supports (-webkit-hyphens:none) {
+    /* Safari-only */
+    padding-top: 85px;
+    margin-top: -85px;
+  }
+  @media screen and (min-width: 768px) {
+    scroll-margin-top: 100px;
+    @supports (-webkit-hyphens:none) {
+      /* Safari-only */
+      padding-top: 100px;
+      margin-top: -100px;
+    }
+  }
   @media screen and (min-width: 1440px) {
     margin-bottom: 200px;
   }

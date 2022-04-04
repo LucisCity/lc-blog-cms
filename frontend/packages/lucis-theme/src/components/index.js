@@ -36,7 +36,7 @@ const Root = ({ state }) => {
             <PostsListByCategory categorySlug="hot-search" title="HOT SEARCH" />
             <RecentPosts />
             <MediaPosts />
-            <PostsListByCategory categorySlug="lucis-review" title="LUCIS REVIEW" />
+            <PostsListByCategory categorySlug="lucis-review" title="LUCIS REVIEW" id="lucis-review" />
           </MainBg>
           <Page when={data.isPage} />
           <Archive when={data.isArchive} />

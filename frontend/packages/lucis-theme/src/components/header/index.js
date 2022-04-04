@@ -9,22 +9,8 @@ import iconSearch from "../../images/search.svg"
 import iconNotificaion from "../../images/notification.svg"
 
 const Header = ({ state, actions }) => {
+  const data = state.source.get(state.router.link)
   const dimension = useDimension()
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const mainHeader = document.querySelector('.main-header')
-      if (window.scrollY > 0) {
-        !mainHeader.classList.contains('is-scrolling') && mainHeader.classList.add('is-scrolling')
-      } else {
-        mainHeader.classList.contains('is-scrolling') && mainHeader.classList.remove('is-scrolling')
-      }
-    }
-
-    document.addEventListener('scroll', handleScroll)
-  
-    return () => document.removeEventListener('scroll', handleScroll)
-  }, [])
   
   const handleCloseMobileMenu = () => {
     actions.theme.closeMobileMenu()
@@ -33,6 +19,30 @@ const Header = ({ state, actions }) => {
   const handleOpenMobileMenu = () => {
     actions.theme.openMobileMenu()
   }
+
+  const handleAnchorClick = (e) => {
+    if (data.isHome) {
+      e.preventDefault()
+      const regex = /^.*?#/g
+      let id = e.target.href.replace(regex, '')
+      handleCloseMobileMenu()
+      document.querySelector(`#${id}`)?.scrollIntoView({
+        behavior: "smooth"
+      })
+    }
+  }
+
+  useEffect(()=> {
+    const location = window.location
+    if (location.hash) {
+        let elem = document.getElementById(location.hash.slice(1))
+        if (elem) {
+            elem.scrollIntoView({behavior: "smooth"})
+        }
+    } else {
+    window.scrollTo({top:0,left:0, behavior: "smooth"})
+    }
+})
 
   return (
     <HeaderStyled className="main-header text-center">
@@ -47,13 +57,41 @@ const Header = ({ state, actions }) => {
           {dimension.width <= 992 && <CloseMobileMenu onClick={handleCloseMobileMenu} />}
           <ul>
             <Li>
-              <Link link="#">Ecosystem</Link>
+              <Link link="https://lucis.network/#EcoSystem" target="_blank">Ecosystem</Link>
             </Li>
             <Li>
-              <Link link="#">Media</Link>
+              {data.isHome ? (
+                <a
+                  href="#media"
+                  onClick={handleAnchorClick}
+                >
+                  Media
+                </a>
+              ): (
+                <Link
+                  link="/#media"
+                  onClick={handleAnchorClick}
+                >
+                  Media
+                </Link>
+              )}
             </Li>
             <Li>
-              <Link link="#">Lucis Insight</Link>
+              {data.isHome ? (
+                <a
+                  href="#lucis-review"
+                  onClick={handleAnchorClick}
+                >
+                  Lucis Insight
+                </a>
+              ): (
+                <Link
+                  link="/#lucis-review"
+                  onClick={handleAnchorClick}
+                >
+                  Lucis Insight
+                </Link>
+              )}
             </Li>
             <Li>
               <Link link="#">About Us</Link>
@@ -87,9 +125,6 @@ const HeaderStyled = styled.header`
   z-index: 5;
   padding: 15px 0;
   font-size: 16px;
-  @media screen and (min-width: 1440px) {
-    padding: 35px 0;
-  }
   &::before {
     content: '';
     position: absolute;

@@ -6,3 +6,12 @@ body{
 * {
   font-family: system-ui, Verdana, Arial, sans-serif !important;
 }
+
+.wp-block-image .components-placeholder__fieldset .components-form-file-upload {
+  display: none !important;
+}
+
+.wp-block-image .components-placeholder__fieldset .block-editor-media-placeholder__button {
+  background: #007cba;
+  color: #fff
+}

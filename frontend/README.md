@@ -1,4 +1,4 @@
-# coin98-clone
+# lucis-blog
 
 This project was bootstrapped with [Frontity](https://frontity.org/).
 

@@ -1,32 +1,67 @@
 import React from "react"
 import { connect, decode } from "frontity"
-import Link from "@frontity/components/link"
-import { getPostsFromCategory } from "../../helpers"
+import { getCategoryInfo, getPostsFromCategory } from "../../helpers"
 import FeaturedImage from "../common/featuredImage"
+import Favorite from "../../images/Favorite_duotone.svg"
+import dayjs from "dayjs"
+import {
+  AuthorAvatar,
+  AuthorName,
+  Container,
+  HomepageSection,
+  PostAuthor,
+  PostsGrid,
+  PostsGridDate,
+  PostsGridFavorite,
+  PostsGridFooter,
+  PostsGridImage,
+  PostsGridInfo,
+  PostsGridItem,
+  PostsGridRibbon,
+  PostsGridTitle,
+  SectionTitle
+} from "../../styles/common"
 
-const PostsListByCategory = ({ state, categorySlug, title }) => {
+const PostsListByCategory = ({ state, categorySlug, title, id }) => {
   const posts = getPostsFromCategory(state.source, categorySlug)
+  const categoryInfo = getCategoryInfo(state.source, categorySlug)
 
   return (
     <>
       {
         posts.length ? (
-          <section>
-            <h2 className="text-center">{title}</h2>
-            <div className="posts-grid">
-              {posts.map((post) => {
+          <HomepageSection id={id}>
+            <Container>
+              <SectionTitle>{title}</SectionTitle>
+              <PostsGrid>
+              {posts.slice(0, 6).map((post) => {
                 const featuredMediaId = parseInt(post.featured_media)
+                const author = state.source.author[post.author]
+                const formatedDate = dayjs(post.date).format('MMMM DD, YYYY')
+
                 return (
-                  <div className="post-item" key={post.id}>
-                    <Link link={post.link}>
+                  <PostsGridItem key={post.id} link={post.link}>
+                    <PostsGridRibbon>{decode(categoryInfo?.name)}</PostsGridRibbon>
+                    <PostsGridImage>
                       <FeaturedImage id={featuredMediaId} />
-                      <h4>{decode(post.title.rendered)}</h4>
-                    </Link>
-                  </div>
+                    </PostsGridImage>
+                    <PostsGridInfo>
+                      <PostsGridTitle>{decode(post.title.rendered)}</PostsGridTitle>
+                      <PostsGridFooter>
+                        <PostAuthor>
+                          <AuthorAvatar src={author.avatar_urls[24]} />
+                          <AuthorName>{author.name}</AuthorName>
+                        </PostAuthor>
+                        <PostsGridDate>{formatedDate}</PostsGridDate>
+                        <PostsGridFavorite src={Favorite} width="23px" />
+                      </PostsGridFooter>
+                    </PostsGridInfo>
+                  </PostsGridItem>
                 )
               })}
-            </div>
-          </section>
+              </PostsGrid>
+            </Container>
+          </HomepageSection>
         ) : null
       }
     </>

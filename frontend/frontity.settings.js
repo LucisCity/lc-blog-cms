@@ -1,9 +1,9 @@
 const settings = {
-  "name": "coin98-clone",
+  "name": "lucis-blog",
   "state": {
     "frontity": {
-      "url": "http://localhost:3000/",
-      "title": "Test Frontity Blog",
+      "url": process.env.BLOG_URL,
+      "title": "Lucis blog",
       "description": "WordPress installation for Frontity development"
     }
   },
@@ -15,12 +15,13 @@ const settings = {
       "name": "@frontity/wp-source",
       "state": {
         "source": {
-          "url": "http://wp-api.local/"
+          "url": process.env.API_URL,
         }
       }
     },
     "@frontity/tiny-router",
-    "@frontity/html2react"
+    "@frontity/html2react",
+    "@frontity/yoast"
   ]
 };
 

@@ -1,0 +1,59 @@
+version: '3.9'
+services:
+  wp:
+    build:
+      context: ../wordpress/
+      dockerfile: wordpress.Dockerfile
+      args:
+        buildno: 1
+    image: lucis-blog-wp:1.0
+    ports:
+      - "${WP_PORT}:80"
+    environment:
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    volumes:
+      - ../data/wp-uploads:/var/www/html/wp-content/uploads/
+    networks:
+      - lucis_blog
+
+  mysql:
+    image: "mysql:8.0.28"
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+    ports:
+      - "33061:3306"
+    volumes:
+      - ../data/mysql:/var/lib/mysql
+      - ./db:/docker-entrypoint-initdb.d
+    networks:
+      - lucis_blog
+
+  frontity:
+    build:
+      context: ../frontend/
+      dockerfile: frontity.Dockerfile
+    image: lucis-blog-ui:1.0
+    restart: always
+    environment:
+      BLOG_URL: "${BLOG_URL}"
+      API_URL: "${API_URL}"
+
+    # The host networking driver only works on Linux hosts,
+    # and is NOT supported on Docker Desktop for Mac, Docker Desktop for Windows, or Docker EE for Windows Server.
+    # Please use: http://host.docker.internal:13500 instead to access a container in this bridge network
+#    network_mode: "host"
+
+    ports:
+      - "${FRONTITY_PORT}:3000"
+    networks:
+      - lucis_blog
+
+networks:
+  lucis_blog:
+    driver: bridge

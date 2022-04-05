@@ -166,3 +166,45 @@ function custom_editor_css() {
 	add_theme_support('editor-styles');
 	add_editor_style('editor-style.css');
 }
+
+// Make yoast seo to work with frontity
+add_action( 'rest_api_init', function () {
+	foreach ( get_post_types( array( 'show_in_rest' => true ), 'objects' ) as $post_type ) {
+	  if ( 'post' === $post_type->name || $post_type->has_archive ) {
+		add_filter( "rest_prepare_{$post_type->name}", function ( $response ) {
+		  $type      = $response->data['type'];
+		  $types_url = rest_url( "wp/v2/types/$type" );
+  
+		  $response->add_links(
+			array(
+			  'type' => array(
+				'href'       => $types_url,
+				'embeddable' => true,
+			  ),
+			)
+		  );
+  
+		  return $response;
+		} );
+	  }
+	}
+  } );
+
+// Auto add id to all headings in post content
+function prefix_heading_ids( $content ) {
+	$pattern = '#(?P<full_tag><(?P<tag_name>h\d)(?P<tag_extra>[^>]*)>(?P<tag_contents>[^<]*)</h\d>)#i';
+	if ( preg_match_all( $pattern, $content, $matches, PREG_SET_ORDER ) ) {
+			$find = array();
+			$replace = array();
+			foreach( $matches as $match ) {
+					$find[]    = $match['full_tag'];
+					$id        = sanitize_title( $match['tag_contents'] );
+					$id_attr   = sprintf( ' id="%s"', $id );
+					$replace[] = sprintf( '<%1$s%2$s%3$s>%4$s</%1$s>', $match['tag_name'], $id_attr, $match['tag_extra'], $match['tag_contents']);
+			}
+			$content = str_replace( $find, $replace, $content );
+	}
+	return $content;
+}
+
+add_filter( 'the_content', 'prefix_heading_ids' );

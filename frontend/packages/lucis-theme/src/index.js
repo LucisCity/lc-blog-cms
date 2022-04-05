@@ -10,12 +10,15 @@ const lucisTheme = {
       isMobileMenuOpen: false,
       autoPrefetch: "in-view",
     },
+    yoast: {
+      renderTags: "both"
+    }
   },
   actions: {
     theme: {
       beforeCSR: ({ state, actions }) => {
-        console.log(state)
-        console.log(actions)
+        // console.log(state)
+        // console.log(actions)
       },
       openMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = true;

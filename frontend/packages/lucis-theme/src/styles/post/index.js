@@ -122,7 +122,7 @@ export const PostDate = styled.div`
   span {
     display: inline-block;
     padding: 2px;
-    &:first-child {
+    &:first-of-type {
       border-right: 1px solid #3b3a3a;
       padding-right: 4px;
     }

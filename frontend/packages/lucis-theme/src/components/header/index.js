@@ -88,7 +88,7 @@ const Header = ({ state, actions }) => {
             <Search>
               <Image src={iconSearch} />
               <form onSubmit={(e) => e.preventDefault()}>
-                <input type="text" placeholder="SEARCH" />
+                <input type="text" placeholder="Search" />
               </form>
             </Search>
             <MultiLanguage>

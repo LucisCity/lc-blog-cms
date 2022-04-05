@@ -154,8 +154,6 @@ export const RightSidebarContainer = styled.aside`
   }
   @media screen and (min-width: 1440px) {
     width: 400px;
-    top: 120px;
-    max-height: calc(100vh - 120px);
   }
 `
 export const LeftSidebarContainer = styled.aside`
@@ -178,10 +176,6 @@ export const LeftSidebarContainer = styled.aside`
   }
   @media screen and (min-width: 1200px) {
     width: 325px;
-  }
-  @media screen and (min-width: 1440px) {
-    top: 120px;
-    max-height: calc(100vh - 120px);
   }
 `
 

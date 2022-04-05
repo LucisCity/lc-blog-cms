@@ -1,3 +1,4 @@
+import { decode } from "frontity"
 import React, { useEffect, useState } from "react"
 import { TableOfContentsContainer } from "../../../styles/post"
 
@@ -10,7 +11,6 @@ const TableOfContents = () => {
 
     headings.forEach((heading, index) => {
       const { innerText: title, id } = heading
-      heading.id = `heading-${index}`
       if (heading.nodeName === 'H2') {
         headingsArr.push({ id: heading.id, title, items: [] })
       } else if (heading.nodeName !== 'H2' && headingsArr.length > 0) {
@@ -19,7 +19,7 @@ const TableOfContents = () => {
     })
 
     setNestedHeading(headingsArr)
-  }, [])
+  })
 
   return (
     <TableOfContentsContainer padding="30px 30px 30px 20px">

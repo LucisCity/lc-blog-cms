@@ -1,10 +1,12 @@
 import { Global, css, Head } from "frontity"
 import SVNTransformer from "../fonts/SVN-Transformer.ttf"
+import favicon from "../images/favicon.png"
 
 const GlobalStyles = () => {
   return (
     <>
       <Head>
+      <link rel="icon" href={favicon} />
       <link rel="preconnect" href="https://fonts.googleapis.com" />
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
       <link href="https://fonts.googleapis.com/css2?family=Saira:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700" rel="stylesheet" />

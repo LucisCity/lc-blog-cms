@@ -1,5 +1,5 @@
 import React from "react"
-import { css } from "frontity"
+import { css, decode } from "frontity"
 import dayjs from "dayjs"
 import gutenbergStyle from "../../styles/gutenberg/style.css"
 import gutenbergTheme from "../../styles/gutenberg/theme.css"
@@ -14,7 +14,7 @@ const PostContent = ({ post, author }) => {
   return (
     <PostContentContainer className="bg-glow" id="post-content">
       <BoxRoundedBlur padding="30px 40px">
-        <h1>{post.title.rendered}</h1>
+        <h1>{decode(post.title.rendered)}</h1>
         <PostInfo>
           <Author>
             <Image src={author.avatar_urls[24]} />

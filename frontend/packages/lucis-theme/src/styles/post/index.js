@@ -78,22 +78,43 @@ export const PostContentContainer = styled.div`
     &:hover {
       text-decoration: underline;
     }
+    
+  }
+  .anchor-heading {
+    &:hover {
+      .anchor {
+        opacity: 1;
+      }
+    }
+    .anchor {
+      padding: 5px;
+      display: inline-flex;
+      align-items: center;
+      &:hover {
+        text-decoration: none;
+      }
+      @media screen and (min-width: 768px) {
+        position: absolute;
+        top: 0;
+        left: -30px;
+        opacity: 0;
+        display: block;
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 0;
+      }
+    }
   }
   h2, h3, h4, h5, h6 {
-    scroll-margin-top: 95px;
-    @media screen and (min-width: 1440px) {
-      scroll-margin-top: 140px;
-    }
+    scroll-margin-top: 90px;
+    position: relative;
   }
   @supports (-webkit-hyphens:none) {
     /* Safari-only */
     h2, h3, h4, h5, h6 {
       padding-top: 95px;
       margin-top: -95px;
-      @media screen and (min-width: 1440px) {
-        padding-top: 140px;
-        margin-top: -140px;
-      }
     }
   }
   @media screen and (min-width: 768px) {
@@ -184,6 +205,9 @@ export const TableOfContentsContainer = styled(BoxRoundedBlur)`
   display: flex;
   font-size: 14px;
   color: #ededed;
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
   nav {
     overflow-y: auto;
     &::-webkit-scrollbar {

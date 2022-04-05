@@ -1,23 +1,15 @@
 import React from "react"
-import { connect, loadable } from "frontity"
 import { LeftSidebarContainer } from "../../../styles/post"
-import useDimension from "../../../hooks/useDimension"
-const TableOfContents = loadable(() => import("./tableOfContents"))
-const Keywords = loadable(() => import("./keywords"))
+import TableOfContents from "./tableOfContents"
+import Keywords from "./keywords"
 
-const LeftSidebar = ({ state }) => {
-  const dimension = useDimension()
-
+const LeftSidebar = () => {
   return (
     <LeftSidebarContainer className="bg-glow">
-      { dimension.width >= 768 ? (
-        <>
-          <TableOfContents />
-          <Keywords />
-        </>
-      ) : null }
+      <TableOfContents />
+      <Keywords />
     </LeftSidebarContainer>
   )
 }
 
-export default connect(LeftSidebar)
+export default LeftSidebar

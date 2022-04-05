@@ -1,6 +1,7 @@
 import { connect } from "frontity"
 import React, { useEffect, useState } from "react"
 import { TableOfContentsContainer } from "../../../styles/post"
+import iconLink from "../../../images/link.svg"
 
 const TableOfContents = ({ state }) => {
   const [nestedHeading, setNestedHeading] = useState([])
@@ -10,12 +11,18 @@ const TableOfContents = ({ state }) => {
     const headingsArr = []
 
     headings.forEach((heading, index) => {
-      const { innerText: title, id } = heading
+      const { textContent: title, id } = heading
       if (heading.nodeName === 'H2') {
         headingsArr.push({ id: heading.id, title, items: [] })
       } else if (heading.nodeName !== 'H2' && headingsArr.length > 0) {
         headingsArr[headingsArr.length - 1].items.push({ id: heading.id, title })
       }
+      heading.classList.add('anchor-heading')
+      heading.insertAdjacentHTML('beforeend', `
+        <a href="#${heading.id}" class="anchor">
+          <img src="${iconLink}" />
+        </a>
+      `)
     })
 
     setNestedHeading(headingsArr)

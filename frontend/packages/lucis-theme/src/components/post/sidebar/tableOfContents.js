@@ -1,8 +1,8 @@
-import { decode } from "frontity"
+import { connect } from "frontity"
 import React, { useEffect, useState } from "react"
 import { TableOfContentsContainer } from "../../../styles/post"
 
-const TableOfContents = () => {
+const TableOfContents = ({ state }) => {
   const [nestedHeading, setNestedHeading] = useState([])
 
   useEffect(() => {
@@ -19,7 +19,7 @@ const TableOfContents = () => {
     })
 
     setNestedHeading(headingsArr)
-  })
+  }, [state.router.link])
 
   return (
     <TableOfContentsContainer padding="30px 30px 30px 20px">
@@ -65,4 +65,4 @@ const AnchorItem = ({ data }) => {
   )
 }
 
-export default TableOfContents
+export default connect(TableOfContents)

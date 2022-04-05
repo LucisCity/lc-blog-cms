@@ -96,7 +96,7 @@ export const PostContentContainer = styled.div`
       @media screen and (min-width: 768px) {
         position: absolute;
         top: 0;
-        left: -30px;
+        left: -32px;
         opacity: 0;
         display: block;
         width: 30px;

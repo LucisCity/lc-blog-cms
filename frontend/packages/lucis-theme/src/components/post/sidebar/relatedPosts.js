@@ -8,17 +8,17 @@ import FeaturedImage from "../../common/featuredImage"
 const RelatedPosts = ({ state }) => {
   const data = state.source.get(state.router.link)
   const currentPost = state.source[data.type][data.id]
-  const posts = getPostsFromCategory(state.source, 'nguoi-moi', currentPost.id)
-  const tags = currentPost.tags.map((tagId) => {
-    return state.source.tag[tagId]
-  })
+  const posts = getPostsFromCategory(state.source, 'spot-news', currentPost.id)
+  // const tags = currentPost.tags.map((tagId) => {
+  //   return state.source.tag[tagId]
+  // })
 
   return (
     posts.length > 0 && (
       <RelatedPostsContainer padding="20px 30px">
-        <Title>Tin liên quan</Title>
+        <Title>Spot news</Title>
         <PostsContainer>
-          {posts.slice(0, 10).map((post) => {
+          {posts.slice(0, 1).map((post) => {
             const featuredMediaId = parseInt(post.featured_media)
 
             return (

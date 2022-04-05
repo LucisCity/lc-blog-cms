@@ -11,14 +11,15 @@ import NotFound from "./common/notfound"
 import GlobalStyles from "../styles/global"
 import RecentPosts from "./homepage/recentPosts"
 import MediaPosts from "./homepage/mediaPosts"
-import { Container, MainBg, Ranking } from "../styles/common"
+import { Container, MainBg, Ranking, Main } from "../styles/common"
 import Footer from "./footer"
 import Image from "@frontity/components/image"
 import rankingImg from "../images/ranking.png"
+import LucisInsight from "./lucisInsight"
 
 const Root = ({ state }) => {
   const data = state.source.get(state.router.link)
-
+  
   return (
     <>
       <GlobalStyles />
@@ -41,6 +42,7 @@ const Root = ({ state }) => {
           <Page when={data.isPage} />
           <Archive when={data.isArchive} />
           <Post when={data.isPost} />
+          <LucisInsight when={state.router.link === '/lucis-insight/'} />
           <NotFound />
         </Switch>
       </Main>
@@ -48,16 +50,5 @@ const Root = ({ state }) => {
     </>
   )
 }
-
-const Main = styled.main`
-  margin: 68px 0 50px;
-  @media screen and (min-width: 768px) {
-    margin: 79px 0 150px;
-  }
-  @media screen and (min-width: 1440px) {
-    margin: 120px 0 150px;
-  }
-
-`
 
 export default connect(Root)

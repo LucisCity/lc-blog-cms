@@ -27,6 +27,13 @@ export const MainBg = styled.div`
   }
 `
 
+export const Main = styled.main`
+  margin: 68px 0 50px;
+  @media screen and (min-width: 768px) {
+    margin: 79px 0 150px;
+  }
+`
+
 export const Container = styled.div`
   max-width: 100%;
   margin: auto;
@@ -128,6 +135,7 @@ export const PostsGridTitle = styled.h3`
   font-size: 16px;
   font-weight: 400;
   margin-bottom: 20px;
+  ${TextLineClamp(3)};
   @media screen and (min-width: 1440px) {
     margin-bottom: 35px;
   }

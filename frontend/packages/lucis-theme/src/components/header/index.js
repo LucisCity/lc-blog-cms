@@ -40,10 +40,10 @@ const Header = ({ state, actions }) => {
         elem.scrollIntoView({behavior: "smooth"})
       }
     }
-  }, [])
+  }, [state.router.link])
 
   return (
-    <HeaderStyled className="main-header text-center">
+    <HeaderStyled>
       <Container>
         <LogoContainer>
           {dimension.width <= 992 && <OpenMobileMenu onClick={handleOpenMobileMenu} />}
@@ -75,21 +75,7 @@ const Header = ({ state, actions }) => {
               )}
             </Li>
             <Li>
-              {data.isHome ? (
-                <a
-                  href="#lucis-review"
-                  onClick={handleAnchorClick}
-                >
-                  Lucis Insight
-                </a>
-              ): (
-                <Link
-                  link="/#lucis-review"
-                  onClick={handleAnchorClick}
-                >
-                  Lucis Insight
-                </Link>
-              )}
+            <Link link="/lucis-insight" target="_blank">Lucis Insight</Link>
             </Li>
             <Li>
               <Link link="#">About Us</Link>

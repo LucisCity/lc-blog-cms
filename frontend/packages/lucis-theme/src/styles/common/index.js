@@ -230,7 +230,7 @@ export const RecentPostsGrid = styled.div`
   }
   ${PostsGridItem} {
     border-radius: 0;
-    &:first-child {
+    &:first-of-type {
       @media screen and (min-width: 992px) {
         grid-column-start: 1;
         grid-column-end: 3;

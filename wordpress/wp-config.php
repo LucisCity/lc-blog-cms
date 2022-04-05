@@ -79,11 +79,21 @@ $table_prefix = 'wp_';
  *
  * @link https://wordpress.org/support/article/debugging-in-wordpress/
  */
-define( 'WP_DEBUG', true );
+define( 'WP_DEBUG', false );
 
 /* Add any custom values between this line and the "stop editing" line. */
 
-
+/*
+ SSL
+ We need to support SSL because of this server
+ Browser ---> cloudflare --> caddy SSL -> apache non-SSL
+*/
+define('FORCE_SSL_ADMIN', true);
+// in some setups HTTP_X_FORWARDED_PROTO might contain
+// a comma-separated list e.g. http,https
+// so check for https existence
+if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false)
+    $_SERVER['HTTPS']='on';
 
 /* That's all, stop editing! Happy publishing. */
 

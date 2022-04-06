@@ -73,8 +73,15 @@ const Header = ({ state, actions }) => {
         <Nav isMobileMenuOpen={state.theme.isMobileMenuOpen}>
           {dimension.width <= 992 && <CloseMobileMenu onClick={handleCloseMobileMenu} />}
           <ul>
-            <Li>
-              <Link link="https://lucis.network/#EcoSystem" target="_blank">Ecosystem</Link>
+            <Li className="has-submenu">
+              <span>Ecosystem</span>
+              <Submenu className="submenu">
+                {submenuItems.map(item => (
+                  <Li key={item.id} disabled={item.disabled && 'disabled'}>
+                    <a href={item.href}>{item.title}</a>
+                  </Li>
+                ))}
+              </Submenu>
             </Li>
             <Li>
               {data.isHome ? (
@@ -84,7 +91,7 @@ const Header = ({ state, actions }) => {
                 >
                   Media
                 </a>
-              ): (
+              ) : (
                 <Link
                   link="/#media"
                   onClick={handleAnchorClick}
@@ -98,16 +105,6 @@ const Header = ({ state, actions }) => {
             </Li>
             <Li>
               <Link link="#">About Us</Link>
-            </Li>
-            <Li className="has-submenu">
-              <Image src={iconSubmenu} />
-              <Submenu className="submenu">
-                {submenuItems.map(item => (
-                  <Li key={item.id} disabled={item.disabled && 'disabled'}>
-                    <a href={item.href}>{item.title}</a>
-                  </Li>
-                ))}
-              </Submenu>
             </Li>
           </ul>
         </Nav>
@@ -194,15 +191,30 @@ const Li = styled.li`
   display: inline-block;
   margin-right: 30px;
   position: relative;
+  cursor: pointer;
   &:last-of-type {
     margin-right: 0;
   }
   &.has-submenu {
-    cursor: pointer;
     &:hover {
       .submenu {
         transform: translateY(0px) translateX(0px) scale(1);
         opacity: 1;
+      }
+    }
+  }
+  .submenu-caret {
+    padding-top: 15px;
+    @media screen and (min-width: 992px) {
+      display: inline-block;
+      margin-left: 10px;
+      padding: 5px;
+    }
+    img {
+      display: none;
+      width: 10px;
+      @media screen and (min-width: 992px) {
+        display: inline-block;
       }
     }
   }
@@ -407,7 +419,7 @@ const MultiLanguage = styled.div`
 `
 
 const Submenu = styled.ul`
-  padding-left: 20px;
+  padding: 15px;
   @media screen and (min-width: 992px) {
     cursor: default;
     position: absolute;

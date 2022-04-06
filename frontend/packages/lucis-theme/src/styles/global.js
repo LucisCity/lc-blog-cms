@@ -1,8 +1,8 @@
-import { Global, css, Head } from "frontity"
+import { Global, css, Head, connect } from "frontity"
 import SVNTransformer from "../fonts/SVN-Transformer.ttf"
 import favicon from "../images/favicon.png"
 
-const GlobalStyles = () => {
+const GlobalStyles = ({ state }) => {
   return (
     <>
       <Head>
@@ -26,6 +26,10 @@ const GlobalStyles = () => {
           font-family: 'Saira', sans-serif;
           line-height: 1.5;
           color: #ffffff;
+          ${state.theme.isMobileMenuOpen && `
+            height: 100vh;
+            overflow: hidden;
+          `}
         }
         body {
           background: #100f0e;
@@ -94,4 +98,4 @@ const GlobalStyles = () => {
   )
 }
 
-export default GlobalStyles
+export default connect(GlobalStyles)

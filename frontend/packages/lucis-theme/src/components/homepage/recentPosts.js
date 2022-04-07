@@ -49,7 +49,7 @@ const RecentPosts = ({ state }) => {
                       <PostsGridTitle>{decode(post.title.rendered)}</PostsGridTitle>
                       <PostsGridFooter>
                         <PostAuthor>
-                          <AuthorName>{author.name}</AuthorName>
+                          <AuthorName>{author?.name}</AuthorName>
                         </PostAuthor>
                         <PostsGridDate>- {formatedDate}</PostsGridDate>
                       </PostsGridFooter>

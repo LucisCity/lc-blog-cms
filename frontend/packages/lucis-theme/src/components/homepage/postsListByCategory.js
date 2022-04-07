@@ -49,8 +49,8 @@ const PostsListByCategory = ({ state, categorySlug, title, id }) => {
                       <PostsGridTitle>{decode(post.title.rendered)}</PostsGridTitle>
                       <PostsGridFooter>
                         <PostAuthor>
-                          <AuthorAvatar src={author.avatar_urls[24]} />
-                          <AuthorName>{author.name}</AuthorName>
+                          <AuthorAvatar src={author?.avatar_urls[24]} />
+                          <AuthorName>{author?.name}</AuthorName>
                         </PostAuthor>
                         <PostsGridDate>{formatedDate}</PostsGridDate>
                         <PostsGridFavorite src={Favorite} width="23px" />

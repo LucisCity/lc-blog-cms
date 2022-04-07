@@ -53,14 +53,14 @@ const MediaPosts = ({ state }) => {
                           <PostsGridDate>{formatedDate}</PostsGridDate>
                           <PostsGridExcerp>{decode(post.content.rendered).slice(0, 250)}</PostsGridExcerp>
                           <PostAuthor>
-                            <AuthorAvatar src={author.avatar_urls[24]} />
-                            <AuthorName>{author.name}</AuthorName>
+                            <AuthorAvatar src={author?.avatar_urls[24]} />
+                            <AuthorName>{author?.name}</AuthorName>
                           </PostAuthor>
                         </PostsGridContent>
                       ) : (
                         <PostsGridFooter>
                           <PostAuthor>
-                            <AuthorName>{author.name}</AuthorName>
+                            <AuthorName>{author?.name}</AuthorName>
                           </PostAuthor>
                           <PostsGridDate>- {formatedDate}</PostsGridDate>
                         </PostsGridFooter>

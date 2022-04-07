@@ -54,16 +54,23 @@ const Footer = () => {
 }
 
 const MainFooter = styled.footer`
-  background: url(${bgFooter}) no-repeat bottom;
-  background-size: contain;
-  padding-bottom: 50%;
   ${Container} {
+    padding-bottom: 250px;
+    background: url(${bgFooter}) no-repeat bottom;
+    background-size: contain;
     display: flex;
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
     @media screen and (min-width: 768px) {
+      padding-bottom: 350px;
       flex-direction: row;
+    }
+    @media screen and (min-width: 992px) {
+      padding-bottom: 450px;
+    }
+    @media screen and (min-width: 1200px) {
+      padding-bottom: 550px;
     }
   }
 `

@@ -33,9 +33,9 @@ const RelatedPostsFooter = ({ state }) => {
                 <Info>
                   <PostTitle>{decode(post.title.rendered)}</PostTitle>
                   <Author>
-                    <Image src={author.avatar_urls[24]} />
+                    <Image src={author?.avatar_urls[24]} />
                     <span>
-                      {author.name}
+                      {author?.name}
                     </span>
                   </Author>
                 </Info>

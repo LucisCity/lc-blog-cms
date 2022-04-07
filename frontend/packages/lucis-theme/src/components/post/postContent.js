@@ -17,9 +17,9 @@ const PostContent = ({ post, author }) => {
         <h1>{decode(post.title.rendered)}</h1>
         <PostInfo>
           <Author>
-            <Image src={author.avatar_urls[24]} />
+            <Image src={author?.avatar_urls[24]} />
             <span>
-              {author.name}
+              {author?.name}
             </span>
           </Author>
           <PostDate>

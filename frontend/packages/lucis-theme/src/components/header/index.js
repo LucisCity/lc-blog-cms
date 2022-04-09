@@ -7,24 +7,15 @@ import useDimension from "../../hooks/useDimension"
 import { Container } from "../../styles/common"
 import iconSearch from "../../images/search.svg"
 import iconNotificaion from "../../images/notification.svg"
-import iconSubmenu from "../../images/submenu.svg"
 import iconSubmenuCorner from "../../images/submenu-corner.svg"
-
-const submenuItems = [
-  {id: 1, href:'https://lucis.network/social-fi', title: 'Social-Fi network platform', disabled: false},
-  {id: 2, href:'https://lucis.network/tournaments', title: 'Tournaments', disabled: false},
-  {id: 3, href:'https://lucis.network/ranking', title: 'Lucis Insight & Game Ranking system', disabled: false},
-  {id: 4, href:'https://lucis.network/media', title: 'Lucis Media', disabled: false},
-  {id: 5, href:'https://lucis.network/launchpad', title: 'Launchpad & Marketplace', disabled: false},
-  {id: 6, href:'https://lucis.network/lucis-gaming-guild', title: 'Gaming Guild', disabled: false},
-  {id: 7, href:'https://lucis.network/ranking', title: 'Automation tool zone', disabled: true},
-  {id: 8, href:'https://lucis.network/ranking', title: 'Streaming platform', disabled: true},
-]
+import i18n from "../../translations/i18n"
+// import { useTranslation } from 'react-i18next'
 
 const Header = ({ state, actions }) => {
   const data = state.source.get(state.router.link)
   const dimension = useDimension()
-  
+  const { t } = i18n
+
   const handleCloseMobileMenu = () => {
     actions.theme.closeMobileMenu()
   }
@@ -45,15 +36,32 @@ const Header = ({ state, actions }) => {
     }
   }
 
+  const submenuItems = [
+    { id: 1, href: 'https://lucis.network/social-fi', title: 'Social-Fi network platform', disabled: false },
+    { id: 2, href: 'https://lucis.network/tournaments', title: 'Tournaments', disabled: false },
+    { id: 3, href: 'https://lucis.network/ranking', title: 'Lucis Insight & Game Ranking system', disabled: false },
+    { id: 4, href: 'https://lucis.network/media', title: 'Lucis Media', disabled: false },
+    { id: 5, href: 'https://lucis.network/launchpad', title: 'Launchpad & Marketplace', disabled: false },
+    { id: 6, href: 'https://lucis.network/lucis-gaming-guild', title: 'Gaming Guild', disabled: false },
+    { id: 7, href: 'https://lucis.network/ranking', title: 'Automation tool zone', disabled: true },
+    { id: 8, href: 'https://lucis.network/ranking', title: 'Streaming platform', disabled: true },
+  ]
+
   useEffect(() => {
+    console.log('i18n.language: ', i18n.language)
     const location = window.location
     if (location.hash) {
       let element = document.getElementById(location.hash.slice(1))
       if (element) {
-        element.scrollIntoView({behavior: "smooth"})
+        element.scrollIntoView({ behavior: "smooth" })
       }
     }
   }, [state.router.link])
+
+  useEffect(() => {
+    console.log('i18n: ', i18n.language, i18n.t('Top trending'))
+  }, [])
+  
 
   useEffect(() => {
     if (dimension.width >= 992) {
@@ -74,7 +82,7 @@ const Header = ({ state, actions }) => {
           {dimension.width <= 992 && <CloseMobileMenu onClick={handleCloseMobileMenu} />}
           <ul>
             <Li className="has-submenu">
-              <span>Ecosystem</span>
+              <span>{t('Ecosystem')}</span>
               <Submenu className="submenu">
                 {submenuItems.map(item => (
                   <Li key={item.id} disabled={item.disabled && 'disabled'}>
@@ -84,27 +92,30 @@ const Header = ({ state, actions }) => {
               </Submenu>
             </Li>
             <Li>
+              <Link link="/category/tournament">{t('Tournaments')}</Link>
+            </Li>
+            <Li>
               {data.isHome ? (
                 <a
                   href="#media"
                   onClick={handleAnchorClick}
                 >
-                  Media
+                  {t('Media')}
                 </a>
               ) : (
                 <Link
                   link="/#media"
                   onClick={handleAnchorClick}
                 >
-                  Media
+                  {t('Media')}
                 </Link>
               )}
             </Li>
             <Li>
-            <Link link="/lucis-insight" target="_blank">Lucis Insight</Link>
+              <Link link="/lucis-insight" target="_blank">{t('Lucis insight')}</Link>
             </Li>
             <Li>
-              <Link link="#">About Us</Link>
+              <Link link="#">{t('About us')}</Link>
             </Li>
           </ul>
         </Nav>
@@ -114,11 +125,18 @@ const Header = ({ state, actions }) => {
             <Search>
               <Image src={iconSearch} />
               <form onSubmit={(e) => e.preventDefault()}>
-                <input type="text" placeholder="Search" />
+                <input type="text" placeholder={t('Search')} />
               </form>
             </Search>
             <MultiLanguage>
-              <button>EN</button>
+              <CurrentLanguage>{i18n.language}</CurrentLanguage>
+              <SelectLanguage>
+                <a
+                  href={state.frontity.name === 'lucis-blog' ? '/en' : '/'}
+                >
+                  {state.frontity.name === 'lucis-blog' ? 'en' : 'vi'}
+                </a>
+              </SelectLanguage>
             </MultiLanguage>
           </HeaderForm>
         </HeaderToolbar>
@@ -375,49 +393,6 @@ const Search = styled.div`
   }
 `
 
-const MultiLanguage = styled.div`
-  border-top-right-radius: 16px;
-  border-bottom-right-radius: 16px;
-  background-color: rgba(28, 31, 37, 0.6);
-  position: relative;
-  height: 100%;
-  width: 50%;
-  @media screen and (min-width: 768px) {
-    width: 66px;
-  }
-  &::after {
-    @media screen and (min-width: 768px) {
-      content: '';
-      position: absolute;
-      top: 50%;
-      right: 14px;
-      transform: translateY(-50%);
-      display: block;
-      width: 0;
-      border: 5px solid transparent;
-      border-top: 8px solid #C4C4C4;
-      border-right: 5px solid transparent;
-      border-left: 5px solid transparent;
-      border-bottom: 0px solid transparent;
-    }
-  }
-  button {
-    font-size: 14px;
-    font-weight: 700;
-    background: none;
-    border: none;
-    outline: none;
-    padding: 5px;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    color: #A0A0A0;
-    @media screen and (min-width: 768px) {
-      padding: 12px 16px 12px 0;
-    }
-  }
-`
-
 const Submenu = styled.ul`
   padding: 15px;
   @media screen and (min-width: 992px) {
@@ -472,6 +447,86 @@ const Submenu = styled.ul`
       @media screen and (min-width: 992px) {
         border-bottom: 1px solid #D9D9D9;
       }
+    }
+  }
+`
+
+const SelectLanguage = styled.div`
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 80%;
+  min-height: 120%;
+  padding-top: 15%;
+  background-color: rgba(28, 31, 37, 0.6);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  color: #A0A0A0;
+  font-size: 14px;
+  font-weight: 700;
+  a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px 15px;
+  }
+`
+
+const CurrentLanguage = styled.div`
+  font-size: 14px;
+  font-weight: 700;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 5px;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  color: #A0A0A0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media screen and (min-width: 768px) {
+    justify-content: start;
+    padding: 12px 25px 12px 16px;
+  }
+`
+
+const MultiLanguage = styled.div`
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  background-color: rgba(28, 31, 37, 0.6);
+  position: relative;
+  height: 100%;
+  width: 50%;
+  text-transform: uppercase;
+  &:hover {
+    ${SelectLanguage} {
+      display: flex;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    width: 66px;
+  }
+  &::after {
+    @media screen and (min-width: 768px) {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      transform: translateY(-50%);
+      display: block;
+      width: 0;
+      border: 5px solid transparent;
+      border-top: 8px solid #C4C4C4;
+      border-right: 5px solid transparent;
+      border-left: 5px solid transparent;
+      border-bottom: 0px solid transparent;
     }
   }
 `

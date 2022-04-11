@@ -3,7 +3,7 @@ import FeaturedImage from "../common/featuredImage"
 import dayjs from "dayjs"
 import { connect, decode } from "frontity"
 import { getCategoryInfo, getPostsFromCategory } from "../../helpers"
-import { useTranslation } from "react-i18next"
+import i18n from "../../translations/i18n"
 import {
   AuthorName,
   Container,
@@ -26,7 +26,7 @@ import {
 const MediaPosts = ({ state }) => {
   const posts = getPostsFromCategory(state.source, 'media')
   const sortedPosts = posts.sort((a, b) => a.acf.order - b.acf.order)
-  const { t, i18n } = useTranslation()
+  const { t } = i18n
 
   return (
     <>
@@ -53,7 +53,7 @@ const MediaPosts = ({ state }) => {
                       {index === 0 ? (
                         <PostsGridContent>
                           <PostsGridDate>{formatedDate}</PostsGridDate>
-                          <PostsGridExcerp>{decode(post.excerpt.rendered).slice(0, 250)}</PostsGridExcerp>
+                          <PostsGridExcerp>{decode(post.excerpt.rendered)}</PostsGridExcerp>
                           <PostAuthor>
                             <AuthorAvatar src={author?.avatar_urls[24]} />
                             <AuthorName>{author?.name}</AuthorName>

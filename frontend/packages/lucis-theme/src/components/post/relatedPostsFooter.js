@@ -5,6 +5,7 @@ import { RelatedPostsFooterContainer } from "../../styles/post"
 import FeaturedImage from "../common/featuredImage"
 import Link from "@frontity/components/link"
 import Image from "@frontity/components/image"
+import i18n from "../../translations/i18n"
 
 const RelatedPostsFooter = ({ state }) => {
   const data = state.source.get(state.router.link)
@@ -12,39 +13,42 @@ const RelatedPostsFooter = ({ state }) => {
   const author = state.source.author[currentPost.author]
   const categoryId = currentPost.categories[0]
   const posts = getPostsFromCategory(state.source, categoryId, currentPost.id)
+  const { t } = i18n
 
   return (
-    <RelatedPostsFooterContainer>
-      <Container>
-        <Title>Tin cùng chuyên mục</Title>
-        <PostsGrid>
-          {posts.length > 0 && posts.slice(0, 6).map((post) => {
-            const featuredMediaId = parseInt(post.featured_media)
+    posts.length > 0 ? (
+      <RelatedPostsFooterContainer>
+        <Container>
+          <Title>{t('Same category')}</Title>
+          <PostsGrid>
+            {posts.slice(0, 6).map((post) => {
+              const featuredMediaId = parseInt(post.featured_media)
 
-            return (
-              <PostItem
-                key={post.id}
-                link={post.link}
-                className="img-hover-scale"
-              >
-                <PostImage>
-                  <FeaturedImage id={featuredMediaId} className="img-scale" />
-                </PostImage>
-                <Info>
-                  <PostTitle>{decode(post.title.rendered)}</PostTitle>
-                  <Author>
-                    <Image src={author?.avatar_urls[24]} />
-                    <span>
-                      {author?.name}
-                    </span>
-                  </Author>
-                </Info>
-              </PostItem>
-            )
-          })}
-        </PostsGrid>
-      </Container>
-    </RelatedPostsFooterContainer>
+              return (
+                <PostItem
+                  key={post.id}
+                  link={post.link}
+                  className="img-hover-scale"
+                >
+                  <PostImage>
+                    <FeaturedImage id={featuredMediaId} className="img-scale" />
+                  </PostImage>
+                  <Info>
+                    <PostTitle>{decode(post.title.rendered)}</PostTitle>
+                    <Author>
+                      <Image src={author?.avatar_urls[24]} />
+                      <span>
+                        {author?.name}
+                      </span>
+                    </Author>
+                  </Info>
+                </PostItem>
+              )
+            })}
+          </PostsGrid>
+        </Container>
+      </RelatedPostsFooterContainer>
+    ) : null
   )
 }
 

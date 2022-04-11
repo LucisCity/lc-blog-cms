@@ -1,8 +1,9 @@
 import React from "react"
-import { connect, decode } from "frontity"
-import { getCategoryInfo, getPostsFromCategory } from "../../helpers"
 import FeaturedImage from "../common/featuredImage"
 import dayjs from "dayjs"
+import { connect, decode } from "frontity"
+import { getCategoryInfo, getPostsFromCategory } from "../../helpers"
+import { useTranslation } from "react-i18next"
 import {
   AuthorName,
   Container,
@@ -25,6 +26,7 @@ import {
 const MediaPosts = ({ state }) => {
   const posts = getPostsFromCategory(state.source, 'media')
   const sortedPosts = posts.sort((a, b) => a.acf.order - b.acf.order)
+  const { t, i18n } = useTranslation()
 
   return (
     <>
@@ -32,7 +34,7 @@ const MediaPosts = ({ state }) => {
         sortedPosts.length ? (
           <HomepageSection id="media">
             <Container>
-              <SectionTitle>MEDIA</SectionTitle>
+              <SectionTitle>{t('Media')}</SectionTitle>
               <MediaPostsGrid>
               {sortedPosts.slice(0, 7).map((post, index) => {
                 const featuredMediaId = parseInt(post.featured_media)

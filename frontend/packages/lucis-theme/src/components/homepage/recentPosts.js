@@ -1,8 +1,9 @@
 import React from "react"
-import { connect, decode } from "frontity"
-import { getCategoryInfo, getPostsFromCategory } from "../../helpers"
 import FeaturedImage from "../common/featuredImage"
 import dayjs from "dayjs"
+import { connect, decode } from "frontity"
+import { getCategoryInfo } from "../../helpers"
+import { useTranslation } from "react-i18next"
 import {
   AuthorName,
   Container,
@@ -24,6 +25,7 @@ const RecentPosts = ({ state }) => {
   const posts = data.items.map(({ type, id }, index) => {
     return state.source[type][id]
   })
+  const { t, i18n } = useTranslation()
 
   return (
     <>
@@ -31,7 +33,7 @@ const RecentPosts = ({ state }) => {
         posts.length ? (
           <HomepageSection>
             <Container>
-              <SectionTitle>RECENT</SectionTitle>
+              <SectionTitle>{t('Recent')}</SectionTitle>
               <RecentPostsGrid>
               {posts.slice(0, 4).map((post) => {
                 const featuredMediaId = parseInt(post.featured_media)

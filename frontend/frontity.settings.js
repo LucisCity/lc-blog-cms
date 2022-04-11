@@ -18,6 +18,9 @@ const settings = [
         "state": {
           "source": {
             "api": process.env.API_URL,
+            "params": {
+              "lang": "vi"
+            },
           }
         }
       },

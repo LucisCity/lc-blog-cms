@@ -7,9 +7,8 @@ import useDimension from "../../hooks/useDimension"
 import { Container } from "../../styles/common"
 import iconSearch from "../../images/search.svg"
 import iconNotificaion from "../../images/notification.svg"
-import iconSubmenuCorner from "../../images/submenu-corner.svg"
+import iconSubmenuCorner from "../../images/submenu-corner.png"
 import i18n from "../../translations/i18n"
-// import { useTranslation } from 'react-i18next'
 
 const Header = ({ state, actions }) => {
   const data = state.source.get(state.router.link)
@@ -36,6 +35,10 @@ const Header = ({ state, actions }) => {
     }
   }
 
+  const languageSubdirectory = () => {
+    return state.frontity.name === 'lucis-blog' ? '/' : '/en/'
+  }
+
   const submenuItems = [
     { id: 1, href: 'https://lucis.network/social-fi', title: 'Social-Fi network platform', disabled: false },
     { id: 2, href: 'https://lucis.network/tournaments', title: 'Tournaments', disabled: false },
@@ -48,7 +51,6 @@ const Header = ({ state, actions }) => {
   ]
 
   useEffect(() => {
-    console.log('i18n.language: ', i18n.language)
     const location = window.location
     if (location.hash) {
       let element = document.getElementById(location.hash.slice(1))
@@ -57,11 +59,6 @@ const Header = ({ state, actions }) => {
       }
     }
   }, [state.router.link])
-
-  useEffect(() => {
-    console.log('i18n: ', i18n.language, i18n.t('Top trending'))
-  }, [])
-  
 
   useEffect(() => {
     if (dimension.width >= 992) {
@@ -73,13 +70,13 @@ const Header = ({ state, actions }) => {
     <HeaderStyled>
       <Container>
         <LogoContainer>
-          {dimension.width <= 992 && <OpenMobileMenu onClick={handleOpenMobileMenu} />}
-          <Logo link="/">
+          {dimension.width <= 991 && <OpenMobileMenu onClick={handleOpenMobileMenu} />}
+          <Logo link={languageSubdirectory()}>
             <Image src={logo} />
           </Logo>
         </LogoContainer>
         <Nav isMobileMenuOpen={state.theme.isMobileMenuOpen}>
-          {dimension.width <= 992 && <CloseMobileMenu onClick={handleCloseMobileMenu} />}
+          {dimension.width <= 991 && <CloseMobileMenu onClick={handleCloseMobileMenu} />}
           <ul>
             <Li className="has-submenu">
               <span>{t('Ecosystem')}</span>
@@ -92,19 +89,19 @@ const Header = ({ state, actions }) => {
               </Submenu>
             </Li>
             <Li>
-              <Link link="/category/tournament">{t('Tournaments')}</Link>
+              <Link link={`${languageSubdirectory()}category/tournament`}>{t('Tournaments')}</Link>
             </Li>
             <Li>
               {data.isHome ? (
                 <a
-                  href="#media"
+                  href={`${languageSubdirectory()}#media`}
                   onClick={handleAnchorClick}
                 >
                   {t('Media')}
                 </a>
               ) : (
                 <Link
-                  link="/#media"
+                  link={`${languageSubdirectory()}#media`}
                   onClick={handleAnchorClick}
                 >
                   {t('Media')}
@@ -112,10 +109,10 @@ const Header = ({ state, actions }) => {
               )}
             </Li>
             <Li>
-              <Link link="/lucis-insight" target="_blank">{t('Lucis insight')}</Link>
+              <Link link={`${languageSubdirectory()}lucis-insight`} target="_blank">{t('Lucis insight')}</Link>
             </Li>
             <Li>
-              <Link link="#">{t('About us')}</Link>
+              <Link link={`${languageSubdirectory()}about-us`}>{t('About us')}</Link>
             </Li>
           </ul>
         </Nav>
@@ -172,7 +169,7 @@ const HeaderStyled = styled.header`
 
 const Nav = styled.nav`
   font-size: 16px;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 991px) {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -200,14 +197,14 @@ const Nav = styled.nav`
       }
     }
   }
-  @media screen and (max-width: 576px) {
-    padding: 35px 15px;
+  @media screen and (max-width: 575px) {
+    padding: 15px;
   }
 `
 
 const Li = styled.li`
   display: inline-block;
-  margin-right: 30px;
+  margin-right: 25px;
   position: relative;
   cursor: pointer;
   &:last-of-type {
@@ -220,6 +217,9 @@ const Li = styled.li`
         opacity: 1;
       }
     }
+  }
+  @media screen and (min-width: 1200px) {
+    margin-right: 35px;
   }
   .submenu-caret {
     padding-top: 15px;
@@ -293,6 +293,7 @@ const CloseMobileMenu = styled.div`
     height: 2px;
     position: absolute;
     left: 0;
+    top: 50%;
     width: 100%;
   }
   &::before {
@@ -399,13 +400,13 @@ const Submenu = styled.ul`
     cursor: default;
     position: absolute;
     top: 35px;
-    right: 0;
+    left: 0;
     min-width: 310px;
     transition: 0.3s;
     padding: 12px 0;
-    transform: translateY(-220px) translateX(140px) scale(0); 
+    transform: translateY(-220px) translateX(-140px) scale(0); 
     opacity: 0;
-    background: linear-gradient(121.07deg, rgba(255, 255, 255, 0.3) -26.88%, rgba(255, 255, 255, 0.1) 73.85%), url('${iconSubmenuCorner}') no-repeat top right;
+    background: linear-gradient(121.07deg, rgba(255, 255, 255, 0.3) -26.88%, rgba(255, 255, 255, 0.1) 73.85%), url('${iconSubmenuCorner}') no-repeat top left;
     box-shadow: 0px 4px 20px 1px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(40px);
     &::after {

@@ -43,17 +43,17 @@ const MediaPosts = ({ state }) => {
                 const categoryInfo = getCategoryInfo(state.source, post.categories[0])
 
                 return (
-                  <PostsGridItem key={post.id} link={post.link}>
+                  <PostsGridItem key={post.id} link={post.link} className="img-hover-scale">
                     <PostsGridRibbon>{decode(categoryInfo?.name)}</PostsGridRibbon>
                     <PostsGridImage>
-                      <FeaturedImage id={featuredMediaId} />
+                      <FeaturedImage id={featuredMediaId} className="img-scale" />
                     </PostsGridImage>
                     <PostsGridInfo>
                       <PostsGridTitle>{decode(post.title.rendered)}</PostsGridTitle>
                       {index === 0 ? (
                         <PostsGridContent>
                           <PostsGridDate>{formatedDate}</PostsGridDate>
-                          <PostsGridExcerp>{decode(post.content.rendered).slice(0, 250)}</PostsGridExcerp>
+                          <PostsGridExcerp>{decode(post.excerpt.rendered).slice(0, 250)}</PostsGridExcerp>
                           <PostAuthor>
                             <AuthorAvatar src={author?.avatar_urls[24]} />
                             <AuthorName>{author?.name}</AuthorName>

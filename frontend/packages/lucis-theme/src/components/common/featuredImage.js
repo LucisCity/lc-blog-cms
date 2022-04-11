@@ -1,8 +1,8 @@
 import React from "react"
-import { connect, styled } from "frontity"
+import { connect } from "frontity"
 import Image from "@frontity/components/image";
 
-const FeaturedImage = ({ state, id, ...rest }) => {
+const FeaturedImage = ({ state, id, className }) => {
   const media = state.source.attachment[id]
   if (!media) return null
   const srcset = Object.values(media.media_details.sizes)
@@ -21,7 +21,7 @@ const FeaturedImage = ({ state, id, ...rest }) => {
       src={media.source_url}
       srcSet={srcset}
       alt={media.alt_text}
-      {...rest}
+      className={className}
     />
   )
 }

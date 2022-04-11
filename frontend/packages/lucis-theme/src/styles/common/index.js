@@ -107,7 +107,7 @@ export const PostsGrid = styled.div`
     gap: 40px 20px;
   }
   @media screen and (min-width: 1440px) {
-    gap: 80px 20px;
+    gap: 60px 20px;
   }
 `
 
@@ -122,6 +122,13 @@ export const PostsGridItem = styled(Link)`
 export const PostsGridImage = styled.div`
   border-radius: 10px;
   overflow: hidden;
+  img {
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    @media screen and (min-width: 992px) {
+      aspect-ratio: 16 / 9;
+    }
+  }
 `
 
 export const PostsGridInfo = styled.div`
@@ -230,47 +237,7 @@ export const RecentPostsGrid = styled.div`
   }
   ${PostsGridItem} {
     border-radius: 0;
-    &:first-of-type {
-      @media screen and (min-width: 992px) {
-        grid-column-start: 1;
-        grid-column-end: 3;
-        grid-row-start: 1;
-        grid-row-end: 3;
-      }
-      @media screen and (min-width: 1200px) {
-        grid-column-end: 4;
-      }
-      ${PostsGridTitle} {
-        @media screen and (min-width: 992px) {
-          font-size: 24px;
-          ${TextLineClamp(3)}
-        }
-        @media screen and (min-width: 1200px) {
-          font-size: 36px;
-          ${TextLineClamp(2)}
-        }
-      }
-      ${PostsGridInfo} {
-        @media screen and (min-width: 992px) {
-          height: 185px;
-          padding: 25px;
-        }
-      }
-      ${PostsGridFooter} {
-        @media screen and (min-width: 992px) {
-          font-size: 16px;
-          margin-bottom: 5px;
-        }
-      }
-      ${PostsGridRibbon} {
-        @media screen and (min-width: 992px) {
-          top: 25px;
-          left: 25px;
-          font-size: 14px;
-        }
-      }
-    }
-    &:last-child {
+    &:last-of-type {
       @media screen and (min-width: 992px) {
         grid-column-start: 3;
         grid-column-end: 5;
@@ -301,6 +268,51 @@ export const RecentPostsGrid = styled.div`
         @media screen and (min-width: 992px) {
           top: 25px;
           left: 25px;
+        }
+      }
+    }
+    &:first-of-type {
+      @media screen and (min-width: 992px) {
+        grid-column-start: 1;
+        grid-column-end: 3;
+        grid-row-start: 1;
+        grid-row-end: 3;
+      }
+      @media screen and (min-width: 1200px) {
+        grid-column-end: 4;
+      }
+      ${PostsGridTitle} {
+        @media screen and (min-width: 992px) {
+          font-size: 24px;
+          ${TextLineClamp(3)}
+        }
+        @media screen and (min-width: 1200px) {
+          font-size: 36px;
+          ${TextLineClamp(2)}
+        }
+      }
+      ${PostsGridImage} {
+        img {
+          aspect-ratio: none;
+        }
+      }
+      ${PostsGridInfo} {
+        @media screen and (min-width: 992px) {
+          height: 185px;
+          padding: 25px;
+        }
+      }
+      ${PostsGridFooter} {
+        @media screen and (min-width: 992px) {
+          font-size: 16px;
+          margin-bottom: 5px;
+        }
+      }
+      ${PostsGridRibbon} {
+        @media screen and (min-width: 992px) {
+          top: 25px;
+          left: 25px;
+          font-size: 14px;
         }
       }
     }
@@ -388,11 +400,8 @@ export const MediaPostsGrid = styled.div`
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(4, 220px);
   }
-  @media screen and (min-width: 1200px) {
-    gap: 40px;
-  }
   @media screen and (min-width: 1440px) {
-    gap: 80px 48px;
+    gap: 60px 30px;
   }
   ${PostsGridItem} {
     background: none;
@@ -408,7 +417,6 @@ export const MediaPostsGrid = styled.div`
       img {
         width: 100%;
         height: 100%;
-        object-fit: cover;
       }
     }
     &:first-of-type {
@@ -427,9 +435,6 @@ export const MediaPostsGrid = styled.div`
       @media screen and (min-width: 992px) {
         grid-column-end: 5;
         grid-row-end: 3;
-      }
-      @media screen and (min-width: 1440px) {
-        margin-bottom: 30px;
       }
       ${PostsGridImage} {
         min-width: 320px;
@@ -488,7 +493,6 @@ export const MediaPostsGrid = styled.div`
     }
     &:not(:first-of-type) {
       margin-bottom: 30px;
-      ${BoxShadowGlowing()}
       ${GradientBorderRadius('#CD28E8', '#0BEBD6', '16px')}
       @media screen and (min-width: 768px) {
         margin-bottom: 0;

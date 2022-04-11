@@ -42,10 +42,10 @@ const RecentPosts = ({ state }) => {
                 const categoryInfo = getCategoryInfo(state.source, post.categories[0])
 
                 return (
-                  <PostsGridItem key={post.id} link={post.link}>
+                  <PostsGridItem key={post.id} link={post.link} className="img-hover-scale">
                     <PostsGridRibbon>{decode(categoryInfo?.name)}</PostsGridRibbon>
                     <PostsGridImage>
-                      <FeaturedImage id={featuredMediaId} />
+                      <FeaturedImage id={featuredMediaId} className="img-scale" />
                     </PostsGridImage>
                     <PostsGridInfo>
                       <PostsGridTitle>{decode(post.title.rendered)}</PostsGridTitle>

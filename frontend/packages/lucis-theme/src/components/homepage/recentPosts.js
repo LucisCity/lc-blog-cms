@@ -3,7 +3,7 @@ import FeaturedImage from "../common/featuredImage"
 import dayjs from "dayjs"
 import { connect, decode } from "frontity"
 import { getCategoryInfo } from "../../helpers"
-import { useTranslation } from "react-i18next"
+import i18n from "../../translations/i18n"
 import {
   AuthorName,
   Container,
@@ -25,7 +25,7 @@ const RecentPosts = ({ state }) => {
   const posts = data.items.map(({ type, id }, index) => {
     return state.source[type][id]
   })
-  const { t, i18n } = useTranslation()
+  const { t } = i18n
 
   return (
     <>

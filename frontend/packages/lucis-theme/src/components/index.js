@@ -16,11 +16,11 @@ import rankingImg from "../images/ranking.png"
 import LucisInsight from "./lucisInsight"
 import { connect } from "frontity"
 import { Container, MainBg, Ranking, Main } from "../styles/common"
-import { useTranslation } from "react-i18next"
+import i18n from "../translations/i18n"
 
 const Root = ({ state }) => {
   const data = state.source.get(state.router.link)
-  const { t, i18n } = useTranslation()
+  const { t } = i18n
 
   return (
     <>

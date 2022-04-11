@@ -10,8 +10,11 @@ import youtube from "../../images/youtube.svg"
 import telegram from "../../images/telegram.svg"
 import twitter from "../../images/twitter.svg"
 import discord from "../../images/discord.svg"
+import i18n from "../../translations/i18n"
+import footerBtnBg from "../../images/footer-btn.svg"
 
 const Footer = () => {
+  const { t } = i18n
   return (
     <MainFooter>
       <Container>
@@ -19,7 +22,13 @@ const Footer = () => {
           <Image src={logoFooter} />
         </FooterLogo>
         <FooterSubcribe>
+          <FooterCTA>
+            <h3>{t('Be our partner')}</h3>
+            <button>{t('Apply Now')}</button>
+            <button>{t('Contact Us')}</button>
+          </FooterCTA>
           <FooterSocials>
+            <h3>{t('Follow our official channel bellow')}</h3>
             <Link link="https://www.tiktok.com/@lucistvv" target="_blank">
               <Image src={tiktok} />
             </Link>
@@ -39,14 +48,6 @@ const Footer = () => {
               <Image src={discord} />
             </Link>
           </FooterSocials>
-          <FooterForm>
-            <h3>SUBSCRIBE TO NEWSLETTER</h3>
-            <form onSubmit={(e) => e.preventDefault()}>
-              <input type="email"/>
-              <button>Submit</button>
-            </form>
-            <p>Thank you for subscribing!</p>
-          </FooterForm>
         </FooterSubcribe>
       </Container>
     </MainFooter>
@@ -55,13 +56,16 @@ const Footer = () => {
 
 const MainFooter = styled.footer`
   ${Container} {
-    padding-bottom: 250px;
+    padding-bottom: 50%;
     background: url(${bgFooter}) no-repeat bottom;
     background-size: contain;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     flex-direction: column;
+    @media screen and (min-width: 576px) {
+      padding-bottom: 250px;
+    }
     @media screen and (min-width: 768px) {
       padding-bottom: 350px;
       flex-direction: row;
@@ -78,7 +82,7 @@ const MainFooter = styled.footer`
 const FooterLogo = styled(Link)`
   display: block;
   width: 150px;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
   @media screen and (min-width: 768px) {
     margin-bottom: 0;
   }
@@ -91,27 +95,44 @@ const FooterSubcribe = styled.div`
   width: 400px;
   max-width: 100%;
   @media screen and (min-width: 992px) {
-    width: 600px;
+    width: 560px;
   }
   @media screen and (min-width: 1440px) {
-    width: auto;
+    width: 720px;
   }
 `
 
 const FooterSocials = styled.div`
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
-  @media screen and (min-width: 768px) {
-    margin-bottom: 60px;
+  h3 {
+    width: 100%;
+    font-size: 12px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-weight: 500;
+    @media screen and (min-width: 576px) {
+      font-size: 16px;
+    }
+    @media screen and (min-width: 768px) {
+      text-align: left;
+    }
+    @media screen and (min-width: 992px) {
+      font-size: 18px;
+    }
+    @media screen and (min-width: 1200px) {
+      margin-bottom: 26px;
+    }
+    @media screen and (min-width: 1440px) {
+      font-size: 30px;
+    }
   }
   a {
     display: block;
     width: 30px;
     height: 30px;
-    box-shadow: 0 2px 40px rgb(255 255 255 / 30%);
-    border-radius: 50%;
     @media screen and (min-width: 768px) {
       width: 50px;
       height: 50px;
@@ -131,74 +152,64 @@ const FooterSocials = styled.div`
   }
 `
 
-const FooterForm = styled.div`
+const FooterCTA = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 30px;
+  @media screen and (min-width: 768px) {
+    justify-content: start;
+  }
+  @media screen and (min-width: 1200px) {
+    margin-bottom: 45px;
+  }
   h3 {
     font-size: 16px;
     font-weight: 700;
-    margin-bottom: 26px;
+    margin-bottom: 15px;
     text-align: center;
+    width: 100%;
     @media screen and (min-width: 768px) {
       font-size: 20px;
       text-align: left;
     }
     @media screen and (min-width: 1200px) {
       font-size: 26px;
-    }
-  }
-  form {
-    display: flex;
-    align-items: center;
-    height: 40px;
-    @media screen and (min-width: 768px) {
-      height: 60px;
+      margin-bottom: 26px;
     }
     @media screen and (min-width: 1200px) {
+      font-size: 36px;
+    }
+  }
+  button {
+    background: url(${footerBtnBg}) no-repeat top center;
+    background-size: contain;
+    font-size: 16px;
+    font-weight: 500;
+    color: #ffffff;
+    display: inline-block;
+    width: 130px;
+    height: 50px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    &:last-of-type {
+      margin-left: 15px;
+    }
+    @media screen and (min-width: 576px) {
+      width: 160px;
+      height: 60px;
+      font-size: 20px;
+      &:last-of-type {
+        margin-left: 30px;
+      }
+    }
+    @media screen and (min-width: 1200px) {
+      width: 240px;
       height: 90px;
-    }
-    input {
-      display: block;
-      width: 100%;
-      height: 100%;
-      border-top-left-radius: 16px;
-      border-bottom-left-radius: 16px;
-      background: linear-gradient(152.97deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%);
-      backdrop-filter: blur(42px);
-      border: none;
-      outline: none;
-      padding: 10px;
-      font-size: 16px;
-      color: #ffffff;
-      @media screen and (min-width: 992px) {
-        padding: 20px;
-      }
-      @media screen and (min-width: 1200px) {
-        font-size: 26px;
-      }
-      @media screen and (min-width: 1440px) {
-        font-size: 36px;
-      }
-    }
-    button {
-      display: block;
-      min-width: 100px;
-      height: 100%;
-      border-top-right-radius: 16px;
-      border-bottom-right-radius: 16px;
-      border: none;
-      cursor: pointer;
-      background: linear-gradient(60deg, #CD28E8 3.41%, #0BEBD6 106.98%);
-      backdrop-filter: blur(42px);
-      font-size: 16px;
-      font-weight: 500;
-      color: #ffffff;
-      padding: 5px;
-      @media screen and (min-width: 768px) {
-        min-width: 150px;
-        font-size: 26px;
-      }
-      @media screen and (min-width: 1200px) {
-        min-width: 242px;
-        font-size: 36px;
+      font-size: 26px;
+      &:last-of-type {
+        margin-left: 77px;
       }
     }
   }

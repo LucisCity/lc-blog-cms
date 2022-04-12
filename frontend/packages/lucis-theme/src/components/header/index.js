@@ -109,7 +109,7 @@ const Header = ({ state, actions }) => {
               )}
             </Li>
             <Li>
-              <Link link={`${languageSubdirectory()}lucis-insight`} target="_blank">{t('Lucis insight')}</Link>
+              <Link link={`${languageSubdirectory()}lucis-insight`}>{t('Lucis insight')}</Link>
             </Li>
             <Li>
               <Link link={`${languageSubdirectory()}about-us`}>{t('About us')}</Link>

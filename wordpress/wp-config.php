@@ -20,16 +20,16 @@
 
 // ** Database settings - You can get this info from your web host ** //
 /** The name of the database for WordPress */
-define( 'DB_NAME', getenv('MYSQL_DATABASE') );
-
+define( 'DB_NAME', 'wpreact' );
+    
 /** Database username */
-define( 'DB_USER', getenv('MYSQL_USER') );
+define( 'DB_USER', 'root' );
 
 /** Database password */
-define( 'DB_PASSWORD', getenv('MYSQL_PASSWORD') );
+define( 'DB_PASSWORD', '' );
 
 /** Database hostname */
-define( 'DB_HOST', 'mysql' );
+define( 'DB_HOST', 'localhost' );
 
 /** Database charset to use in creating database tables. */
 define( 'DB_CHARSET', 'utf8mb4' );
@@ -90,11 +90,12 @@ define( 'WP_DEBUG', false );
 */
 if ($_SERVER['REQUEST_SCHEME'] === 'https') {
     define('FORCE_SSL_ADMIN', true);
-    // in some setups HTTP_X_FORWARDED_PROTO might contain
-    // a comma-separated list e.g. http,https
-    // so check for https existence
-    if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false)
-        $_SERVER['HTTPS']='on';
+}
+// in some setups HTTP_X_FORWARDED_PROTO might contain
+// a comma-separated list e.g. http,https
+// so check for https existence
+if (strpos($_SERVER['HTTP_X_FORWARDED_PROTO'], 'https') !== false) {
+    $_SERVER['HTTPS'] = 'on';
 }
 /* That's all, stop editing! Happy publishing. */
 

@@ -1,8 +1,9 @@
 import React from "react"
-import { connect, decode } from "frontity"
-import { getCategoryInfo, getPostsFromCategory } from "../../helpers"
 import FeaturedImage from "../common/featuredImage"
 import dayjs from "dayjs"
+import { connect, decode } from "frontity"
+import { getCategoryInfo, getPostsFromCategory } from "../../helpers"
+import i18n from "../../translations/i18n"
 import {
   AuthorName,
   Container,
@@ -25,6 +26,7 @@ import {
 const MediaPosts = ({ state }) => {
   const posts = getPostsFromCategory(state.source, 'media')
   const sortedPosts = posts.sort((a, b) => a.acf.order - b.acf.order)
+  const { t } = i18n
 
   return (
     <>
@@ -32,7 +34,7 @@ const MediaPosts = ({ state }) => {
         sortedPosts.length ? (
           <HomepageSection id="media">
             <Container>
-              <SectionTitle>MEDIA</SectionTitle>
+              <SectionTitle>{t('Media')}</SectionTitle>
               <MediaPostsGrid>
               {sortedPosts.slice(0, 7).map((post, index) => {
                 const featuredMediaId = parseInt(post.featured_media)
@@ -41,17 +43,17 @@ const MediaPosts = ({ state }) => {
                 const categoryInfo = getCategoryInfo(state.source, post.categories[0])
 
                 return (
-                  <PostsGridItem key={post.id} link={post.link}>
+                  <PostsGridItem key={post.id} link={post.link} className="img-hover-scale">
                     <PostsGridRibbon>{decode(categoryInfo?.name)}</PostsGridRibbon>
                     <PostsGridImage>
-                      <FeaturedImage id={featuredMediaId} />
+                      <FeaturedImage id={featuredMediaId} className="img-scale" />
                     </PostsGridImage>
                     <PostsGridInfo>
                       <PostsGridTitle>{decode(post.title.rendered)}</PostsGridTitle>
                       {index === 0 ? (
                         <PostsGridContent>
                           <PostsGridDate>{formatedDate}</PostsGridDate>
-                          <PostsGridExcerp>{decode(post.content.rendered).slice(0, 250)}</PostsGridExcerp>
+                          <PostsGridExcerp>{decode(post.excerpt.rendered)}</PostsGridExcerp>
                           <PostAuthor>
                             <AuthorAvatar src={author?.avatar_urls[24]} />
                             <AuthorName>{author?.name}</AuthorName>

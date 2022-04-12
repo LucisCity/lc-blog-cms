@@ -2,6 +2,7 @@ import React from "react"
 import { connect, styled, decode } from "frontity"
 import { BoxRoundedBlur } from "../../../styles/common"
 import Link from "@frontity/components/link"
+import i18n from "../../../translations/i18n"
 
 const Keywords = ({ state }) => {
   const data = state.source.get(state.router.link)
@@ -9,11 +10,12 @@ const Keywords = ({ state }) => {
   const tags = post.tags.map((tagId) => {
     return state.source.tag[tagId]
   })
-  
+  const { t } = i18n
+
   return (
     tags.length > 0 && (
       <TagsContainer padding="20px 30px">
-        <Title>Keywords</Title>
+        <Title>{t('Keywords')}</Title>
         <ScrollContainer>
           {tags.map((tag) => (
             <Tag key={tag.id} link={tag.link}>

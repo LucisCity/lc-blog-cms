@@ -4,16 +4,18 @@ import { BoxRoundedBlur } from "../../../styles/common"
 import Link from "@frontity/components/link"
 import { getPostsFromCategory } from "../../../helpers"
 import FeaturedImage from "../../common/featuredImage"
+import i18n from "../../../translations/i18n"
 
 const HotNews = ({ state }) => {
   const data = state.source.get(state.router.link)
   const currentPost = state.source[data.type][data.id]
   const posts = getPostsFromCategory(state.source, 'tin-hot', currentPost.id)
+  const { t } = i18n
 
   return (
     posts.length > 0 && (
       <HotNewsContainer padding="20px 30px">
-        <Title>Tin hot</Title>
+        <Title>{t('Hot news')}</Title>
         <PostsContainer>
           {posts.slice(0, 2).map((post) => {
             const featuredMediaId = parseInt(post.featured_media)

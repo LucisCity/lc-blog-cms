@@ -40,10 +40,10 @@ const PostsListByCategory = ({ state, categorySlug, title, id }) => {
                 const formatedDate = dayjs(post.date).format('MMMM DD, YYYY')
 
                 return (
-                  <PostsGridItem key={post.id} link={post.link}>
+                  <PostsGridItem key={post.id} link={post.link} className="img-hover-scale">
                     <PostsGridRibbon>{decode(categoryInfo?.name)}</PostsGridRibbon>
                     <PostsGridImage>
-                      <FeaturedImage id={featuredMediaId} />
+                      <FeaturedImage id={featuredMediaId} className="img-scale" />
                     </PostsGridImage>
                     <PostsGridInfo>
                       <PostsGridTitle>{decode(post.title.rendered)}</PostsGridTitle>

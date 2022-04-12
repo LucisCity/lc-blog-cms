@@ -7,24 +7,14 @@ import useDimension from "../../hooks/useDimension"
 import { Container } from "../../styles/common"
 import iconSearch from "../../images/search.svg"
 import iconNotificaion from "../../images/notification.svg"
-import iconSubmenu from "../../images/submenu.svg"
-import iconSubmenuCorner from "../../images/submenu-corner.svg"
-
-const submenuItems = [
-  {id: 1, href:'https://lucis.network/social-fi', title: 'Social-Fi network platform', disabled: false},
-  {id: 2, href:'https://lucis.network/tournaments', title: 'Tournaments', disabled: false},
-  {id: 3, href:'https://lucis.network/ranking', title: 'Lucis Insight & Game Ranking system', disabled: false},
-  {id: 4, href:'https://lucis.network/media', title: 'Lucis Media', disabled: false},
-  {id: 5, href:'https://lucis.network/launchpad', title: 'Launchpad & Marketplace', disabled: false},
-  {id: 6, href:'https://lucis.network/lucis-gaming-guild', title: 'Gaming Guild', disabled: false},
-  {id: 7, href:'https://lucis.network/ranking', title: 'Automation tool zone', disabled: true},
-  {id: 8, href:'https://lucis.network/ranking', title: 'Streaming platform', disabled: true},
-]
+import iconSubmenuCorner from "../../images/submenu-corner.png"
+import i18n from "../../translations/i18n"
 
 const Header = ({ state, actions }) => {
   const data = state.source.get(state.router.link)
   const dimension = useDimension()
-  
+  const { t } = i18n
+
   const handleCloseMobileMenu = () => {
     actions.theme.closeMobileMenu()
   }
@@ -45,12 +35,27 @@ const Header = ({ state, actions }) => {
     }
   }
 
+  const languageSubdirectory = () => {
+    return state.frontity.name === 'lucis-blog' ? '/' : '/en/'
+  }
+
+  const submenuItems = [
+    { id: 1, href: 'https://lucis.network/social-fi', title: 'Social-Fi network platform', disabled: false },
+    { id: 2, href: 'https://lucis.network/tournaments', title: 'Tournaments', disabled: false },
+    { id: 3, href: 'https://lucis.network/ranking', title: 'Lucis Insight & Game Ranking system', disabled: false },
+    { id: 4, href: 'https://lucis.network/media', title: 'Lucis Media', disabled: false },
+    { id: 5, href: 'https://lucis.network/launchpad', title: 'Launchpad & Marketplace', disabled: false },
+    { id: 6, href: 'https://lucis.network/lucis-gaming-guild', title: 'Gaming Guild', disabled: false },
+    { id: 7, href: 'https://lucis.network/ranking', title: 'Automation tool zone', disabled: true },
+    { id: 8, href: 'https://lucis.network/ranking', title: 'Streaming platform', disabled: true },
+  ]
+
   useEffect(() => {
     const location = window.location
     if (location.hash) {
       let element = document.getElementById(location.hash.slice(1))
       if (element) {
-        element.scrollIntoView({behavior: "smooth"})
+        element.scrollIntoView({ behavior: "smooth" })
       }
     }
   }, [state.router.link])
@@ -65,16 +70,16 @@ const Header = ({ state, actions }) => {
     <HeaderStyled>
       <Container>
         <LogoContainer>
-          {dimension.width <= 992 && <OpenMobileMenu onClick={handleOpenMobileMenu} />}
-          <Logo link="/">
+          {dimension.width <= 991 && <OpenMobileMenu onClick={handleOpenMobileMenu} />}
+          <Logo link={languageSubdirectory()}>
             <Image src={logo} />
           </Logo>
         </LogoContainer>
         <Nav isMobileMenuOpen={state.theme.isMobileMenuOpen}>
-          {dimension.width <= 992 && <CloseMobileMenu onClick={handleCloseMobileMenu} />}
+          {dimension.width <= 991 && <CloseMobileMenu onClick={handleCloseMobileMenu} />}
           <ul>
             <Li className="has-submenu">
-              <span>Ecosystem</span>
+              <span>{t('Ecosystem')}</span>
               <Submenu className="submenu">
                 {submenuItems.map(item => (
                   <Li key={item.id} disabled={item.disabled && 'disabled'}>
@@ -84,27 +89,30 @@ const Header = ({ state, actions }) => {
               </Submenu>
             </Li>
             <Li>
+              <Link link={`${languageSubdirectory()}category/tournament`}>{t('Tournaments')}</Link>
+            </Li>
+            <Li>
               {data.isHome ? (
                 <a
-                  href="#media"
+                  href={`${languageSubdirectory()}#media`}
                   onClick={handleAnchorClick}
                 >
-                  Media
+                  {t('Media')}
                 </a>
               ) : (
                 <Link
-                  link="/#media"
+                  link={`${languageSubdirectory()}#media`}
                   onClick={handleAnchorClick}
                 >
-                  Media
+                  {t('Media')}
                 </Link>
               )}
             </Li>
             <Li>
-            <Link link="/lucis-insight" target="_blank">Lucis Insight</Link>
+              <Link link={`${languageSubdirectory()}lucis-insight`} target="_blank">{t('Lucis insight')}</Link>
             </Li>
             <Li>
-              <Link link="#">About Us</Link>
+              <Link link={`${languageSubdirectory()}about-us`}>{t('About us')}</Link>
             </Li>
           </ul>
         </Nav>
@@ -114,11 +122,18 @@ const Header = ({ state, actions }) => {
             <Search>
               <Image src={iconSearch} />
               <form onSubmit={(e) => e.preventDefault()}>
-                <input type="text" placeholder="Search" />
+                <input type="text" placeholder={t('Search')} />
               </form>
             </Search>
             <MultiLanguage>
-              <button>EN</button>
+              <CurrentLanguage>{i18n.language}</CurrentLanguage>
+              <SelectLanguage>
+                <a
+                  href={state.frontity.name === 'lucis-blog' ? '/en' : '/'}
+                >
+                  {state.frontity.name === 'lucis-blog' ? 'en' : 'vi'}
+                </a>
+              </SelectLanguage>
             </MultiLanguage>
           </HeaderForm>
         </HeaderToolbar>
@@ -154,7 +169,7 @@ const HeaderStyled = styled.header`
 
 const Nav = styled.nav`
   font-size: 16px;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 991px) {
     width: 100%;
     height: 100%;
     position: fixed;
@@ -182,14 +197,14 @@ const Nav = styled.nav`
       }
     }
   }
-  @media screen and (max-width: 576px) {
-    padding: 35px 15px;
+  @media screen and (max-width: 575px) {
+    padding: 15px;
   }
 `
 
 const Li = styled.li`
   display: inline-block;
-  margin-right: 30px;
+  margin-right: 25px;
   position: relative;
   cursor: pointer;
   &:last-of-type {
@@ -202,6 +217,9 @@ const Li = styled.li`
         opacity: 1;
       }
     }
+  }
+  @media screen and (min-width: 1200px) {
+    margin-right: 35px;
   }
   .submenu-caret {
     padding-top: 15px;
@@ -275,6 +293,7 @@ const CloseMobileMenu = styled.div`
     height: 2px;
     position: absolute;
     left: 0;
+    top: 50%;
     width: 100%;
   }
   &::before {
@@ -375,62 +394,19 @@ const Search = styled.div`
   }
 `
 
-const MultiLanguage = styled.div`
-  border-top-right-radius: 16px;
-  border-bottom-right-radius: 16px;
-  background-color: rgba(28, 31, 37, 0.6);
-  position: relative;
-  height: 100%;
-  width: 50%;
-  @media screen and (min-width: 768px) {
-    width: 66px;
-  }
-  &::after {
-    @media screen and (min-width: 768px) {
-      content: '';
-      position: absolute;
-      top: 50%;
-      right: 14px;
-      transform: translateY(-50%);
-      display: block;
-      width: 0;
-      border: 5px solid transparent;
-      border-top: 8px solid #C4C4C4;
-      border-right: 5px solid transparent;
-      border-left: 5px solid transparent;
-      border-bottom: 0px solid transparent;
-    }
-  }
-  button {
-    font-size: 14px;
-    font-weight: 700;
-    background: none;
-    border: none;
-    outline: none;
-    padding: 5px;
-    cursor: pointer;
-    width: 100%;
-    height: 100%;
-    color: #A0A0A0;
-    @media screen and (min-width: 768px) {
-      padding: 12px 16px 12px 0;
-    }
-  }
-`
-
 const Submenu = styled.ul`
   padding: 15px;
   @media screen and (min-width: 992px) {
     cursor: default;
     position: absolute;
     top: 35px;
-    right: 0;
+    left: 0;
     min-width: 310px;
     transition: 0.3s;
     padding: 12px 0;
-    transform: translateY(-220px) translateX(140px) scale(0); 
+    transform: translateY(-220px) translateX(-140px) scale(0); 
     opacity: 0;
-    background: linear-gradient(121.07deg, rgba(255, 255, 255, 0.3) -26.88%, rgba(255, 255, 255, 0.1) 73.85%), url('${iconSubmenuCorner}') no-repeat top right;
+    background: linear-gradient(121.07deg, rgba(255, 255, 255, 0.3) -26.88%, rgba(255, 255, 255, 0.1) 73.85%), url('${iconSubmenuCorner}') no-repeat top left;
     box-shadow: 0px 4px 20px 1px rgba(0, 0, 0, 0.2);
     backdrop-filter: blur(40px);
     &::after {
@@ -472,6 +448,86 @@ const Submenu = styled.ul`
       @media screen and (min-width: 992px) {
         border-bottom: 1px solid #D9D9D9;
       }
+    }
+  }
+`
+
+const SelectLanguage = styled.div`
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  z-index: -1;
+  left: 0;
+  right: 0;
+  top: 80%;
+  min-height: 120%;
+  padding-top: 15%;
+  background-color: rgba(28, 31, 37, 0.6);
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  color: #A0A0A0;
+  font-size: 14px;
+  font-weight: 700;
+  a {
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 12px 15px;
+  }
+`
+
+const CurrentLanguage = styled.div`
+  font-size: 14px;
+  font-weight: 700;
+  background: none;
+  border: none;
+  outline: none;
+  padding: 5px;
+  cursor: pointer;
+  width: 100%;
+  height: 100%;
+  color: #A0A0A0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  @media screen and (min-width: 768px) {
+    justify-content: start;
+    padding: 12px 25px 12px 16px;
+  }
+`
+
+const MultiLanguage = styled.div`
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  background-color: rgba(28, 31, 37, 0.6);
+  position: relative;
+  height: 100%;
+  width: 50%;
+  text-transform: uppercase;
+  &:hover {
+    ${SelectLanguage} {
+      display: flex;
+    }
+  }
+  @media screen and (min-width: 768px) {
+    width: 66px;
+  }
+  &::after {
+    @media screen and (min-width: 768px) {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 14px;
+      transform: translateY(-50%);
+      display: block;
+      width: 0;
+      border: 5px solid transparent;
+      border-top: 8px solid #C4C4C4;
+      border-right: 5px solid transparent;
+      border-left: 5px solid transparent;
+      border-bottom: 0px solid transparent;
     }
   }
 `

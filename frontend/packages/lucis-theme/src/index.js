@@ -1,4 +1,5 @@
 import Root from "./components"
+import i18n from "./translations/i18n"
 
 const lucisTheme = {
   name: "lucis-theme",
@@ -9,6 +10,7 @@ const lucisTheme = {
     theme: {
       isMobileMenuOpen: false,
       autoPrefetch: "in-view",
+      language: "vi"
     },
     yoast: {
       renderTags: "both"
@@ -16,15 +18,25 @@ const lucisTheme = {
   },
   actions: {
     theme: {
-      beforeCSR: ({ state, actions }) => {
-        // console.log(state)
-        // console.log(actions)
+      beforeSSR: ({ state }) => {
+        if (state.frontity.name === 'lucis-blog-en') {
+          i18n.changeLanguage('en')
+        } else {
+          i18n.changeLanguage('vi')
+        }
+      },
+      beforeCSR: ({ state }) => {
+        if (state.frontity.name === 'lucis-blog-en') {
+          i18n.changeLanguage('en')
+        } else {
+          i18n.changeLanguage('vi')
+        }
       },
       openMobileMenu: ({ state }) => {
-        state.theme.isMobileMenuOpen = true;
+        state.theme.isMobileMenuOpen = true
       },
       closeMobileMenu: ({ state }) => {
-        state.theme.isMobileMenuOpen = false;
+        state.theme.isMobileMenuOpen = false
       }
     }
   },

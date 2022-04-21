@@ -27,7 +27,7 @@ services:
       MYSQL_USER: "${MYSQL_USER}"
       MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
     ports:
-      - "33061:3306"
+      - "${MYSQL_PORT}:3306"
     volumes:
       - ../../lucis-blog-data/mysql:/var/lib/mysql
       - ./db:/docker-entrypoint-initdb.d

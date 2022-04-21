@@ -17,7 +17,7 @@ const settings = [
         "name": "@frontity/wp-source",
         "state": {
           "source": {
-            "api": process.env.API_URL,
+            "api": `${process.env.API_URL}/wp-json`,
             "params": {
               "lang": "vi"
             },
@@ -47,7 +47,7 @@ const settings = [
         "name": "@frontity/wp-source",
         "state": {
           "source": {
-            "api": process.env.API_URL,
+            "api": `${process.env.API_URL}/wp-json`,
             "subdirectory": "/en",
             "params": {
               "lang": "en"

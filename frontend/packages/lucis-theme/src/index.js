@@ -19,6 +19,7 @@ const lucisTheme = {
   actions: {
     theme: {
       beforeSSR: ({ state }) => {
+        console.log('{beforeSSR} state.frontity.name: ', state.frontity.name);
         if (state.frontity.name === 'lucis-blog-en') {
           i18n.changeLanguage('en')
         } else {
@@ -26,6 +27,7 @@ const lucisTheme = {
         }
       },
       beforeCSR: ({ state }) => {
+        console.log('{beforeCSR} state.frontity.name: ', state.frontity.name);
         if (state.frontity.name === 'lucis-blog-en') {
           i18n.changeLanguage('en')
         } else {

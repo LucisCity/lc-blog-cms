@@ -129,7 +129,7 @@ const Header = ({ state, actions }) => {
               <CurrentLanguage>{i18n.language}</CurrentLanguage>
               <SelectLanguage>
                 <a
-                  href={state.frontity.name === 'lucis-blog' ? '/en' : '/'}
+                  href={state.frontity.name === 'lucis-blog' ? '/en/' : '/'}
                 >
                   {state.frontity.name === 'lucis-blog' ? 'en' : 'vi'}
                 </a>

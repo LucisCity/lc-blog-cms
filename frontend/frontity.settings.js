@@ -1,7 +1,11 @@
+function removeSchema(url) {
+  return url.replace(/^https?:\/\//, '');
+}
+
 const settings = [
   {
     "name": "lucis-blog-en",
-    "match": [`${process.env.BLOG_URL}/en/`],
+    "match": [`${removeSchema(process.env.BLOG_URL)}/en/`],
     "state": {
       "frontity": {
         "url": `${process.env.BLOG_URL}/en`,
@@ -33,7 +37,7 @@ const settings = [
 
   {
     "name": "lucis-blog",
-    "match": [`${process.env.BLOG_URL}`],
+    "match": [`${removeSchema(process.env.BLOG_URL)}`],
     "state": {
       "frontity": {
         "url": process.env.BLOG_URL,

@@ -1,7 +1,7 @@
 import Root from "./components"
 import i18n from "./translations/i18n"
 
-const lucisTheme = {
+export default {
   name: "lucis-theme",
   roots: {
     theme: Root,
@@ -9,8 +9,7 @@ const lucisTheme = {
   state: {
     theme: {
       isMobileMenuOpen: false,
-      autoPrefetch: "in-view",
-      language: "vi"
+      autoPrefetch: "in-view"
     },
     yoast: {
       renderTags: "both"
@@ -18,13 +17,6 @@ const lucisTheme = {
   },
   actions: {
     theme: {
-      beforeSSR: ({ state }) => {
-        if (state.frontity.name === 'lucis-blog-en') {
-          i18n.changeLanguage('en')
-        } else {
-          i18n.changeLanguage('vi')
-        }
-      },
       beforeCSR: ({ state }) => {
         if (state.frontity.name === 'lucis-blog-en') {
           i18n.changeLanguage('en')
@@ -41,5 +33,3 @@ const lucisTheme = {
     }
   },
 }
-
-export default lucisTheme

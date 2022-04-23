@@ -60,3 +60,17 @@ export const trimEllipsis = (str, length) => {
   
   return str.length > length ? str.substring(0, length) + "..." : str;
 }
+
+export const debounce = (func, timeout = 300) => {
+  let timer
+  return (...args) => {
+    clearTimeout(timer)
+    timer = setTimeout(() => {
+      func.apply(this, args)
+    }, timeout)
+  }
+}
+
+export const languageSubdirectory = (state) => {
+  return state.frontity.name === 'lucis-blog' ? '/' : '/en/'
+}

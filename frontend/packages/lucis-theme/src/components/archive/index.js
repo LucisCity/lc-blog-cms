@@ -1,6 +1,5 @@
 import React from "react"
 import { connect, decode, styled } from "frontity"
-// import { getCategoryInfo } from "../../helpers"
 import FeaturedImage from "../common/featuredImage"
 import Favorite from "../../images/Favorite_duotone.svg"
 import {
@@ -16,7 +15,6 @@ import {
   PostsGridImage,
   PostsGridInfo,
   PostsGridItem,
-  // PostsGridRibbon,
   PostsGridTitle,
   SectionTitle
 } from "../../styles/common"
@@ -28,7 +26,11 @@ const Archive = ({ state }) => {
   return (
     <ArchiveSection>
       <Container>
-        <SectionTitle>{decode(state.source[data.taxonomy][data.id]?.name)}</SectionTitle>
+        <SectionTitle>
+          {
+            data.isSearch ? 'search' : decode(state.source[data.taxonomy][data.id]?.name)
+          }
+        </SectionTitle>
         {
           data.items.length ? (
             <PostsGrid>
@@ -37,11 +39,9 @@ const Archive = ({ state }) => {
               const featuredMediaId = parseInt(post.featured_media)
               const author = state.source.author[post.author]
               const formatedDate = dayjs(post.date).format('MMMM DD, YYYY')
-              // const categoryInfo = getCategoryInfo(state.source, post.categories[0])
 
               return (
                 <PostsGridItem key={post.id} link={post.link}>
-                  {/* <PostsGridRibbon>{decode(categoryInfo?.name)}</PostsGridRibbon> */}
                   <PostsGridImage>
                     <FeaturedImage id={featuredMediaId} />
                   </PostsGridImage>

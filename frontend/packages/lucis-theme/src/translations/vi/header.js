@@ -4,5 +4,6 @@ export const header = {
   'Media': 'Đa phương tiện',
   'Lucis insight': 'Lucis insight',
   'About us': 'Về chúng tôi',
-  'Search': 'Tìm kiếm'
+  'Search': 'Tìm kiếm',
+  'View all': 'Xem tất cả',
 }

@@ -1,9 +1,17 @@
 import React from "react"
-import { Container } from "../../styles/common"
 
 const Loading = () => {
   return (
-    <Container>loading...</Container>
+    <div className="ispinner">
+      <div className="ispinner-blade"></div>
+      <div className="ispinner-blade"></div>
+      <div className="ispinner-blade"></div>
+      <div className="ispinner-blade"></div>
+      <div className="ispinner-blade"></div>
+      <div className="ispinner-blade"></div>
+      <div className="ispinner-blade"></div>
+      <div className="ispinner-blade"></div>
+    </div>
   )
 }
 

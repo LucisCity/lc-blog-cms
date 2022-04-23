@@ -1,5 +1,5 @@
 import React, { useEffect } from "react"
-import { connect, styled } from "frontity"
+import { connect, styled, loadable } from "frontity"
 import Link from "@frontity/components/link"
 import Image from "@frontity/components/image"
 import logo from "../../images/logo.svg"
@@ -9,6 +9,8 @@ import iconSearch from "../../images/search.svg"
 import iconNotificaion from "../../images/notification.svg"
 import iconSubmenuCorner from "../../images/submenu-corner.png"
 import i18n from "../../translations/i18n"
+import { languageSubdirectory } from "../../helpers"
+const SearchModal = loadable(() => import("../search/searchModal"))
 
 const Header = ({ state, actions }) => {
   const data = state.source.get(state.router.link)
@@ -27,7 +29,7 @@ const Header = ({ state, actions }) => {
     if (data.isHome) {
       e.preventDefault()
       const regex = /^.*?#/g
-      let id = e.target.href.replace(regex, '')
+      const id = e.target.href.replace(regex, '')
       handleCloseMobileMenu()
       document.querySelector(`#${id}`)?.scrollIntoView({
         behavior: "smooth"
@@ -35,19 +37,14 @@ const Header = ({ state, actions }) => {
     }
   }
 
-  const languageSubdirectory = () => {
-    return state.frontity.name === 'lucis-blog' ? '/' : '/en/'
-  }
-
   const submenuItems = [
     { id: 1, href: 'https://lucis.network/social-fi', title: 'Social-Fi network platform', disabled: false },
     { id: 2, href: 'https://lucis.network/tournaments', title: 'Tournaments', disabled: false },
-    { id: 3, href: 'https://lucis.network/ranking', title: 'Lucis Insight & Game Ranking system', disabled: false },
-    { id: 4, href: 'https://lucis.network/media', title: 'Lucis Media', disabled: false },
-    { id: 5, href: 'https://lucis.network/launchpad', title: 'Launchpad & Marketplace', disabled: false },
-    { id: 6, href: 'https://lucis.network/lucis-gaming-guild', title: 'Gaming Guild', disabled: false },
-    { id: 7, href: 'https://lucis.network/ranking', title: 'Automation tool zone', disabled: true },
-    { id: 8, href: 'https://lucis.network/ranking', title: 'Streaming platform', disabled: true },
+    { id: 3, href: 'https://lucis.network/media', title: 'Lucis Media', disabled: false },
+    { id: 4, href: 'https://lucis.network/marketplace', title: 'Launchpad & Marketplace', disabled: false },
+    { id: 5, href: 'https://lucis.network/lucis-gaming-guild', title: 'Gaming Guild', disabled: false },
+    { id: 6, href: 'https://lucis.network/ranking', title: 'Automation tool zone', disabled: true },
+    { id: 7, href: 'https://lucis.network/ranking', title: 'Streaming platform', disabled: true },
   ]
 
   useEffect(() => {
@@ -64,14 +61,15 @@ const Header = ({ state, actions }) => {
     if (dimension.width >= 992) {
       handleCloseMobileMenu()
     }
-  }, [dimension]);
+  }, [dimension])
 
   return (
     <HeaderStyled>
+      {state.theme.isSearchModalOpen && <SearchModal />}
       <Container>
         <LogoContainer>
           {dimension.width <= 991 && <OpenMobileMenu onClick={handleOpenMobileMenu} />}
-          <Logo link={languageSubdirectory()}>
+          <Logo link={languageSubdirectory(state)}>
             <Image src={logo} />
           </Logo>
         </LogoContainer>
@@ -89,19 +87,19 @@ const Header = ({ state, actions }) => {
               </Submenu>
             </Li>
             <Li>
-              <Link link={`${languageSubdirectory()}category/tournament`}>{t('Tournaments')}</Link>
+              <Link link={`${languageSubdirectory(state)}category/tournament`}>{t('Tournaments')}</Link>
             </Li>
             <Li>
               {data.isHome ? (
                 <a
-                  href={`${languageSubdirectory()}#media`}
+                  href={`${languageSubdirectory(state)}#media`}
                   onClick={handleAnchorClick}
                 >
                   {t('Media')}
                 </a>
               ) : (
                 <Link
-                  link={`${languageSubdirectory()}#media`}
+                  link={`${languageSubdirectory(state)}#media`}
                   onClick={handleAnchorClick}
                 >
                   {t('Media')}
@@ -109,21 +107,18 @@ const Header = ({ state, actions }) => {
               )}
             </Li>
             <Li>
-              <Link link={`${languageSubdirectory()}lucis-insight`}>{t('Lucis insight')}</Link>
+              <Link link={`${languageSubdirectory(state)}lucis-insight`}>{t('Lucis insight')}</Link>
             </Li>
             <Li>
-              <Link link={`${languageSubdirectory()}about-us`}>{t('About us')}</Link>
+              <Link link={`${languageSubdirectory(state)}about-us`}>{t('About us')}</Link>
             </Li>
           </ul>
         </Nav>
         <HeaderToolbar>
           <Notification amount="6" />
           <HeaderForm>
-            <Search>
+            <Search onClick={() => actions.theme.openSearchModal()}>
               <Image src={iconSearch} />
-              <form onSubmit={(e) => e.preventDefault()}>
-                <input type="text" placeholder={t('Search')} />
-              </form>
             </Search>
             <MultiLanguage>
               <CurrentLanguage>{i18n.language}</CurrentLanguage>
@@ -340,13 +335,8 @@ const HeaderForm = styled.div`
   align-items: center;
   border-radius: 16px;
   height: 38px;
-  width: 74px;
   background: rgba(101, 80, 167, 0.6);
-  @media screen and (min-width: 390px) {
-    width: 100px;
-  }
   @media screen and (min-width: 768px) {
-    width: 280px;
     height: 49px;
     background-color: rgba(28, 31, 37, 0.6);
   }
@@ -358,12 +348,11 @@ const Search = styled.div`
   justify-content: center;
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
-  padding: 5px;
+  padding: 10px;
   height: 100%;
-  width: 50%;
+  cursor: pointer;
   @media screen and (min-width: 768px) {
     padding: 12px 16px;
-    width: 213px;
   }
   img {
     width: 20px;
@@ -371,12 +360,12 @@ const Search = styled.div`
       width: 25px;
     }
   }
-  form {
+  /* form {
     display: none;
     @media screen and (min-width: 768px) {
       display: block;
     }
-  }
+  } */
   input {
     background: none;
     outline: none;
@@ -474,7 +463,10 @@ const SelectLanguage = styled.div`
     display: block;
     width: 100%;
     text-align: center;
-    padding: 12px 15px;
+    padding: 12px 0;
+    @media screen and (min-width: 768px) {
+      padding: 12px 15px;
+    }
   }
 `
 
@@ -494,7 +486,6 @@ const CurrentLanguage = styled.div`
   justify-content: center;
   @media screen and (min-width: 768px) {
     justify-content: start;
-    padding: 12px 25px 12px 16px;
   }
 `
 
@@ -504,23 +495,23 @@ const MultiLanguage = styled.div`
   background-color: rgba(28, 31, 37, 0.6);
   position: relative;
   height: 100%;
-  width: 50%;
   text-transform: uppercase;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  @media screen and (min-width: 768px) {
+    padding: 12px;
+  }
   &:hover {
     ${SelectLanguage} {
       display: flex;
     }
   }
-  @media screen and (min-width: 768px) {
-    width: 66px;
-  }
   &::after {
     @media screen and (min-width: 768px) {
       content: '';
-      position: absolute;
-      top: 50%;
-      right: 14px;
-      transform: translateY(-50%);
       display: block;
       width: 0;
       border: 5px solid transparent;

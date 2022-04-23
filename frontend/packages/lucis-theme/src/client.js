@@ -9,7 +9,10 @@ export default {
   state: {
     theme: {
       isMobileMenuOpen: false,
-      autoPrefetch: "in-view"
+      isSearchModalOpen: false,
+      autoPrefetch: "in-view",
+      searchResults: [],
+      searchKeyword: ''
     },
     yoast: {
       renderTags: "both"
@@ -26,10 +29,19 @@ export default {
       },
       openMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = true
+        state.theme.isSearchModalOpen = false
       },
       closeMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = false
-      }
+        state.theme.isSearchModalOpen = false
+      },
+      openSearchModal: ({ state }) => {
+        state.theme.isSearchModalOpen = true
+      },
+      closeSearchModal: ({ state }) => {
+        state.theme.isSearchModalOpen = false
+        state.theme.searchResults = []
+      },
     }
   },
 }

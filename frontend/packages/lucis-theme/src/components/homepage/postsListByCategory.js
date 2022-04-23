@@ -4,6 +4,7 @@ import { getCategoryInfo, getPostsFromCategory } from "../../helpers"
 import FeaturedImage from "../common/featuredImage"
 import Favorite from "../../images/Favorite_duotone.svg"
 import dayjs from "dayjs"
+import i18n from "../../translations/i18n"
 import {
   AuthorAvatar,
   AuthorName,
@@ -23,6 +24,7 @@ import {
 } from "../../styles/common"
 
 const PostsListByCategory = ({ state, categorySlug, title, id }) => {
+  categorySlug = i18n.language === 'en' ? categorySlug + '-en' : categorySlug
   const posts = getPostsFromCategory(state.source, categorySlug)
   const categoryInfo = getCategoryInfo(state.source, categorySlug)
 

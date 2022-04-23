@@ -4,5 +4,6 @@ export const header = {
   'Media': 'Media',
   'Lucis insight': 'Lucis insight',
   'About us': 'About us',
-  'Search': 'Search'
+  'Search': 'Search',
+  'View all': 'View all',
 }

@@ -1,7 +1,7 @@
 import Root from "./components"
 import i18n from "./translations/i18n"
 
-const lucisTheme = {
+export default {
   name: "lucis-theme",
   roots: {
     theme: Root,
@@ -9,8 +9,10 @@ const lucisTheme = {
   state: {
     theme: {
       isMobileMenuOpen: false,
+      isSearchModalOpen: false,
       autoPrefetch: "in-view",
-      language: "vi"
+      searchResults: [],
+      searchKeyword: ''
     },
     yoast: {
       renderTags: "both"
@@ -18,16 +20,7 @@ const lucisTheme = {
   },
   actions: {
     theme: {
-      beforeSSR: ({ state }) => {
-        console.log('{beforeSSR} state.frontity.name: ', state.frontity.name);
-        if (state.frontity.name === 'lucis-blog-en') {
-          i18n.changeLanguage('en')
-        } else {
-          i18n.changeLanguage('vi')
-        }
-      },
       beforeCSR: ({ state }) => {
-        console.log('{beforeCSR} state.frontity.name: ', state.frontity.name);
         if (state.frontity.name === 'lucis-blog-en') {
           i18n.changeLanguage('en')
         } else {
@@ -36,12 +29,19 @@ const lucisTheme = {
       },
       openMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = true
+        state.theme.isSearchModalOpen = false
       },
       closeMobileMenu: ({ state }) => {
         state.theme.isMobileMenuOpen = false
-      }
+        state.theme.isSearchModalOpen = false
+      },
+      openSearchModal: ({ state }) => {
+        state.theme.isSearchModalOpen = true
+      },
+      closeSearchModal: ({ state }) => {
+        state.theme.isSearchModalOpen = false
+        state.theme.searchResults = []
+      },
     }
   },
 }
-
-export default lucisTheme

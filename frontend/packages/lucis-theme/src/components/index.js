@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import Switch from "@frontity/components/switch"
 import Header from "./header"
 import PostsListByCategory from "./homepage/postsListByCategory"
@@ -17,6 +17,7 @@ import LucisInsight from "./lucisInsight"
 import { connect } from "frontity"
 import { Container, MainBg, Ranking, Main } from "../styles/common"
 import i18n from "../translations/i18n"
+import SearchResults from "./search/searchResults"
 
 const Root = ({ state }) => {
   const data = state.source.get(state.router.link)
@@ -28,7 +29,9 @@ const Root = ({ state }) => {
       <Header />
       <Main>
         <Switch>
-          <Loading when={data.isFetching} />
+          <Container when={data.isFetching}>
+            <Loading />
+          </Container>
           <MainBg when={data.isHome}>
             <Ranking>
               <Container>
@@ -42,6 +45,7 @@ const Root = ({ state }) => {
             <PostsListByCategory categorySlug="lucis-review" title={t('Lucis review')} id="lucis-review" />
           </MainBg>
           <Page when={data.isPage} />
+          <SearchResults when={data.isSearch} />
           <Archive when={data.isArchive} />
           <Post when={data.isPost} />
           <LucisInsight

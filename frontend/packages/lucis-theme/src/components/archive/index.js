@@ -19,16 +19,17 @@ import {
   SectionTitle
 } from "../../styles/common"
 import dayjs from "dayjs"
+import i18n from "../../translations/i18n"
 
-const Archive = ({ state }) => {
+const Archive = ({ state, searchQuery }) => {
   const data = state.source.get(state.router.link)
-
+  const { t } = i18n
   return (
     <ArchiveSection>
       <Container>
         <SectionTitle>
           {
-            data.isSearch ? 'search' : decode(state.source[data.taxonomy][data.id]?.name)
+            data.isSearch ? `${t('Found results')} "${searchQuery}"` : decode(state.source[data.taxonomy][data.id]?.name)
           }
         </SectionTitle>
         {
@@ -60,7 +61,7 @@ const Archive = ({ state }) => {
               )
             })}
             </PostsGrid>
-          ) : <h2>Chưa có bài viết</h2>
+          ) : <h3>{t('No posts')}</h3>
         }
       </Container>
     </ArchiveSection>

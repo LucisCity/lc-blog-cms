@@ -8,11 +8,13 @@ export default {
   },
   state: {
     theme: {
+      autoPrefetch: "in-view",
       isMobileMenuOpen: false,
       isSearchModalOpen: false,
-      autoPrefetch: "in-view",
+      isSearching: false,
       searchResults: [],
-      searchKeyword: ''
+      searchKeyword: '',
+      noSearchResults: false,
     },
     yoast: {
       renderTags: "both"
@@ -37,10 +39,19 @@ export default {
       },
       openSearchModal: ({ state }) => {
         state.theme.isSearchModalOpen = true
+        state.theme.noSearchResults = false
       },
       closeSearchModal: ({ state }) => {
         state.theme.isSearchModalOpen = false
         state.theme.searchResults = []
+        state.theme.noSearchResults = false
+      },
+      startSearching: ({ state }) => {
+        state.theme.isSearching = true
+        state.theme.noSearchResults = false
+      },
+      stopSearching: ({ state }) => {
+        state.theme.isSearching = false
       },
     }
   },

@@ -1,12 +1,13 @@
 import { useEffect } from "react"
-import { connect, styled, decode } from "frontity";
-import { Container } from "../../styles/common";
-import SearchForm from "./searchForm";
-import FeaturedImage from "../common/featuredImage";
+import { connect, styled, decode } from "frontity"
+import { Container } from "../../styles/common"
+import SearchForm from "./searchForm"
+import FeaturedImage from "../common/featuredImage"
 import Link from "@frontity/components/link"
-import { languageSubdirectory } from "../../helpers";
-import { TextLineClamp } from "../../styles/mixins";
+import { languageSubdirectory } from "../../helpers"
+import { TextLineClamp } from "../../styles/mixins"
 import i18n from "../../translations/i18n"
+
 const SearchModal = ({ state, actions }) => {
   const data = state.theme.searchResults
   const isEmpty = data.length === 0
@@ -29,7 +30,7 @@ const SearchModal = ({ state, actions }) => {
       <Container>
         <CloseSearchModal onClick={actions.theme.closeSearchModal} />
         <SearchForm />
-          {!isEmpty && (
+          {!isEmpty ? (
             <>
               <SearchModalResults>
                 {
@@ -53,6 +54,8 @@ const SearchModal = ({ state, actions }) => {
                 </Link>
               </ViewAll>
             </>
+          ) : (
+            state.theme.noSearchResults && <NoResults>{t('No results')} "{decode(state.theme.searchKeyword)}"</NoResults>
           )}
       </Container>
     </SearchModalWrap>
@@ -153,6 +156,10 @@ const CloseSearchModal = styled.div`
 
 const ViewAll = styled.div`
   text-align: center;
+`
+
+const NoResults = styled.p`
+  margin-top: 30px;
 `
 
 export default connect(SearchModal);

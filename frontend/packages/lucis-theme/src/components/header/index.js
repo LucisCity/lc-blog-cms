@@ -55,6 +55,8 @@ const Header = ({ state, actions }) => {
         element.scrollIntoView({ behavior: "smooth" })
       }
     }
+    actions.theme.closeMobileMenu()
+    actions.theme.closeSearchModal()
   }, [state.router.link])
 
   useEffect(() => {
@@ -360,12 +362,6 @@ const Search = styled.div`
       width: 25px;
     }
   }
-  /* form {
-    display: none;
-    @media screen and (min-width: 768px) {
-      display: block;
-    }
-  } */
   input {
     background: none;
     outline: none;

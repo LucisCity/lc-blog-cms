@@ -20,7 +20,7 @@ const SearchResults = ({ state }) => {
           </Container>
         </HomepageSection>
       ) : (
-        <Archive />
+        <Archive searchQuery={searchQuery}/>
       )}
     </>
   )

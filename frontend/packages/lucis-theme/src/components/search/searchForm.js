@@ -6,10 +6,9 @@ import Loading from "../common/loading"
 
 const SearchForm = ({ state, actions }) => {
   const [searchKeyword, setSearchKeyword] = useState('')
-  const [isLoading, setIsLoading] = useState(false)
   const { t } = i18n
 
-  const redirectToSearchResult = (e) => {
+  const redirectToSearchResults = (e) => {
     e.preventDefault()
     const searchString = e.target[0].value
 
@@ -23,7 +22,8 @@ const SearchForm = ({ state, actions }) => {
   const debounceSearchTyping = useCallback(
     debounce((value) => {
       setSearchKeyword(value)
-    }, 500),
+      state.theme.noSearchResults = false
+    }, 300),
     []
   )
 
@@ -34,19 +34,24 @@ const SearchForm = ({ state, actions }) => {
 
   const getSearchResults = async (value) => {
     const searchLink = `${languageSubdirectory(state)}?s=${value}`
-    setIsLoading(true)
+    actions.theme.startSearching()
     try {
       await actions.source.fetch(searchLink, { force: true })
-      const results = state.source.get(searchLink)
-      const posts = results.items.map(({ type, id }) => {
-        return state.source[type][id]
-      })
-      state.theme.searchResults = posts
-      console.log('results: ', results)
+      const results = state.source.get(searchLink).items
+      if (results.length > 0) {
+        const posts = results.map(({ type, id }) => {
+          return state.source[type][id]
+        })
+        state.theme.searchResults = posts
+        state.theme.noSearchResults = false
+      } else {
+        state.theme.noSearchResults = true
+      }
     } catch (error) {
+      state.theme.noSearchResults = true
       console.log(error)
     } finally {
-      setIsLoading(false)
+      actions.theme.stopSearching()
     }
   }
 
@@ -61,15 +66,14 @@ const SearchForm = ({ state, actions }) => {
   }, [searchKeyword])
 
   return (
-    <form onSubmit={redirectToSearchResult}>
+    <form onSubmit={redirectToSearchResults}>
       <input
         type="text"
         placeholder={t('Search')}
         onChange={handleSearchTyping}
         autoFocus
       />
-      {isLoading && <Loading />}
-      {/* <Loading /> */}
+      {state.theme.isSearching && <Loading />}
     </form>
   )
 }

@@ -217,7 +217,7 @@ function redirect_to_fronttity() {
 		!current_user_can('edit_posts')) :
 	?>
 		<script>
-			window.location = 'https://insight.lucis.network' + window.location.pathname;
+			window.location.hostname = 'insight.lucis.network'
 		</script>
 	<?php
 	endif;

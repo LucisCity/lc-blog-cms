@@ -208,3 +208,19 @@ function prefix_heading_ids( $content ) {
 }
 
 add_filter( 'the_content', 'prefix_heading_ids' );
+
+// Auto redirect to frontity domain
+function redirect_to_fronttity() {
+	if (
+		(strpos(site_url(), 'api.insight.lucis.network') !== false) &&
+		!is_admin() &&
+		!current_user_can('edit_posts')) :
+	?>
+		<script>
+			window.location = 'https://insight.lucis.network' + window.location.pathname;
+		</script>
+	<?php
+	endif;
+}
+
+add_action('wp_head', 'redirect_to_fronttity');

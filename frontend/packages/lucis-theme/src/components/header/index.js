@@ -117,7 +117,7 @@ const Header = ({ state, actions }) => {
           </ul>
         </Nav>
         <HeaderToolbar>
-          <Notification amount="6" />
+          {/* <Notification amount="6" /> */}
           <HeaderForm>
             <Search onClick={() => actions.theme.openSearchModal()}>
               <Image src={iconSearch} />

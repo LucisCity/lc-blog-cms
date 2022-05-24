@@ -224,3 +224,24 @@ function redirect_to_fronttity() {
 }
 
 add_action('wp_head', 'redirect_to_fronttity');
+
+function my_expiration_filter($seconds, $user_id, $remember){
+    //if "remember me" is checked;
+    if ( $remember ) {
+        //WP defaults to 2 weeks;
+        $expiration = MONTH_IN_SECONDS;
+    } else {
+        //WP defaults to 48 hrs/2 days;
+        $expiration = WEEK_IN_SECONDS;
+    }
+
+    //http://en.wikipedia.org/wiki/Year_2038_problem
+    if ( PHP_INT_MAX - time() < $expiration ) {
+        //Fix to a little bit earlier!
+        $expiration =  PHP_INT_MAX - time() - 5;
+    }
+
+    return $expiration;
+}
+
+add_filter('auth_cookie_expiration', 'my_expiration_filter', 99, 3);

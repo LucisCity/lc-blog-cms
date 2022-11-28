@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 source .env
 
 OLD_API_URL="https://api.insight.lucis.network"

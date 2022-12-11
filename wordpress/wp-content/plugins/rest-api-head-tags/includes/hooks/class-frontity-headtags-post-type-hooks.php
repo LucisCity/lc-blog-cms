@@ -124,7 +124,7 @@ class Frontity_Headtags_Post_Type_Hooks {
 	 * @return WP_Response Modified response.
 	 */
 	public function add_type_to_links( $response ) {
-		$type      = $response->data['type'];
+		$type      = array_key_exists('type', $response->data) ? $response->data['type'] : '';
 		$types_url = rest_url( "wp/v2/types/$type" );
 
 		$response->add_links(

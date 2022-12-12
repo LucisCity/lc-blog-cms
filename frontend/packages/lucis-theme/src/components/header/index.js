@@ -39,7 +39,7 @@ const Header = ({ state, actions }) => {
   }
 
   const submenuItems = [
-    { id: 1, href: `${lucisCityEndpoint}/member`, title: 'Member', disabled: false },
+    { id: 1, href: `${lucisCityEndpoint}/member`, title: 'Membership', disabled: false },
     { id: 2, href: `${lucisCityEndpoint}/invest`, title: 'Invest', disabled: false },
   ]
 

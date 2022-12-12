@@ -28,9 +28,9 @@ export const MainBg = styled.div`
 `
 
 export const Main = styled.main`
-  margin: 68px 0 50px;
+  margin: 80px 0 50px;
   @media screen and (min-width: 768px) {
-    margin: 79px 0 150px;
+    margin: 100px 0 150px;
   }
 `
 

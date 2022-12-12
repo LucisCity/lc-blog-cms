@@ -12,6 +12,7 @@ import i18n from "../../translations/i18n"
 import { languageSubdirectory } from "../../helpers"
 const SearchModal = loadable(() => import("../search/searchModal"))
 
+const lucisCityEndpoint = "https://bc68.fun";
 const Header = ({ state, actions }) => {
   const data = state.source.get(state.router.link)
   const dimension = useDimension()
@@ -38,13 +39,8 @@ const Header = ({ state, actions }) => {
   }
 
   const submenuItems = [
-    { id: 1, href: 'https://lucis.network/social-fi', title: 'Social-Fi network platform', disabled: false },
-    { id: 2, href: 'https://lucis.network/tournaments', title: 'Tournaments', disabled: false },
-    { id: 3, href: 'https://lucis.network/media', title: 'Lucis Media', disabled: false },
-    { id: 4, href: 'https://lucis.network/marketplace', title: 'Launchpad & Marketplace', disabled: false },
-    { id: 5, href: 'https://lucis.network/lucis-gaming-guild', title: 'Gaming Guild', disabled: false },
-    { id: 6, href: 'https://lucis.network/ranking', title: 'Automation tool zone', disabled: true },
-    { id: 7, href: 'https://lucis.network/ranking', title: 'Streaming platform', disabled: true },
+    { id: 1, href: `${lucisCityEndpoint}/member`, title: 'Member', disabled: false },
+    { id: 2, href: `${lucisCityEndpoint}/invest`, title: 'Invest', disabled: false },
   ]
 
   useEffect(() => {
@@ -88,9 +84,9 @@ const Header = ({ state, actions }) => {
                 ))}
               </Submenu>
             </Li>
-            <Li>
-              <Link link={`${languageSubdirectory(state)}category/tournament`}>{t('Tournaments')}</Link>
-            </Li>
+            {/*<Li>*/}
+            {/*  <Link link={`${languageSubdirectory(state)}category/tournament`}>{t('Tournaments')}</Link>*/}
+            {/*</Li>*/}
             <Li>
               {data.isHome ? (
                 <a
@@ -108,12 +104,12 @@ const Header = ({ state, actions }) => {
                 </Link>
               )}
             </Li>
-            <Li>
-              <Link link={`${languageSubdirectory(state)}lucis-insight`}>{t('Lucis insight')}</Link>
-            </Li>
-            <Li>
-              <Link link={`${languageSubdirectory(state)}about-us`}>{t('About us')}</Link>
-            </Li>
+            {/*<Li>*/}
+            {/*  <Link link={`${languageSubdirectory(state)}lucis-insight`}>{t('Lucis insight')}</Link>*/}
+            {/*</Li>*/}
+            {/*<Li>*/}
+            {/*  <Link link={`${languageSubdirectory(state)}about-us`}>{t('About us')}</Link>*/}
+            {/*</Li>*/}
           </ul>
         </Nav>
         <HeaderToolbar>

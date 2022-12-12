@@ -18,37 +18,40 @@ const Footer = () => {
   return (
     <MainFooter>
       <Container>
-        <FooterLogo link="/">
-          <Image src={logoFooter} />
+        <FooterLogo>
+          <FooterLink link="/">
+            <Image src={logoFooter} />
+          </FooterLink>
+
         </FooterLogo>
-        <FooterSubcribe>
-          <FooterCTA>
-            <h3>{t('Be our partner')}</h3>
-            <button>{t('Apply Now')}</button>
-            <button>{t('Contact Us')}</button>
-          </FooterCTA>
-          <FooterSocials>
-            <h3>{t('Follow our official channel bellow')}</h3>
-            <Link link="https://www.tiktok.com/@lucistvv" target="_blank">
-              <Image src={tiktok} />
-            </Link>
-            <Link link="https://www.facebook.com/lucistv.news" target="_blank">
-              <Image src={facebook} />
-            </Link>
-            <Link link="https://www.youtube.com/c/LucisTVGaming" target="_blank">
-              <Image src={youtube} />
-            </Link>
-            <Link link="https://t.me/sankeonft" target="_blank">
-              <Image src={telegram} />
-            </Link>
-            <Link link="https://twitter.com/Lucis_TV" target="_blank">
-              <Image src={twitter} />
-            </Link>
-            <Link link="https://discord.com/channels/911921072830574603/926398655093702666" target="_blank">
-              <Image src={discord} />
-            </Link>
-          </FooterSocials>
-        </FooterSubcribe>
+        {/*<FooterSubcribe>*/}
+        {/*  <FooterCTA>*/}
+        {/*    <h3>{t('Be our partner')}</h3>*/}
+        {/*    <button>{t('Apply Now')}</button>*/}
+        {/*    <button>{t('Contact Us')}</button>*/}
+        {/*  </FooterCTA>*/}
+        {/*  <FooterSocials>*/}
+        {/*    <h3>{t('Follow our official channel bellow')}</h3>*/}
+        {/*    <Link link="https://www.tiktok.com/@lucistvv" target="_blank">*/}
+        {/*      <Image src={tiktok} />*/}
+        {/*    </Link>*/}
+        {/*    <Link link="https://www.facebook.com/lucistv.news" target="_blank">*/}
+        {/*      <Image src={facebook} />*/}
+        {/*    </Link>*/}
+        {/*    <Link link="https://www.youtube.com/c/LucisTVGaming" target="_blank">*/}
+        {/*      <Image src={youtube} />*/}
+        {/*    </Link>*/}
+        {/*    <Link link="https://t.me/sankeonft" target="_blank">*/}
+        {/*      <Image src={telegram} />*/}
+        {/*    </Link>*/}
+        {/*    <Link link="https://twitter.com/Lucis_TV" target="_blank">*/}
+        {/*      <Image src={twitter} />*/}
+        {/*    </Link>*/}
+        {/*    <Link link="https://discord.com/channels/911921072830574603/926398655093702666" target="_blank">*/}
+        {/*      <Image src={discord} />*/}
+        {/*    </Link>*/}
+        {/*  </FooterSocials>*/}
+        {/*</FooterSubcribe>*/}
       </Container>
     </MainFooter>
   )
@@ -78,8 +81,12 @@ const MainFooter = styled.footer`
     }
   }
 `
-
-const FooterLogo = styled(Link)`
+const FooterLogo = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: center;
+`
+const FooterLink = styled(Link)`
   display: block;
   width: 150px;
   margin-bottom: 20px;

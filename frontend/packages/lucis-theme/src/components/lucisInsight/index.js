@@ -12,11 +12,11 @@ const LucisInsight = ({ state }) => {
 
   return (
     <MainBg>
-      <Ranking>
-        <Container>
-          <Image src={rankingImg} />
-        </Container>
-      </Ranking>
+      {/*<Ranking>*/}
+      {/*  <Container>*/}
+      {/*    <Image src={rankingImg} />*/}
+      {/*  </Container>*/}
+      {/*</Ranking>*/}
       <PostsListByCategory categorySlug="lucis-review" title={t('Lucis review')} />
     </MainBg>
   )

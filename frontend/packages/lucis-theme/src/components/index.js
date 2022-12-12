@@ -33,11 +33,11 @@ const Root = ({ state }) => {
             <Loading />
           </Container>
           <MainBg when={data.isHome}>
-            <Ranking>
-              <Container>
-                <Image src={rankingImg} />
-              </Container>
-            </Ranking>
+            {/*<Ranking>*/}
+            {/*  <Container>*/}
+            {/*    <Image src={rankingImg} />*/}
+            {/*  </Container>*/}
+            {/*</Ranking>*/}
             <PostsListByCategory categorySlug="top-trending" title={t('Top trending')} />
             <PostsListByCategory categorySlug="hot-search" title={t('Hot search')} />
             <RecentPosts />

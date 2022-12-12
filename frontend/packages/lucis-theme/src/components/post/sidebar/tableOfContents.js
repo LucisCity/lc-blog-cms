@@ -3,6 +3,10 @@ import React, { useEffect, useState } from "react"
 import { TableOfContentsContainer } from "../../../styles/post"
 import iconLink from "../../../images/link.svg"
 
+/*
+  Requirements:
+  - The post must have at least an H2 tag
+ */
 const TableOfContents = ({ state }) => {
   const [nestedHeading, setNestedHeading] = useState([])
 

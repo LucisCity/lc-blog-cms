@@ -6,6 +6,13 @@ import iconLink from "../../../images/link.svg"
 /*
   Requirements:
   - The post must have at least an H2 tag
+
+  TOC structure:
+  - H2
+    - H3, H4, H5, H6
+  - H2
+    - H3, H4, H5, H6
+  ...
  */
 const TableOfContents = ({ state }) => {
   const [nestedHeading, setNestedHeading] = useState([])
@@ -14,16 +21,25 @@ const TableOfContents = ({ state }) => {
     const headings = Array.from(document.querySelector('#post-content').querySelectorAll('h2, h3, h4, h5, h6'))
     const headingsArr = []
 
+    const getHeadingIdOrDefault = (heading, index) => {
+      return heading.id ?? 'toc-hx-' + index;
+    }
+
     headings.forEach((heading, index) => {
-      const { textContent: title, id } = heading
+      const { textContent: title } = heading
+      const id = getHeadingIdOrDefault(heading, index);
       if (heading.nodeName === 'H2') {
-        headingsArr.push({ id: heading.id, title, items: [] })
+        headingsArr.push({ id, title, items: [] })
       } else if (heading.nodeName !== 'H2' && headingsArr.length > 0) {
-        headingsArr[headingsArr.length - 1].items.push({ id: heading.id, title })
+        headingsArr[headingsArr.length - 1].items.push({ id, title })
+      }
+      if (!heading.id) {
+        // Set id to the dom element
+        heading.id = id;
       }
       heading.classList.add('anchor-heading')
       heading.insertAdjacentHTML('beforeend', `
-        <a href="#${heading.id}" class="anchor">
+        <a href="#${id}" class="anchor">
           <img src="${iconLink}" />
         </a>
       `)

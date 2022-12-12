@@ -72,6 +72,7 @@ export const PostContentContainer = styled.div`
   }
   img {
     border-radius: 10px !important;
+    height: auto;
   }
   a {
     color: #cfb160;

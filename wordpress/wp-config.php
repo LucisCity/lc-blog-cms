@@ -81,6 +81,12 @@ $table_prefix = 'wp_';
  */
 define( 'WP_DEBUG', false );
 
+// Force install plugin by direct write to file system, skip other options: 'ssh', 'ftpext' or 'ftpsockets'
+// Help you install plugin without using FTP, ssh, ...
+// Your must ensure www-data has write permission to wp-content/plugins directory
+define('FS_METHOD', 'direct');
+
+
 /* Add any custom values between this line and the "stop editing" line. */
 
 /*

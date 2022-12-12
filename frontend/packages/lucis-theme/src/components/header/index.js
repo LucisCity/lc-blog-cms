@@ -75,7 +75,7 @@ const Header = ({ state, actions }) => {
           {dimension.width <= 991 && <CloseMobileMenu onClick={handleCloseMobileMenu} />}
           <ul>
             <Li className="has-submenu">
-              <span>{t('Ecosystem')}</span>
+              <span>Lucis City</span>
               <Submenu className="submenu">
                 {submenuItems.map(item => (
                   <Li key={item.id} disabled={item.disabled && 'disabled'}>

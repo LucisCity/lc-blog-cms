@@ -14,15 +14,22 @@ import iconLink from "../../../images/link.svg"
     - H3, H4, H5, H6
   ...
  */
+function getWpPostContentContainer() {
+  const wpPostContentContainer = document.querySelector('#post-content');
+  if (!wpPostContentContainer) {
+    throw new Error('The post content container not found');
+  }
+  return wpPostContentContainer;
+}
 const TableOfContents = ({ state }) => {
   const [nestedHeading, setNestedHeading] = useState([])
 
   useEffect(() => {
-    const headings = Array.from(document.querySelector('#post-content').querySelectorAll('h2, h3, h4, h5, h6'))
+    const headings = Array.from(getWpPostContentContainer().querySelectorAll('h2, h3, h4, h5, h6'))
     const headingsArr = []
 
     const getHeadingIdOrDefault = (heading, index) => {
-      return heading.id ?? 'toc-hx-' + index;
+      return !!heading.id ? heading.id : 'toc-hx-' + index;
     }
 
     headings.forEach((heading, index) => {
@@ -77,7 +84,7 @@ const TableOfContents = ({ state }) => {
 const AnchorItem = ({ data }) => {
   const handleAnchorClick = (event, data) => {
     event.preventDefault()
-    document.querySelector(`#${data.id}`)?.scrollIntoView({
+    getWpPostContentContainer().querySelector(`#${data.id}`)?.scrollIntoView({
       behavior: "smooth"
     });
   }

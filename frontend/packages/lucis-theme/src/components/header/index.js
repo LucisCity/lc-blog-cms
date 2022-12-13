@@ -12,7 +12,7 @@ import i18n from "../../translations/i18n"
 import { languageSubdirectory } from "../../helpers"
 const SearchModal = loadable(() => import("../search/searchModal"))
 
-const lucisCityEndpoint = "https://bc68.fun";
+const lucisCityEndpoint = "https://luciscity.io";
 const Header = ({ state, actions }) => {
   const data = state.source.get(state.router.link)
   const dimension = useDimension()

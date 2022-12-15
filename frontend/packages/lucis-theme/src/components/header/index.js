@@ -238,12 +238,12 @@ const LogoContainer = styled.div`
 `
 
 const Logo = styled(Link)`
-  width: 100px;
+  width: 120px;
   @media screen and (min-width: 992px) {
-    width: 120px;
+    width: 130px;
   }
   @media screen and (min-width: 1440px) {
-    width: 138px;
+    width: 150px;
   }
 `
 

@@ -1,4 +1,36 @@
 <?php
+// Enable this filter to debug rank_math sitemap generation
+// Disable this on prod
+function lucis_rank_math_cache_enabled($current) {
+  // return false;
+  return $current;
+}
+add_filter( 'rank_math/sitemap/enable_caching', 'lucis_rank_math_cache_enabled', 10, 1);
+// Usage: apply_filters( 'rank_math/sitemap/enable_caching', true );
+
+
+/**
+ * Alter base url from https://news-api.domain.com to https://news.domain.com
+ * This is special design for WP_SITE_URL = news-api.domain.com
+ * and Frontend url = news.domain.com (use wp as headless cms)
+ *
+ * @param  string $loc url to alter
+ * @return string
+ */
+function lucis_alter_url_for_headless_cms($loc) {
+  // echo '$loc: ' . $loc;
+  $s = str_replace_first($loc, '//news-api.', '//news.');
+  // echo '$s: ' . $s;
+  return $s;
+}
+// add_filter( 'rank_math/sitemap/base_url', 'lucis_alter_url_for_headless_cms', 10, 1);
+// Usage: $value = apply_filters( 'rank_math/sitemap/base_url', $site_url);
+
+function alter_rank_math_url( $output, $url_object ) {
+    return lucis_alter_url_for_headless_cms($output);
+}
+add_filter( 'rank_math/sitemap/url', 'alter_rank_math_url', 10, 2 );
+
 
 // Custom max posts per page
 add_filter( 'rest_post_query', 'lucis_change_post_per_page', 10, 2 );
@@ -95,3 +127,17 @@ function my_expiration_filter($seconds, $user_id, $remember){
 }
 
 add_filter('auth_cookie_expiration', 'my_expiration_filter', 99, 3);
+
+
+
+
+// -------- HELPER FUNCTIONS --------
+
+function str_replace_first($haystack, $needle, $replace) {
+  $pos = strpos($haystack, $needle);
+  if ($pos !== false) {
+      $haystack = substr_replace($haystack, $replace, $pos, strlen($needle));
+  }
+
+  return $haystack;
+}

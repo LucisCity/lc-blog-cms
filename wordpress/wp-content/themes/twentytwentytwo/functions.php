@@ -155,7 +155,7 @@ add_filter( 'rest_post_query', 'lucis_change_post_per_page', 10, 2 );
 
 function lucis_change_post_per_page( $args, $request ) {
     $max = max( (int) $request->get_param( 'custom_per_page' ), 200 );
-    $args['posts_per_page'] = $max;    
+    $args['posts_per_page'] = $max;
     return $args;
 }
 
@@ -174,7 +174,7 @@ add_action( 'rest_api_init', function () {
 		add_filter( "rest_prepare_{$post_type->name}", function ( $response ) {
 		  $type      = array_key_exists('type', $response->data) ? $response->data['type'] : '';
 		  $types_url = rest_url( "wp/v2/types/$type" );
-  
+
 		  $response->add_links(
 			array(
 			  'type' => array(
@@ -183,7 +183,7 @@ add_action( 'rest_api_init', function () {
 			  ),
 			)
 		  );
-  
+
 		  return $response;
 		} );
 	  }
@@ -245,3 +245,33 @@ function my_expiration_filter($seconds, $user_id, $remember){
 }
 
 add_filter('auth_cookie_expiration', 'my_expiration_filter', 99, 3);
+
+
+/**
+ * Alter base url from https://news-api.domain.com to https://news.domain.com
+ * This is special design for WP_SITE_URL = news-api.domain.com
+ * and Frontend url = news.domain.com (use wp as headless cms)
+ *
+ * ==> NOTE: DO NOT need this any more because you just
+ * configure wp_options.home is your frontend url https://news.luciscity.io then it's done
+ */
+ *
+ * @param  string $loc url to alter
+ * @return string
+ */
+// function lucis_alter_url_for_headless_cms($loc) {
+//   $s = str_replace_first($loc, '//news-api.', '//news.');
+//   return $s;
+// }
+//
+// add_filter( 'rank_math/sitemap/base_url', 'lucis_alter_url_for_headless_cms', 10, 1);
+// // Usage: $value = apply_filters( 'rank_math/sitemap/base_url', $site_url);
+//
+// function str_replace_first($haystack, $needle, $replace) {
+//   $pos = strpos($haystack, $needle);
+//   if ($pos !== false) {
+//       $haystack = substr_replace($haystack, $replace, $pos, strlen($needle));
+//   }
+//
+//   return $haystack;
+// }

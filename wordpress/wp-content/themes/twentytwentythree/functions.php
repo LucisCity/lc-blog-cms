@@ -33,13 +33,13 @@ add_filter( 'rank_math/sitemap/url', 'alter_rank_math_url', 10, 2 );
 
 
 // Custom max posts per page
-add_filter( 'rest_post_query', 'lucis_change_post_per_page', 10, 2 );
-
-function lucis_change_post_per_page( $args, $request ) {
-    $max = max( (int) $request->get_param( 'custom_per_page' ), 200 );
-    $args['posts_per_page'] = $max;
-    return $args;
-}
+// add_filter( 'rest_post_query', 'lucis_change_post_per_page', 10, 2 );
+//
+// function lucis_change_post_per_page( $args, $request ) {
+//     $max = max( (int) $request->get_param( 'custom_per_page' ), 200 );
+//     $args['posts_per_page'] = $max;
+//     return $args;
+// }
 
 // Add custom styles for gutenberg editor
 add_action( 'after_setup_theme', 'custom_editor_css' );
@@ -50,27 +50,27 @@ function custom_editor_css() {
 }
 
 // Make yoast seo to work with frontity
-add_action( 'rest_api_init', function () {
-	foreach ( get_post_types( array( 'show_in_rest' => true ), 'objects' ) as $post_type ) {
-	  if ( 'post' === $post_type->name || $post_type->has_archive ) {
-		add_filter( "rest_prepare_{$post_type->name}", function ( $response ) {
-		  $type      = array_key_exists('type', $response->data) ? $response->data['type'] : '';
-		  $types_url = rest_url( "wp/v2/types/$type" );
-
-		  $response->add_links(
-			array(
-			  'type' => array(
-				'href'       => $types_url,
-				'embeddable' => true,
-			  ),
-			)
-		  );
-
-		  return $response;
-		} );
-	  }
-	}
-  } );
+// add_action( 'rest_api_init', function () {
+// 	foreach ( get_post_types( array( 'show_in_rest' => true ), 'objects' ) as $post_type ) {
+// 	  if ( 'post' === $post_type->name || $post_type->has_archive ) {
+// 		add_filter( "rest_prepare_{$post_type->name}", function ( $response ) {
+// 		  $type      = array_key_exists('type', $response->data) ? $response->data['type'] : '';
+// 		  $types_url = rest_url( "wp/v2/types/$type" );
+//
+// 		  $response->add_links(
+// 			array(
+// 			  'type' => array(
+// 				'href'       => $types_url,
+// 				'embeddable' => true,
+// 			  ),
+// 			)
+// 		  );
+//
+// 		  return $response;
+// 		} );
+// 	  }
+// 	}
+//   } );
 
 // Auto add id to all headings in post content
 function prefix_heading_ids( $content ) {
